@@ -1,0 +1,29 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="sidenav">
+         <div class="login-main-text">
+            <h2>Delivery Choc</h2>
+            <h2>Login</h2>
+            <p>Aqui te podras logear con tu Usuario y Clave..!</p>
+         </div>
+      </div>
+      <div class="main">
+         <div class="col-md-6 col-sm-12">
+            <div class="login-form">
+               <form>
+                  <div class="form-group">
+                     <label>Usuario</label>
+                     <input class="form-control"  placeholder="login" name="nombre" type="text" placeholder="Usuario" [(ngModel)]="loginUserData.Nombre" required>
+                  </div>
+                  <div class="form-group">
+                     <label>Clave</label>
+                     <input class="form-control" placeholder="password" name="clave" type="password" placeholder="Clave" [(ngModel)]="loginUserData.Clave" required>
+                  </div>
+                  <button class="btn btn-info btn-block login" type="button" (click)="loginUser()">Login</button>
+               </form>
+            </div>
+         </div>
+      </div>
