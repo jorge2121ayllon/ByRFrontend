@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsuarioDetalle } from '../modelos/usuario-detalle.model';
 import { UsuarioDetalleService } from '../servicios/usuario-detalle.service';
 import { Router } from '@angular/router';
+import { UserService } from '../servicios/user.service';
 
 @Component({
   selector: 'app-registrar',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class RegistrarComponent implements OnInit {
   registerUserData : UsuarioDetalle;
-  constructor(private _usuarioSvr: UsuarioDetalleService,private _routes:Router) {
+  constructor(private _usuarioSvr: UserService,private _routes:Router) {
     this.registerUserData = new UsuarioDetalle();
    }
 
@@ -19,7 +20,7 @@ export class RegistrarComponent implements OnInit {
 
   registerUser(): void{
     this._usuarioSvr.formData = this.registerUserData;
-    this._usuarioSvr.putUsuario().subscribe(
+    this._usuarioSvr.putUser().subscribe(
       res => {
         this._routes.navigate(['/']);
       },

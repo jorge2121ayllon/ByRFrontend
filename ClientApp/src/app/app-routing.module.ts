@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { UsuarioDetalleComponent } from './usuarios-detalles/usuario-detalle/usuario-detalle.component';
-import { UsuariosDetallesComponent } from './usuarios-detalles/usuarios-detalles.component';
+import { UsersComponent } from './users/users.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrarComponent } from './registrar/registrar.component';
 import { InicioComponent } from './inicio/inicio.component';
@@ -15,7 +14,7 @@ const routes: Routes = [
 
   {
     path:"usuarios", 
-    component:UsuariosDetallesComponent,
+    component: UsersComponent,
     canActivate: [AuthGuard]
   },
   {

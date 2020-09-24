@@ -1,0 +1,19 @@
+<table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th scope="col" sortable="Nombre" (sort)="onSort($event)">Nombre</th>
+        <th scope="col" sortable="Clave" (sort)="onSort($event)">Clave</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of service.list">
+        <td (click)="populateForm(user)">{{user.Nombre}}</td>
+        <td (click)="populateForm(user)">{{user.Clave}}</td>
+        <td>
+          <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(user.Id)"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
