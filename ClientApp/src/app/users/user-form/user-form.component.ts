@@ -1,16 +1,16 @@
-import { UsuarioDetalleService } from '../../servicios/usuario-detalle.service' 
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
+import { UserService } from 'src/app/servicios/user.service';
 
 @Component({
-  selector: 'app-usuario-detalle',
-  templateUrl: './usuario-detalle.component.html',
-  styleUrls: ['./usuario-detalle.component.css']
+  selector: 'app-user-form',
+  templateUrl: './user-form.component.html',
+  styles: [
+  ]
 })
-export class UsuarioDetalleComponent implements OnInit {
+export class UserFormComponent implements OnInit {
 
-  constructor(public service: UsuarioDetalleService, private toastr: ToastrService) { }
+  constructor(public service: UserService) { }
 
   ngOnInit(): void {
     this.resetForm();
@@ -34,10 +34,9 @@ export class UsuarioDetalleComponent implements OnInit {
   }
 
   updateRecord(form: NgForm) {
-    this.service.putUsuario().subscribe(
+    this.service.putUser().subscribe(
       res => {
         this.resetForm(form);
-        this.toastr.info('Datos Guardados', 'Detalles de Usuario');
         this.service.refreshList();
       },
       err => {
@@ -47,7 +46,7 @@ export class UsuarioDetalleComponent implements OnInit {
   }
 
   insertRecord(form: NgForm) {
-    this.service.postUsuario().subscribe(
+    this.service.postUser().subscribe(
       res => {
         this.resetForm(form);
         this.service.refreshList();

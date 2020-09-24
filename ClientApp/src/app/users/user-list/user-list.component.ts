@@ -1,28 +1,32 @@
-import { UsuarioDetalleService } from '../../servicios/usuario-detalle.service' 
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { SortColumns, SortEvent } from '../../directivas/sortcolumns';
+import { SortColumns, SortEvent } from 'src/app/directivas/sortcolumns';
+import { User } from 'src/app/modelos/user.model';
+import { UserService } from 'src/app/servicios/user.service';
 
 @Component({
-  selector: 'app-usuario-detalle-lista',
-  templateUrl: './usuario-detalle-lista.component.html',
-  styleUrls: ['./usuario-detalle-lista.component.css']
+  selector: 'app-user-list',
+  templateUrl: './user-list.component.html',
+  styles: [
+  ]
 })
-export class UsuarioDetalleListaComponent implements OnInit {
+export class UserListComponent implements OnInit {
   @ViewChildren(SortColumns) headers: QueryList<SortColumns>;
 
-  constructor(public service: UsuarioDetalleService) { }
+  constructor(public service: UserService) { }
 
   ngOnInit(): void {
     this.service.refreshList();
   }
 
+  
   populateForm(selectedRecord) {
     this.service.formData = Object.assign({}, selectedRecord);
   }
 
+  
   onDelete(id) {
     if (confirm('Esta seguro de borrar el usuario?')) {
-      this.service.deleteUsuario(id)
+      this.service.deleteUser(id)
         .subscribe(res => {
           this.service.refreshList();
         },
@@ -41,4 +45,6 @@ export class UsuarioDetalleListaComponent implements OnInit {
     this.service.filterData.Direccion = direction;
     this.service.refreshList();
   }
+
+
 }

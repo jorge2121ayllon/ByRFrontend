@@ -3,6 +3,7 @@ import { UsuarioDetalle } from '../modelos/usuario-detalle.model';
 import { UsuarioDetalleService } from '../servicios/usuario-detalle.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { UserService } from '../servicios/user.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class LoginComponent implements OnInit {
   loginUserData : UsuarioDetalle;
 
-  constructor(private _usuarioSvr: UsuarioDetalleService,private _routes:Router) { 
+  constructor(private _usuarioSvr: UserService,private _routes:Router) { 
     this.loginUserData = new UsuarioDetalle();
   }
 
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit {
 
   loginUser(): void {
     console.log(this.loginUserData);
-    this._usuarioSvr.authUsuarios(this.loginUserData.Nombre, this.loginUserData.Clave).subscribe(
+    this._usuarioSvr.authUser(this.loginUserData.Nombre, this.loginUserData.Clave).subscribe(
       res => {
       console.log(res);
       localStorage.setItem('UserId', (res as any).Id);
