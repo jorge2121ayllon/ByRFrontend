@@ -15,12 +15,28 @@
             <div class="login-form">
                <form>
                   <div class="form-group">
-                     <label>Usuario</label>
-                     <input class="form-control"  placeholder="login" name="nombre" type="text" placeholder="Usuario" [(ngModel)]="registerUserData.Nombre" required>
+                     <label>Nombre de Usuario</label>
+                     <input class="form-control"  placeholder="Nombre" name="Name" type="text"  [(ngModel)]="registerUserData.Name" required>
+                  </div>
+                  <div class="form-group">
+                     <label>Apellido de usuario</label>
+                     <input class="form-control"  placeholder="Apellido" name="LastName" type="text" [(ngModel)]="registerUserData.LastName" required>
+                  </div>
+                  <div class="form-group">
+                     <label>Email</label>
+                     <input class="form-control"  placeholder="Email" name="Email" type="email" [(ngModel)]="registerUserData.Email" required>
+                  </div>
+                  <div class="form-group">
+                     <label>Numero de celular</label>
+                     <input class="form-control"  placeholder="Celular" name="Phone" type="text"  [(ngModel)]="registerUserData.Phone" required>
+                  </div>
+                  <div class="form-group">
+                     <label>Cedula de identidad</label>
+                     <input class="form-control"  placeholder="Ci" name="nombre" type="text" [(ngModel)]="registerUserData.Ci" required>
                   </div>
                   <div class="form-group">
                      <label>Clave</label>
-                     <input class="form-control" placeholder="password" name="clave" type="password" placeholder="Clave" [(ngModel)]="registerUserData.Clave" required>
+                     <input class="form-control" placeholder="password" name="Password" type="password" [(ngModel)]="registerUserData.Password" required>
                   </div>
                   <button class="btn btn-info btn-block login" type="button" (click)="registerUser()">Registrar</button>
                </form>

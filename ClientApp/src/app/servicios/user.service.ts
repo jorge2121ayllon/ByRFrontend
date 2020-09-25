@@ -42,6 +42,7 @@ export class UserService {
 
 
    postUser() {
+    this.formData.Id = "12345669898"; //esto cambiar
     return this.http.post(`${environment.apiUrl}Users`, this.formData);
   }
 

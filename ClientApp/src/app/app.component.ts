@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UsuarioDetalleService }  from  './servicios/usuario-detalle.service';
+import { UserService } from './servicios/user.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,5 +8,5 @@ import { UsuarioDetalleService }  from  './servicios/usuario-detalle.service';
 export class AppComponent {
   title = 'ClientApp';
   
-  constructor(public _authService:UsuarioDetalleService) {}
+  constructor(public _authService:UserService) {}
 }

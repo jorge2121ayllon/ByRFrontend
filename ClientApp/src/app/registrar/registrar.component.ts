@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UsuarioDetalle } from '../modelos/usuario-detalle.model';
-import { UsuarioDetalleService } from '../servicios/usuario-detalle.service';
 import { Router } from '@angular/router';
 import { UserService } from '../servicios/user.service';
+import { User } from '../modelos/user.model';
 
 @Component({
   selector: 'app-registrar',
@@ -10,9 +9,9 @@ import { UserService } from '../servicios/user.service';
   styleUrls: ['./registrar.component.css']
 })
 export class RegistrarComponent implements OnInit {
-  registerUserData : UsuarioDetalle;
+  registerUserData : User;
   constructor(private _usuarioSvr: UserService,private _routes:Router) {
-    this.registerUserData = new UsuarioDetalle();
+    this.registerUserData = new User();
    }
 
   ngOnInit(): void {
@@ -20,7 +19,7 @@ export class RegistrarComponent implements OnInit {
 
   registerUser(): void{
     this._usuarioSvr.formData = this.registerUserData;
-    this._usuarioSvr.putUser().subscribe(
+    this._usuarioSvr.postUser().subscribe(
       res => {
         this._routes.navigate(['/']);
       },

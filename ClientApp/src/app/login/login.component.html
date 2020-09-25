@@ -16,11 +16,11 @@
                <form>
                   <div class="form-group">
                      <label>Usuario</label>
-                     <input class="form-control"  placeholder="login" name="nombre" type="text" placeholder="Usuario" [(ngModel)]="loginUserData.Nombre" required>
+                     <input class="form-control"  placeholder="login" name="Name" type="text" placeholder="Usuario" [(ngModel)]="loginUserData.Name" required>
                   </div>
                   <div class="form-group">
                      <label>Clave</label>
-                     <input class="form-control" placeholder="password" name="clave" type="password" placeholder="Clave" [(ngModel)]="loginUserData.Clave" required>
+                     <input class="form-control" placeholder="password" name="clave" type="Password" placeholder="Clave" [(ngModel)]="loginUserData.Password" required>
                   </div>
                   <button class="btn btn-info btn-block login" type="button" (click)="loginUser()">Login</button>
                </form>

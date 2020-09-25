@@ -9,15 +9,14 @@ import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common
 import { SortColumns } from './directivas/sortcolumns';
 
 
-import { UsuarioDetalleService } from './servicios/usuario-detalle.service';
 import { LoginComponent } from './login/login.component';
 import { RegistrarComponent } from './registrar/registrar.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptor } from './token.interceptor';
 import { UsersComponent } from './users/users.component';
-import { UserFormComponent } from './users/user-form/user-form.component';
 import { UserListComponent } from './users/user-list/user-list.component';
+import { UserService } from './servicios/user.service';
 
 
 @NgModule({
@@ -29,7 +28,6 @@ import { UserListComponent } from './users/user-list/user-list.component';
     RegistrarComponent,
     InicioComponent,
     UsersComponent,
-    UserFormComponent,
     UserListComponent,
 
   ],
@@ -41,7 +39,7 @@ import { UserListComponent } from './users/user-list/user-list.component';
     ToastrModule.forRoot() 
   ],
   providers: [
-    UsuarioDetalleService,
+    UserService,
     AuthGuard, {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
