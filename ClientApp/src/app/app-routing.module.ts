@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { RegistrarComponent } from './registrar/registrar.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { AuthGuard } from './auth.guard';
+import { PropertiesComponent } from './properties/properties.component';
 
 
 
@@ -28,6 +29,10 @@ const routes: Routes = [
   {
     path:"inicio", 
     component: InicioComponent
+  },
+  {
+    path:"propiedades",
+    component: PropertiesComponent
   },
 
 

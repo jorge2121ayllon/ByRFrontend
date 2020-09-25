@@ -18,6 +18,9 @@ import { TokenInterceptor } from './token.interceptor';
 import { UsersComponent } from './users/users.component';
 import { UserFormComponent } from './users/user-form/user-form.component';
 import { UserListComponent } from './users/user-list/user-list.component';
+import { PropertiesComponent } from './properties/properties.component';
+import { PropertyFormComponent } from './properties/property-form/property-form.component';
+import { PropertyListComponent } from './properties/property-list/property-list.component';
 
 
 @NgModule({
@@ -31,6 +34,9 @@ import { UserListComponent } from './users/user-list/user-list.component';
     UsersComponent,
     UserFormComponent,
     UserListComponent,
+    PropertiesComponent,
+    PropertyFormComponent,
+    PropertyListComponent,
 
   ],
   imports: [
