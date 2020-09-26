@@ -1,48 +1,47 @@
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
 
+<!------ Include the above in your HEAD tag ----------><!------ Include the above in your HEAD tag ---------->
 
-<div class="container">
+<header class="mt-0 pt-0">
+  <div class="bg-cover clearfix pt-3">   
+    <nav>
+      <h2 class="logo text-center">Bienes y raices </h2>
+      
+    </nav>
+  <div class="">
+    <nav class="navbar navbar-expand-md" >      
+      <div id="my-nav" class="collapse navbar-collapse text-left">        
+        <ul class="navbar-nav mx-auto">          
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" *ngIf="!_authService.loggedIn()"  routerLinkActive="active" routerLink="/ingresar">Ingresar</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger"  *ngIf="!_authService.loggedIn()" routerLinkActive="active" routerLink="/registrar">Registrar</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" *ngIf="_authService.loggedIn()" style="cursor: pointer;" (click)="_authService.logoutUser()">Salir</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger"  *ngIf="_authService.loggedAdministrator()" routerLinkActive="active" routerLink="/registrar">Logeado de admin</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger"  *ngIf="_authService.loggedBuyer()" routerLinkActive="active" routerLink="/registrar">Logeado de comprador</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger"  *ngIf="_authService.loggedVendor()" routerLinkActive="active" routerLink="/registrar">Logeado de vendedor</a>
+          </li>         
+      </ul>
+      </div>
+    </nav>    
+  </div>  
+  </div>  
+</header>
+<div class="container-fluid video-player">
 
-  <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
-    <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">Delivery</a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto my-2 my-lg-0">
-              
-                <li class="nav-item">
-                  <a class="nav-link js-scroll-trigger" *ngIf="!_authService.loggedIn()"  routerLinkActive="active" routerLink="/ingresar">Ingresar</a>
-                </li>
-                
-                <li class="nav-item">
-                  <a class="nav-link js-scroll-trigger"  *ngIf="!_authService.loggedIn()" routerLinkActive="active" routerLink="/registrar">Registrar</a>
-                </li>
+  <div class="container">
 
-                <li class="nav-item">
-                  <a class="nav-link js-scroll-trigger" *ngIf="_authService.loggedIn()" style="cursor: pointer;" (click)="_authService.logoutUser()">Salir</a>
-                </li>
-                
-                <li class="nav-item">
-                  <a class="nav-link js-scroll-trigger"  *ngIf="_authService.loggedAdministrator()" routerLinkActive="active" routerLink="/registrar">Logeado de admin</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link js-scroll-trigger"  *ngIf="_authService.loggedBuyer()" routerLinkActive="active" routerLink="/registrar">Logeado de comprador</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link js-scroll-trigger"  *ngIf="_authService.loggedVendor()" routerLinkActive="active" routerLink="/registrar">Logeado de vendedor</a>
-                </li>
-              
-              </ul>
-        </div>
-    </div>
-</nav>
+    <router-outlet></router-outlet>
 
-<br>
-<br>
-  <router-outlet></router-outlet>
+  </div>
 </div>
 

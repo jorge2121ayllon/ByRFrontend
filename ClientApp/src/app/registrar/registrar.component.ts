@@ -22,7 +22,8 @@ export class RegistrarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  registerUser(): void{
+  registerUser(): void{    
+
     this._usuarioSvr.formData = this.registerUserData;
     this._usuarioSvr.postUser().subscribe(
       res => {

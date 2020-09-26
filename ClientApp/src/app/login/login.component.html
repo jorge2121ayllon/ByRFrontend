@@ -1,16 +1,8 @@
-
-
-<div class="sidenav">
-         <div class="login-main-text">
-            <h2>Delivery Choc</h2>
-            <h2>Login</h2>
-            <p>Aqui te podras logear con tu Usuario y Clave..!</p>
-         </div>
-      </div>
-      <div class="main">
-         <div class="col-md-6 col-sm-12">
-            <div class="login-form">
-               <form>
+      <div class="text-center">
+         <h1 class="text-control">Inicio de sesión</h1>
+         <div class=" text-control text-center col-md-10 ">           
+               <div class="form-group" style="padding:25px 10px 75px 250px;">
+               <form class="text-center">
                   <div class="form-group">
                      <label>Usuario</label>
                      <input class="form-control"  placeholder="login" name="Email" type="text" placeholder="Usuario" [(ngModel)]="loginUserData.Email" required>
@@ -20,7 +12,7 @@
                      <input class="form-control" placeholder="password" name="clave" type="Password" placeholder="Clave" [(ngModel)]="loginUserData.Password" required>
                   </div>
                   <button class="btn btn-info btn-block login" type="button" (click)="loginUser()">Login</button>
-               </form>
+               </form>           
             </div>
          </div>
       </div>
