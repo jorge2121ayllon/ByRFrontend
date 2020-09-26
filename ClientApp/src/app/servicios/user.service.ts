@@ -31,18 +31,45 @@ export class UserService {
     return !!localStorage.getItem('UserId');
   }
 
+  loggedAdministrator()
+  {
+    if (localStorage.getItem('Role') == "administrador") {
+      return true;
+    }
+    return false;
+  }
+  
+  loggedVendor()
+  {
+    if (localStorage.getItem('Role') == "vendedor") {
+      return true;
+    }
+    return false;
+  }
+  
+  loggedBuyer()
+  {
+    if (localStorage.getItem('Role') == "compradro") {
+      return true;
+    }
+    return false;
+  }
+
+
   getUserId(){
     return localStorage.getItem('UserId');
   }
 
   logoutUser(){
     localStorage.removeItem('UserId');
+    localStorage.removeItem('Role');
     this._router.navigate(['/inicio']);
   }
 
 
+  
+
    postUser() {
-    this.formData.Id = "12345669898"; //esto cambiar
     return this.http.post(`${environment.apiUrl}Users`, this.formData);
   }
 
@@ -54,8 +81,8 @@ export class UserService {
     return this.http.delete(`${environment.apiUrl}Users/${id}`);
   }
 
-  authUser(nombre, clave){
-    return this.http.get(`${environment.apiUrl}Users/${nombre}/${clave}`);
+  authUser(email, clave){
+    return this.http.get(`${environment.apiUrl}Users/${email}/${clave}`);
   }
 
   refreshList() {

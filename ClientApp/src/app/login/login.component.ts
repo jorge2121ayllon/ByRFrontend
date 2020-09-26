@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UsuarioDetalle } from '../modelos/usuario-detalle.model';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UserService } from '../servicios/user.service';
@@ -23,11 +22,12 @@ export class LoginComponent implements OnInit {
 
   loginUser(): void {
     console.log(this.loginUserData);
-    this._usuarioSvr.authUser(this.loginUserData.Name, this.loginUserData.Password).subscribe(
+    this._usuarioSvr.authUser(this.loginUserData.Email, this.loginUserData.Password).subscribe(
       res => {
       console.log(res);
       localStorage.setItem('UserId', (res as any).Id);
       localStorage.setItem('Token', (res as any).Token);
+      localStorage.setItem('Role', (res as any).Role);
       this._routes.navigate(['/inicio']);
     },
     err => {

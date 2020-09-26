@@ -36,9 +36,20 @@
                   </div>
                   <div class="form-group">
                      <label>Clave</label>
-                     <input class="form-control" placeholder="password" name="Password" type="password" [(ngModel)]="registerUserData.Password" required>
+                     <input class="form-control" placeholder="password" name="Password" type="password" [(ngModel)]="registerUserData.Password"  autocomplete="on" required>
                   </div>
+
+                  <div>
+                     <label>Tipo de propiedad</label><br>
+                     <select name="TypeProperties" [(ngModel)]="registerUserData.Role" >
+                        <option *ngFor="let typeProperty of TypeProperties" [value]="typeProperty.value">
+                        {{typeProperty.display}}
+                        </option>
+                     </select>
+                  </div>
+
                   <button class="btn btn-info btn-block login" type="button" (click)="registerUser()">Registrar</button>
+              
                </form>
             </div>
          </div>

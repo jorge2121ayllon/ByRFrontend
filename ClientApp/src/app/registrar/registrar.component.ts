@@ -13,6 +13,10 @@ export class RegistrarComponent implements OnInit {
   constructor(private _usuarioSvr: UserService,private _routes:Router) {
     this.registerUserData = new User();
    }
+   public TypeProperties = [
+      { value: 'vendedor', display: 'Vendedor' },
+      { value: 'comprador', display: 'Comprador' }
+  ];
 
   ngOnInit(): void {
   }
