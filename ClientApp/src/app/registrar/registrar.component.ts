@@ -17,7 +17,8 @@ export class RegistrarComponent implements OnInit {
       { value: 'vendedor', display: 'Vendedor' },
       { value: 'comprador', display: 'Comprador' }
   ];
-
+ 
+  
   ngOnInit(): void {
   }
 
