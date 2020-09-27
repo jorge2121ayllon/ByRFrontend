@@ -27,20 +27,20 @@ export class PropertyListComponent implements OnInit {
     });
     this.service.filterData.Columna = column;
     this.service.filterData.Direccion = direction;
-    this.service.refreshList();
+   this.service.refreshList();
   }
   sort(column: SortColumn, direction: SortDirection) {
     if (direction === '' || column === '') {
 
     } else {
-      this.service.refreshList();
+     this.service.refreshList();
     }
   }
   onDelete(id) {
     if (confirm('Estas seguro de eliminar ?')) {
       this.service.deleteProperty(id)
         .subscribe(res => {
-          this.service.refreshList();
+        this.service.refreshList();
         },
           err => { console.log(err); })
     }
