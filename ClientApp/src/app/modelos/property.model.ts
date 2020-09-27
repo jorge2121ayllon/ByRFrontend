@@ -2,10 +2,9 @@ import { DecimalPipe } from '@angular/common';
 
 export class Property {
     Id: string;
-    IsDelete: boolean;
     Price: number;//listo
     Bedrooms: number;//listo
-    Badrooms: number;//listo
+    Bathrooms: number;//listo
     Size: number;//listo
     Direction: string;//listo
     State: boolean;//listo
@@ -14,5 +13,5 @@ export class Property {
     Longitude: string;//listo
     Category: number;
     TypeProperty: number;
-    User: string;
+    UserIdPro: string;
 }

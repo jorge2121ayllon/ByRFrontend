@@ -32,7 +32,8 @@ const routes: Routes = [
   },
   {
     path:"propiedades",
-    component: PropertiesComponent
+    component: PropertiesComponent,
+    canActivate: [AuthGuard]
   },
 
 

@@ -1,73 +1,73 @@
 <div class="row">
-    <button class="btn btn-success float-rigth" type="button" (click)="Search(buscar.value)">Buscar</button>
-    <div class="col-md-5">
-        <input #buscar class="form-control"placeholder="ingrese la busqueda" required>
-    </div>
+  <button class="btn btn-success float-rigth" type="button" (click)="Search(buscar.value)">Buscar</button>
+  <div class="col-md-5">
+      <input #buscar class="form-control"placeholder="ingrese la busqueda" required>
   </div>
-  
-  <br>
-  
-  <table class="table table-hover table-striped">
-      <thead>
-        <tr>
-          <th scope="col" sortable="Price" (sort)="onSort($event)">Precio</th>
-          <th scope="col" sortable="Descripcion" (sort)="onSort($event)">Descripci&oacute;n</th>
-          <th scope="col" sortable="Descripcion" (sort)="onSort($event)">Descripci&oacute;n</th>
-          <th scope="col" sortable="Descripcion" (sort)="onSort($event)">Descripci&oacute;n</th>
-          <th scope="col" sortable="Descripcion" (sort)="onSort($event)">Descripci&oacute;n</th>
-          <th scope="col" sortable="Descripcion" (sort)="onSort($event)">Descripci&oacute;n</th>
-          <th scope="col" sortable="Descripcion" (sort)="onSort($event)">Descripci&oacute;n</th>
-          <th scope="col" sortable="Descripcion" (sort)="onSort($event)">Descripci&oacute;n</th>
-          <th scope="col" sortable="Descripcion" (sort)="onSort($event)">Descripci&oacute;n</th>
-          <th scope="col" sortable="Descripcion" (sort)="onSort($event)">Descripci&oacute;n</th>
-          <th scope="col" sortable="Descripcion" (sort)="onSort($event)">Descripci&oacute;n</th>
-          <th scope="col" sortable="Descripcion" (sort)="onSort($event)">Descripci&oacute;n</th>
-          <th scope="col">Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let property of service.list">
-          <td (click)="populateForm(property)">{{property.Nombre}}</td>
-          <td (click)="populateForm(property)">{{property.Descripcion}}</td>
-          <td (click)="populateForm(property)">{{property.Descripcion}}</td>
-          <td (click)="populateForm(property)">{{property.Descripcion}}</td>
-          <td (click)="populateForm(property)">{{property.Descripcion}}</td>
-          <td (click)="populateForm(property)">{{property.Descripcion}}</td>
-          <td (click)="populateForm(property)">{{property.Descripcion}}</td>
-          <td (click)="populateForm(property)">{{property.Descripcion}}</td>
-          <td (click)="populateForm(property)">{{property.Descripcion}}</td>
-          <td (click)="populateForm(property)">{{property.Descripcion}}</td>
-          <td (click)="populateForm(property)">{{property.Descripcion}}</td>
-          <td (click)="populateForm(property)">{{property.Descripcion}}</td>
+</div>
 
-          <td>
-            <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(property.Id)"></i>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <form>
-      <div class="row">
-      </div>
+<br>
+
+<table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th scope="col" sortable="Price" (sort)="onSort($event)">Precio</th>
+        <th scope="col" sortable="Descripcion" (sort)="onSort($event)">Descripci&oacute;n</th>
+        <th scope="col" sortable="Descripcion" (sort)="onSort($event)">Descripci&oacute;n</th>
+        <th scope="col" sortable="Descripcion" (sort)="onSort($event)">Descripci&oacute;n</th>
+        <th scope="col" sortable="Descripcion" (sort)="onSort($event)">Descripci&oacute;n</th>
+        <th scope="col" sortable="Descripcion" (sort)="onSort($event)">Descripci&oacute;n</th>
+        <th scope="col" sortable="Descripcion" (sort)="onSort($event)">Descripci&oacute;n</th>
+        <th scope="col" sortable="Descripcion" (sort)="onSort($event)">Descripci&oacute;n</th>
+        <th scope="col" sortable="Descripcion" (sort)="onSort($event)">Descripci&oacute;n</th>
+        <th scope="col" sortable="Descripcion" (sort)="onSort($event)">Descripci&oacute;n</th>
+        <th scope="col" sortable="Descripcion" (sort)="onSort($event)">Descripci&oacute;n</th>
+        <th scope="col" sortable="Descripcion" (sort)="onSort($event)">Descripci&oacute;n</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let property of service.list">
+        <td (click)="populateForm(property)">{{property.Nombre}}</td>
+        <td (click)="populateForm(property)">{{property.Descripcion}}</td>
+        <td (click)="populateForm(property)">{{property.Descripcion}}</td>
+        <td (click)="populateForm(property)">{{property.Descripcion}}</td>
+        <td (click)="populateForm(property)">{{property.Descripcion}}</td>
+        <td (click)="populateForm(property)">{{property.Descripcion}}</td>
+        <td (click)="populateForm(property)">{{property.Descripcion}}</td>
+        <td (click)="populateForm(property)">{{property.Descripcion}}</td>
+        <td (click)="populateForm(property)">{{property.Descripcion}}</td>
+        <td (click)="populateForm(property)">{{property.Descripcion}}</td>
+        <td (click)="populateForm(property)">{{property.Descripcion}}</td>
+        <td (click)="populateForm(property)">{{property.Descripcion}}</td>
+
+        <td>
+          <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(property.Id)"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <form>
+    <div class="row">
+    </div>
+  
+    <div class="row">
+      <div class="col-md-6">
+        Cantidad de P&aacute;ginas:
+        <select #cant ng-model="cant" >
+          <option value="">0
+          <option value=1> 1
+          <option value=7> 7
+          <option value=10> 10
+        </select>
     
-      <div class="row">
-        <div class="col-md-6">
-          Cantidad de P&aacute;ginas:
-          <select #cant ng-model="cant" >
-            <option value="">0
-            <option value=1> 1
-            <option value=7> 7
-            <option value=10> 10
-          </select>
-      
-          <button class="btn btn-success float-rigth" type="button" (click)="Quantity(cant.value)">  Listar</button>
-        </div>
-    
-        <div class="col-md-2">
-          <button class="btn btn-success float-rigth"  (click)="Previus()">Anterior</button>
-        </div>
-        <div class="col-md-2">
-          <button class="btn btn-success float-rigth" (click)="Next()">Siguiente</button>
-        </div>
+        <button class="btn btn-success float-rigth" type="button" (click)="Quantity(cant.value)">  Listar</button>
       </div>
-    </form>
+  
+      <div class="col-md-2">
+        <button class="btn btn-success float-rigth"  (click)="Previus()">Anterior</button>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-success float-rigth" (click)="Next()">Siguiente</button>
+      </div>
+    </div>
+  </form>

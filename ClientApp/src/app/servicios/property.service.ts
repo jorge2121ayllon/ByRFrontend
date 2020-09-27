@@ -21,25 +21,28 @@ export class PropertyService {
     this.filterData.TamPagina = 10;
     this.filterData.Filtro = "";
   }
+  
   postProperty() {
-    this.formData.User = localStorage.getItem('UserId');
-    console.log(localStorage.getItem('UserId'))
+    this.formData.UserIdPro = localStorage.getItem('UserId');
+    
     return this.http.post(`${environment.apiUrl}Properties`, this.formData);
   }
 
   putProperty() {
+    this.formData.UserIdPro = localStorage.getItem('UserId');
     return this.http.put(`${environment.apiUrl}Properties/${this.formData.Id}`, this.formData);
   }
 
   deleteProperty(id) {
+    this.formData.UserIdPro = localStorage.getItem('UserId');
     return this.http.delete(`${environment.apiUrl}Properties/${id}`);
   }
   refreshList() {
-    this.http.get( `${environment.apiUrl}Properties` + '?columna=' + this.filterData.Columna +
-      '&direccion=' + this.filterData.Direccion +
-      '&pagina=' + this.filterData.Pagina +
-      '&tampagina=' + this.filterData.TamPagina +
-      '&filtro=' + this.filterData.Filtro)
+    this.http.get( `${environment.apiUrl}Properties` + '?column=' + this.filterData.Columna +
+      '&direction=' + this.filterData.Direccion +
+      '&page=' + this.filterData.Pagina +
+      '&pagesize=' + this.filterData.TamPagina +
+      '&filter=' + this.filterData.Filtro)
       .toPromise()
       .then(res => this.list = (res as any).Datos as Property[]);
   }
