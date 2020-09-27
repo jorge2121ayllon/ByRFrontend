@@ -39,22 +39,12 @@
 </header>
 <div class="container-fluid video-player">
 
-                <li class="nav-item">
-                  <a class="nav-link js-scroll-trigger"  *ngIf="_authService.loggedIn()" routerLinkActive="active" routerLink="/usuarios">Usuario</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link js-scroll-trigger" *ngIf="!_authService.loggedIn()"  routerLinkActive="active" routerLink="/propiedades">Propiedades</a>
-                </li>
-              </ul>
-        </div>
-    </div>
-</nav>
-
 
   <div class="container">
 
     <router-outlet></router-outlet>
 
   </div>
+
 </div>
 
