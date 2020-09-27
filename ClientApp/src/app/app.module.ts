@@ -16,7 +16,13 @@ import { AuthGuard } from './auth.guard';
 import { TokenInterceptor } from './token.interceptor';
 import { UsersComponent } from './users/users.component';
 import { UserListComponent } from './users/user-list/user-list.component';
+
 import { UserService } from './servicios/user.service';
+
+import { PropertiesComponent } from './properties/properties.component';
+import { PropertyFormComponent } from './properties/property-form/property-form.component';
+import { PropertyListComponent } from './properties/property-list/property-list.component';
+
 
 
 @NgModule({
@@ -29,6 +35,9 @@ import { UserService } from './servicios/user.service';
     InicioComponent,
     UsersComponent,
     UserListComponent,
+    PropertiesComponent,
+    PropertyFormComponent,
+    PropertyListComponent,
 
   ],
   imports: [

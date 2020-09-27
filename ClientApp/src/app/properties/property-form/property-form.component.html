@@ -1,0 +1,125 @@
+<form #form="ngForm" autocomplete="off">
+    <input type="hidden" name="id" [value]="service.formData.Id">
+    
+    <div class="form-group">
+        <label>Precio</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text bg-white">
+            <i class="fas fa-dollar-sign" [class.green-icon]="Price.valid" [class.red-icon]="Price.invalid && Price.touched"></i>
+          </div>
+        </div>
+        
+        <input name="Price" #Price="ngModel" [(ngModel)]="service.formData.Price" class="form-control"
+               placeholder="Precio de la propiedad" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Descripci&oacute;n</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text bg-white">
+              </div>
+          </div>
+          <input name="Description" #Description="ngModel" [(ngModel)]="service.formData.Description" class="form-control"
+                 placeholder="Descripci&oacute;n de la propiedad" required>
+        </div>
+    </div>
+    <div class="form-group">
+      <label>Direcci&oacute;n</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text bg-white">
+              </div>
+          </div>
+          <input name="Direction" #Direction="ngModel" [(ngModel)]="service.formData.Direction" class="form-control"
+                 placeholder="Direcci&oacute;n de la propiedad" required>
+        </div>
+    </div>
+      <div class="form-group">
+        <label>Tama&ntilde;o</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text bg-white">
+              </div>
+          </div>
+          <input name="Size" #Size="ngModel" [(ngModel)]="service.formData.Size" class="form-control"
+                 placeholder="El tama&ntilde;o de la propiedad en m^2" required>
+        </div>
+      </div>  
+      <div class="form-group">
+        <label>Cantidad de cuartos</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text bg-white">
+              </div>
+          </div>
+          <input name="Bedrooms" #Bedrooms="ngModel" [(ngModel)]="service.formData.Bedrooms" class="form-control"
+                 placeholder="Cantidad de cuartos en la propiedad" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Cantidad de ba&ntilde;os</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text bg-white">
+              </div>
+          </div>
+          <input name="Badrooms" #Badrooms="ngModel" [(ngModel)]="service.formData.Badrooms" class="form-control"
+                 placeholder="Cantidad de ba&ntilde;os en la propiedad" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Latitud</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text bg-white">
+              </div>
+          </div>
+          <input name="Latitude" #Latitude="ngModel" [(ngModel)]="service.formData.Latitude" class="form-control"
+                 placeholder="Latitud de la ubicaci&oacute;n" required>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label>Longitud</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text bg-white">
+              </div>
+          </div>
+          <input name="Longitude" #Longitude="ngModel" [(ngModel)]="service.formData.Longitude" class="form-control"
+                 placeholder="Logitud de la ubicaci&oacute;n" required>
+        </div>
+      </div>
+      
+    <div>
+        <label>
+            <input type="checkbox" name="State"  [(ngModel)]="service.formData.State">
+            Disponible
+        </label>
+    </div>
+    <div>
+      <label>Categorias</label><br>
+      <select name="Category" [(ngModel)]="service.formData.Category">
+          <option *ngFor="let category of Categories" [value]="category.value">  
+          {{category.display}}
+          </option>
+      </select>
+  </div>
+  <div>
+    <label>Tipo de propiedad</label><br>
+    <select name="TypeProperties" [(ngModel)]="service.formData.TypeProperty">
+        <option *ngFor="let typeProperty of TypeProperties" [value]="typeProperty.value">  
+        {{typeProperty.display}}
+        </option>
+    </select>
+</div><br>
+    <div class="form-group">
+      <button class="btn btn-success btn-lg btn-block" type="button" [disabled]="form.invalid"
+        (click)="onSubmit(form)"><i class="fas fa-database"></i> Guardar</button>
+    </div>
+    
+  </form>
+  
