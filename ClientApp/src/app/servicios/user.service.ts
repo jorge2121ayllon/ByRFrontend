@@ -49,7 +49,7 @@ export class UserService {
   
   loggedBuyer()
   {
-    if (localStorage.getItem('Role') == "compradro") {
+    if (localStorage.getItem('Role') == "comprador") {
       return true;
     }
     return false;
