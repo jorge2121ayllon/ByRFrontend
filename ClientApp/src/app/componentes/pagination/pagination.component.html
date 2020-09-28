@@ -1,0 +1,48 @@
+<div class="form-inline">
+    <label for="filtro" class="mr-sm-2">Cant. de filas a mostrar:</label>
+    <select *ngIf="allowToChangePageSize" class="form-control form-control-sm pl-1" (change)="rowsPerPageChange()" [(ngModel)]="itemsPerPage">
+        <option>10</option>
+        <option>25</option>
+        <option>50</option>
+        <option>100</option>
+    </select>
+    <button type="button"
+            class="btn btn-default  btn-sm  ml-1"
+            [disabled]="isFirstPage()"
+            title="Next Page"
+            (click)="goToFirstPage()">
+        <div>
+            <i aria-hidden="true" class="fa fa-angle-double-left"></i><span class="sr-only"></span>
+        </div>
+    </button>
+    <button type="button"
+            class="btn btn-default btn-sm ml-1"
+            [disabled]="isFirstPage()"
+            title="Last Page"
+            (click)="goToPreviousPage()">
+        <div>
+            <i aria-hidden="true" class="fa fa-angle-left"></i><span class="sr-only"></span>
+        </div>
+    </button>
+    <label style="font-size:small" class="ml-1"></label>
+    <button type="button"
+            class="btn btn-default  btn-sm ml-1"
+            [disabled]="isLastPage()"
+            title="Next Page"
+            (click)="goToNextPage()">
+        <div>
+            <i aria-hidden="true" class="fa fa-angle-right"></i><span class="sr-only"></span>
+        </div>
+    </button>
+    <button type="button"
+            class="btn btn-default btn-sm ml-1"
+            [disabled]="isLastPage()"
+            title="Last Page"
+            (click)="goToLastPage()">
+        <div>
+            <i aria-hidden="true" class="fa fa-angle-double-right"></i><span class="sr-only"></span>
+        </div>
+    </button>
+
+    <label style="font-size:small" class="ml-1">{{getDisplayingLabel()}}</label>
+</div>
