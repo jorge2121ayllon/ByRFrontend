@@ -13,6 +13,7 @@ export class PropertyService {
   formData: Property;
   filterData: PageAndSort;
   list: Property[];
+  
   constructor(private http: HttpClient,private _router:Router ) {
     this.filterData = new PageAndSort();
     this.filterData.Columna = "Id";
@@ -20,6 +21,7 @@ export class PropertyService {
     this.filterData.Pagina = 1;
     this.filterData.TamPagina = 10;
     this.filterData.Filtro = "";
+   // this.formData.UserIdPro = localStorage.getItem('UserId');
   }
   
   postProperty() {
@@ -42,9 +44,11 @@ export class PropertyService {
       '&direction=' + this.filterData.Direccion +
       '&page=' + this.filterData.Pagina +
       '&pagesize=' + this.filterData.TamPagina +
-      '&filter=' + this.filterData.Filtro)
+      '&filter=' + this.filterData.Filtro +
+      '&id=' + localStorage.getItem('UserId'))
       .toPromise()
       .then(res => this.list = (res as any).Datos as Property[]);
+      
   }
   Search(filtro) {
     this.filterData.Filtro = filtro;
