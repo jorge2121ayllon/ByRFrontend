@@ -23,6 +23,11 @@ import { PropertiesComponent } from './properties/properties.component';
 import { PropertyFormComponent } from './properties/property-form/property-form.component';
 import { PropertyListComponent } from './properties/property-list/property-list.component';
 
+import { FilterComponent } from './componentes/filter/filter.component';
+import { PaginationComponent } from './componentes/pagination/pagination.component';
+import { Property } from './modelos/property.model';
+import { PropertyService } from './servicios/property.service';
+
 
 
 @NgModule({
@@ -38,6 +43,9 @@ import { PropertyListComponent } from './properties/property-list/property-list.
     PropertiesComponent,
     PropertyFormComponent,
     PropertyListComponent,
+    
+    FilterComponent,
+    PaginationComponent,
 
   ],
   imports: [
@@ -49,6 +57,7 @@ import { PropertyListComponent } from './properties/property-list/property-list.
   ],
   providers: [
     UserService,
+    PropertyService,
     AuthGuard, {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
