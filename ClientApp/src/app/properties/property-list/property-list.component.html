@@ -12,16 +12,15 @@
       <tr>
         <th scope="col" sortable="Price" (sort)="onSort($event)">Precio</th>
         <th scope="col" sortable="Description" (sort)="onSort($event)">Descripci&oacute;n</th>
-        <th scope="col" sortable="Description" (sort)="onSort($event)">Descripci&oacute;n</th>
-        <th scope="col" sortable="Description" (sort)="onSort($event)">Descripci&oacute;n</th>
-        <th scope="col" sortable="Description" (sort)="onSort($event)">Descripci&oacute;n</th>
-        <th scope="col" sortable="Description" (sort)="onSort($event)">Descripci&oacute;n</th>
-        <th scope="col" sortable="Description" (sort)="onSort($event)">Descripci&oacute;n</th>
-        <th scope="col" sortable="Description" (sort)="onSort($event)">Descripci&oacute;n</th>
-        <th scope="col" sortable="Description" (sort)="onSort($event)">Descripci&oacute;n</th>
-        <th scope="col" sortable="Description" (sort)="onSort($event)">Descripci&oacute;n</th>
-        <th scope="col" sortable="Description" (sort)="onSort($event)">Descripci&oacute;n</th>
-        <th scope="col" sortable="Description" (sort)="onSort($event)">Descripci&oacute;n</th>
+        <th scope="col" sortable="Direction" (sort)="onSort($event)">Direcci&oacute;n</th>
+        <th scope="col" sortable="Size" (sort)="onSort($event)">Tama&ntilde;o</th>
+        <th scope="col" sortable="Bedrooms" (sort)="onSort($event)">Cantidad de cuartos</th>
+        <th scope="col" sortable="Bathrooms" (sort)="onSort($event)">Cantidad de ba&ntilde;os</th>
+        <th scope="col" sortable="Latitude" (sort)="onSort($event)">Latitud</th>
+        <th scope="col" sortable="Longitude" (sort)="onSort($event)">Longitud</th>
+        <th scope="col" sortable="State" (sort)="onSort($event)">Estado</th>
+        <th scope="col" sortable="Category" (sort)="onSort($event)">Categoria</th>
+        <th scope="col" sortable="TypeProperty" (sort)="onSort($event)">Tipo de propiedad</th>
         <th scope="col">Acciones</th>
       </tr>
     </thead>
@@ -29,17 +28,15 @@
       <tr *ngFor="let property of service.list">
         <td (click)="populateForm(property)">{{property.Price}}</td>
         <td (click)="populateForm(property)">{{property.Description}}</td>
-        <td (click)="populateForm(property)">{{property.Description}}</td>
-        <td (click)="populateForm(property)">{{property.Description}}</td>
-        <td (click)="populateForm(property)">{{property.Description}}</td>
-        <td (click)="populateForm(property)">{{property.Description}}</td>
-        <td (click)="populateForm(property)">{{property.Description}}</td>
-        <td (click)="populateForm(property)">{{property.Description}}</td>
-        <td (click)="populateForm(property)">{{property.Description}}</td>
-        <td (click)="populateForm(property)">{{property.Description}}</td>
-        <td (click)="populateForm(property)">{{property.Description}}</td>
-        <td (click)="populateForm(property)">{{property.Description}}</td>
-
+        <td (click)="populateForm(property)">{{property.Direction}}</td>
+        <td (click)="populateForm(property)">{{property.Size}}</td>
+        <td (click)="populateForm(property)">{{property.Bedrooms}}</td>
+        <td (click)="populateForm(property)">{{property.Bathrooms}}</td>
+        <td (click)="populateForm(property)">{{property.Latitude}}</td>
+        <td (click)="populateForm(property)">{{property.Longitude}}</td>
+        <td (click)="populateForm(property)">{{property.State}}</td>
+        <td (click)="populateForm(property)">{{property.Category}}</td>
+        <td (click)="populateForm(property)">{{property.TypeProperty}}</td>
         <td>
           <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(property.Id)"></i>
         </td>
