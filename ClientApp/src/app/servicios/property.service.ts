@@ -26,10 +26,10 @@ export class PropertyService {
     this.filterData.Filtro = "";
    // this.formData.UserIdPro = localStorage.getItem('UserId');
   }
-  
+
   postProperty() {
     this.formData.UserIdPro = localStorage.getItem('UserId');
-    
+
     return this.http.post(`${environment.apiUrl}Properties`, this.formData);
   }
 
@@ -45,35 +45,34 @@ export class PropertyService {
   refreshList() : Observable<PropertyList> {
     let self = this;
     return this.http.get(`${environment.apiUrl}Properties`+
-      '?column='+this.filterData.Columna+
-      '&direction='+this.filterData.Direccion+
-      '&page='+this.filterData.Pagina+
-      '&pagesize='+this.filterData.TamPagina+
-      '&filter='+this.filterData.Filtro+
-      '&id='+localStorage.getItem('UserId'))
+      '?column=' + this.filterData.Columna +
+      '&direction=' + this.filterData.Direccion +
+      '&page=' + this.filterData.Pagina +
+      '&pagesize=' + this.filterData.TamPagina +
+      '&filter=' + this.filterData.Filtro +
+      '&id=' + localStorage.getItem('UserId'))
       .pipe(map((data: PropertyList ) => {
-        self.list = data.Datos; 
-        self.totalRows = data.TotalFilas;
+        self.list = data.Data;
+        self.totalRows = data.TotalRows;
+        console.log(data.Data);
+        console.log(data);
         return data;
-      })); 
+      }));
   }
   Search(filtro) {
     this.filterData.Filtro = filtro;
-    this.refreshList();  
+    this.refreshList();
     }
-  
     Quantity(cantidad) {
       this.filterData.TamPagina = cantidad;
-      this.refreshList();  
+      this.refreshList();
       }
-  
     Previus() {
-      this.filterData.Pagina= this.filterData.Pagina-1;
-      this.refreshList();  
+      this.filterData.Pagina = this.filterData.Pagina - 1;
+      this.refreshList();
       }
-  
     Next() {
-        this.filterData.Pagina=this.filterData.Pagina+1;
+        this.filterData.Pagina = this.filterData.Pagina + 1;
         this.refreshList();
       }
 }
