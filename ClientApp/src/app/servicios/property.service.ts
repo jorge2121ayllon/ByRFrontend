@@ -54,8 +54,6 @@ export class PropertyService {
       .pipe(map((data: PropertyList ) => {
         self.list = data.Data;
         self.totalRows = data.TotalRows;
-        console.log(data.Data);
-        console.log(data);
         return data;
       }));
   }

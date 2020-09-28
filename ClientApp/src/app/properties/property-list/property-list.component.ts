@@ -16,7 +16,6 @@ export class PropertyListComponent implements OnInit {
 
   ngOnInit(): void {
     this.refreshData();
-   
   }
   populateForm(selectedRecord) {
     this.service.formData = Object.assign({}, selectedRecord);
@@ -26,8 +25,7 @@ export class PropertyListComponent implements OnInit {
       console.log(result);
       this.service.list = result.Data;
       this.service.totalRows = result.TotalRows;
-      console.log(result.Data);
-      console.log(result.TotalRows);
+
     });
   }
 
