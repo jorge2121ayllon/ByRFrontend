@@ -11,34 +11,34 @@
     <thead>
       <tr>
         <th scope="col" sortable="Price" (sort)="onSort($event)">Precio</th>
-        <th scope="col" sortable="Descripcion" (sort)="onSort($event)">Descripci&oacute;n</th>
-        <th scope="col" sortable="Descripcion" (sort)="onSort($event)">Descripci&oacute;n</th>
-        <th scope="col" sortable="Descripcion" (sort)="onSort($event)">Descripci&oacute;n</th>
-        <th scope="col" sortable="Descripcion" (sort)="onSort($event)">Descripci&oacute;n</th>
-        <th scope="col" sortable="Descripcion" (sort)="onSort($event)">Descripci&oacute;n</th>
-        <th scope="col" sortable="Descripcion" (sort)="onSort($event)">Descripci&oacute;n</th>
-        <th scope="col" sortable="Descripcion" (sort)="onSort($event)">Descripci&oacute;n</th>
-        <th scope="col" sortable="Descripcion" (sort)="onSort($event)">Descripci&oacute;n</th>
-        <th scope="col" sortable="Descripcion" (sort)="onSort($event)">Descripci&oacute;n</th>
-        <th scope="col" sortable="Descripcion" (sort)="onSort($event)">Descripci&oacute;n</th>
-        <th scope="col" sortable="Descripcion" (sort)="onSort($event)">Descripci&oacute;n</th>
+        <th scope="col" sortable="Description" (sort)="onSort($event)">Descripci&oacute;n</th>
+        <th scope="col" sortable="Description" (sort)="onSort($event)">Descripci&oacute;n</th>
+        <th scope="col" sortable="Description" (sort)="onSort($event)">Descripci&oacute;n</th>
+        <th scope="col" sortable="Description" (sort)="onSort($event)">Descripci&oacute;n</th>
+        <th scope="col" sortable="Description" (sort)="onSort($event)">Descripci&oacute;n</th>
+        <th scope="col" sortable="Description" (sort)="onSort($event)">Descripci&oacute;n</th>
+        <th scope="col" sortable="Description" (sort)="onSort($event)">Descripci&oacute;n</th>
+        <th scope="col" sortable="Description" (sort)="onSort($event)">Descripci&oacute;n</th>
+        <th scope="col" sortable="Description" (sort)="onSort($event)">Descripci&oacute;n</th>
+        <th scope="col" sortable="Description" (sort)="onSort($event)">Descripci&oacute;n</th>
+        <th scope="col" sortable="Description" (sort)="onSort($event)">Descripci&oacute;n</th>
         <th scope="col">Acciones</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let property of service.list">
-        <td (click)="populateForm(property)">{{property.Nombre}}</td>
-        <td (click)="populateForm(property)">{{property.Descripcion}}</td>
-        <td (click)="populateForm(property)">{{property.Descripcion}}</td>
-        <td (click)="populateForm(property)">{{property.Descripcion}}</td>
-        <td (click)="populateForm(property)">{{property.Descripcion}}</td>
-        <td (click)="populateForm(property)">{{property.Descripcion}}</td>
-        <td (click)="populateForm(property)">{{property.Descripcion}}</td>
-        <td (click)="populateForm(property)">{{property.Descripcion}}</td>
-        <td (click)="populateForm(property)">{{property.Descripcion}}</td>
-        <td (click)="populateForm(property)">{{property.Descripcion}}</td>
-        <td (click)="populateForm(property)">{{property.Descripcion}}</td>
-        <td (click)="populateForm(property)">{{property.Descripcion}}</td>
+        <td (click)="populateForm(property)">{{property.Price}}</td>
+        <td (click)="populateForm(property)">{{property.Description}}</td>
+        <td (click)="populateForm(property)">{{property.Description}}</td>
+        <td (click)="populateForm(property)">{{property.Description}}</td>
+        <td (click)="populateForm(property)">{{property.Description}}</td>
+        <td (click)="populateForm(property)">{{property.Description}}</td>
+        <td (click)="populateForm(property)">{{property.Description}}</td>
+        <td (click)="populateForm(property)">{{property.Description}}</td>
+        <td (click)="populateForm(property)">{{property.Description}}</td>
+        <td (click)="populateForm(property)">{{property.Description}}</td>
+        <td (click)="populateForm(property)">{{property.Description}}</td>
+        <td (click)="populateForm(property)">{{property.Description}}</td>
 
         <td>
           <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(property.Id)"></i>
