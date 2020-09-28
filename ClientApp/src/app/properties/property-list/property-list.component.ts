@@ -11,19 +11,23 @@ import { Subscription } from 'rxjs';
 })
 export class PropertyListComponent implements OnInit {
   @ViewChildren(SortColumns) headers: QueryList<SortColumns>;
-  
+
   constructor(public service: PropertyService) { }
 
   ngOnInit(): void {
     this.refreshData();
-    
+   
   }
   populateForm(selectedRecord) {
     this.service.formData = Object.assign({}, selectedRecord);
   }
   refreshData() {
     this.service.refreshList().subscribe((result: PropertyList) => {
-      
+      console.log(result);
+      this.service.list = result.Data;
+      this.service.totalRows = result.TotalRows;
+      console.log(result.Data);
+      console.log(result.TotalRows);
     });
   }
 
@@ -36,9 +40,9 @@ export class PropertyListComponent implements OnInit {
     });
     this.service.filterData.Columna = column;
     this.service.filterData.Direccion = direction;
-   this.refreshData();
+    this.refreshData();
   }
-  
+
   onDelete(id) {
     if (confirm('Estas seguro de eliminar ?')) {
       this.service.deleteProperty(id)
