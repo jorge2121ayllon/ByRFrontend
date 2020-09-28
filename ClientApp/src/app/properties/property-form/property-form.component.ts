@@ -14,11 +14,13 @@ export class PropertyFormComponent implements OnInit {
 
   constructor(public service: PropertyService, private toastr: ToastrService,private _routes:Router) { }
   public Categories = [
+      
       { value: 1, display: 'Venta' },
       { value: 2, display: 'Alquiler' },
       { value: 3, display: 'Anticretico' },
       { value: 4, display: 'Terreno' }
   ];
+   
   public TypeProperties = [
     { value: 1, display: 'Vivienda' },
     { value: 2, display: 'Terreno' }

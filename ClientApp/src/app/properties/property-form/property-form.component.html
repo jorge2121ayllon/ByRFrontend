@@ -100,22 +100,40 @@
           Disponible
       </label>
   </div>
-  <div>
-    <label>Categorias</label><br>
-    <select  id="Category" name="Category" #Category="ngModel" [(ngModel)]="service.formData.Category">
-        <option type="number" *ngFor="let category of Categories" [value]="category.value">  
-        {{category.display}}
-        </option>
-    </select>
+  
+<div class="form-group">
+  <label>Categorias</label>
+<div class="input-group">
+  <div class="input-group-prepend">
+    <div class="input-group-text bg-white">
+      <i class="fas fa-dollar-sign" [class.green-icon]="Category.valid" [class.red-icon]="Category.invalid && Category.touched"></i>
+    </div>
+  </div>
+  <select ng-required="true" class="form-control input-lg" id="Category" name="Category" #Category="ngModel" [(ngModel)]="service.formData.Category">
+    <option  *ngFor="let category of Categories" [value]="category.value" >  
+    {{category.display}}
+    </option>
+</select>
 </div>
-<div>
+</div>
+
+<div class="form-group">
   <label>Tipo de propiedad</label><br>
-  <select name="TypeProperty" #TypeProperty="ngModel" [(ngModel)]="service.formData.TypeProperty">
-      <option *ngFor="let typeProperty of TypeProperties" [value]="typeProperty.value">  
-      {{typeProperty.display}}
-      </option>
-  </select>
+<div class="input-group">
+  <div class="input-group-prepend">
+    <div class="input-group-text bg-white">
+      <i class="fas fa-dollar-sign" [class.green-icon]="Price.valid" [class.red-icon]="Price.invalid && Price.touched"></i>
+    </div>
+  </div>
+  <select class="form-control input-lg" name="TypeProperty" #TypeProperty="ngModel" [(ngModel)]="service.formData.TypeProperty" required>
+    <option *ngFor="let typeProperty of TypeProperties" [value]="typeProperty.value">  
+    {{typeProperty.display}}
+    </option>
+</select>
+                                                                                                        
 </div>
+</div>
+
 <br>
 
   <div class="form-group">
