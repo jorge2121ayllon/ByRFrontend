@@ -70,7 +70,6 @@ export class PropertyFormComponent implements OnInit {
         this.resetForm(form);
         this.toastr.info('Datos guardados', 'Detalles de la propiedad');
         this.refreshData();
-        this._routes.navigate(['/propiedades']);
       },
       err => {
         console.log(err);
@@ -81,6 +80,7 @@ export class PropertyFormComponent implements OnInit {
     this.service.postProperty().subscribe(
       res => {
         this.resetForm(form); 
+        this.toastr.info('Datos guardados', 'Su propiedad se guardo correctamente');
         this.refreshData();
       },
       err => { console.log(err); }
