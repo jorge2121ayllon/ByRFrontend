@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-
+import {PropertyList} from 'src/app/modelos/property-list.model';
 @Component({
   selector: 'app-property-form',
   templateUrl: './property-form.component.html',
@@ -14,18 +14,16 @@ export class PropertyFormComponent implements OnInit {
 
   constructor(public service: PropertyService, private toastr: ToastrService,private _routes:Router) { }
   public Categories = [
-      
+
       { value: 1, display: 'Venta' },
       { value: 2, display: 'Alquiler' },
-      { value: 3, display: 'Anticretico' },
-      { value: 4, display: 'Terreno' }
+      { value: 3, display: 'Anticretico' }
   ];
-   
+
   public TypeProperties = [
     { value: 1, display: 'Vivienda' },
     { value: 2, display: 'Terreno' }
   ];
-  
   ngOnInit(): void {
     this.resetForm();
   }
@@ -43,19 +41,26 @@ export class PropertyFormComponent implements OnInit {
       Description: '',
       Latitude: '',
       Longitude: '',
-      Category: 0,
-      TypeProperty: 0,
+      Category: 1,
+      TypeProperty: 1,
       UserIdPro: null
     }
   }
+
+  refreshData() {
+    this.service.refreshList().subscribe((result: PropertyList) => {
+    });
+  }
   onSubmit(form: NgForm) {
-    
+
     var category = Number(this.service.formData.Category);
     var type = Number(this.service.formData.TypeProperty);
     this.service.formData.TypeProperty = type;
     this.service.formData.Category = category;
-    if (this.service.formData.Id == null)
+    if (this.service.formData.Id == null){
       this.insertRecord(form);
+      }
+
     else
       this.updateRecord(form);
     }
@@ -63,8 +68,9 @@ export class PropertyFormComponent implements OnInit {
     this.service.putProperty().subscribe(
       res => {
         this.resetForm(form);
-        this.toastr.info('Submitted successfully', '');
-        this.service.refreshList();
+        this.toastr.info('Datos guardados', 'Detalles de la propiedad');
+        this.refreshData();
+        this._routes.navigate(['/propiedades']);
       },
       err => {
         console.log(err);
@@ -74,13 +80,11 @@ export class PropertyFormComponent implements OnInit {
   insertRecord(form: NgForm) {
     this.service.postProperty().subscribe(
       res => {
-
-        this.resetForm(form);
-       this.service.refreshList();
-       
+        this.resetForm(form); 
+        this.refreshData();
       },
       err => { console.log(err); }
-    )
+    ) 
   }
   
 }

@@ -13,7 +13,17 @@ export class PropertyListComponent implements OnInit {
   @ViewChildren(SortColumns) headers: QueryList<SortColumns>;
 
   constructor(public service: PropertyService) { }
+  public Categories = [
 
+    { value: 1, display: 'Venta' },
+    { value: 2, display: 'Alquiler' },
+    { value: 3, display: 'Anticretico' }
+];
+
+public TypeProperties = [
+  { value: 1, display: 'Vivienda' },
+  { value: 2, display: 'Terreno' }
+];
   ngOnInit(): void {
     this.refreshData();
   }
@@ -22,10 +32,7 @@ export class PropertyListComponent implements OnInit {
   }
   refreshData() {
     this.service.refreshList().subscribe((result: PropertyList) => {
-      console.log(result);
-      this.service.list = result.Data;
-      this.service.totalRows = result.TotalRows;
-
+      
     });
   }
 
@@ -45,7 +52,7 @@ export class PropertyListComponent implements OnInit {
     if (confirm('Estas seguro de eliminar ?')) {
       this.service.deleteProperty(id)
         .subscribe(res => {
-          this.service.refreshList();
+          this.refreshData();
         },
           err => { console.log(err); })
     }

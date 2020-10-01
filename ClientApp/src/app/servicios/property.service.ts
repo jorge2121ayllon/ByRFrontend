@@ -35,7 +35,7 @@ export class PropertyService {
 
   putProperty() {
     this.formData.UserIdPro = localStorage.getItem('UserId');
-    return this.http.put(`${environment.apiUrl}Properties/${this.formData.Id}`, this.formData);
+    return this.http.put(`${environment.apiUrl}Properties`, this.formData);
   }
 
   deleteProperty(id) {
@@ -44,7 +44,7 @@ export class PropertyService {
   }
   refreshList() : Observable<PropertyList> {
     let self = this;
-    return this.http.get(`${environment.apiUrl}Properties`+
+    return this.http.get(`${environment.apiUrl}Properties` +
       '?column=' + this.filterData.Columna +
       '&direction=' + this.filterData.Direccion +
       '&page=' + this.filterData.Pagina +
