@@ -9,9 +9,15 @@
           <i class="fas fa-dollar-sign" [class.green-icon]="Price.valid" [class.red-icon]="Price.invalid && Price.touched"></i>
         </div>
       </div>
-      
-      <input type="number" name="Price" #Price="ngModel" [(ngModel)]="service.formData.Price" class="form-control"
-             placeholder="Precio de la propiedad" required>
+      <input class="form-control"
+        name="Price"
+        #Price="ngModel" [(ngModel)]="service.formData.Price"
+        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+        type = "number"
+        maxlength = "24" 
+        placeholder="Precio de la propiedad"
+        required
+      /> 
     </div>
   </div>
 
@@ -20,10 +26,12 @@
       <div class="input-group">
         <div class="input-group-prepend">
           <div class="input-group-text bg-white">
+            <i class="fas fa-server" [class.green-icon]="Description.valid" [class.red-icon]="Description.invalid && Description.touched"></i>
             </div>
         </div>
-        <input name="Description" #Description="ngModel" [(ngModel)]="service.formData.Description" class="form-control"
-               placeholder="Descripci&oacute;n de la propiedad" required>
+        <textarea rows="4" cols="50" name="Description" #Description="ngModel" [(ngModel)]="service.formData.Description" class="form-control"
+        placeholder="Descripci&oacute;n de la propiedad" maxlength = "250" required>
+        </textarea>
       </div>
   </div>
   <div class="form-group">
@@ -31,21 +39,30 @@
       <div class="input-group">
         <div class="input-group-prepend">
           <div class="input-group-text bg-white">
+            <i class="fas fa-map-marked-alt" [class.green-icon]="Direction.valid" [class.red-icon]="Direction.invalid && Direction.touched"></i>
             </div>
         </div>
-        <input name="Direction" #Direction="ngModel" [(ngModel)]="service.formData.Direction" class="form-control"
-               placeholder="Direcci&oacute;n de la propiedad" required>
+        <textarea rows="4" cols="50" name="Direction" #Direction="ngModel" [(ngModel)]="service.formData.Direction" class="form-control"
+         placeholder="Direcci&oacute;n de la propiedad" maxlength = "400" required>
+        </textarea>
       </div>
   </div>
     <div class="form-group">
-      <label>Tama&ntilde;o</label>
+      <label>Tama&ntilde;o en metros cuadrados</label>
       <div class="input-group">
         <div class="input-group-prepend">
           <div class="input-group-text bg-white">
+            <i class="fas fa-home" [class.green-icon]="Size.valid" [class.red-icon]="Size.invalid && Size.touched"></i>
             </div>
         </div>
-        <input type="number" name="Size" #Size="ngModel" [(ngModel)]="service.formData.Size" class="form-control"
-               placeholder="El tama&ntilde;o de la propiedad en m^2" required>
+        <input type="number"
+          name="Size"
+          #Size="ngModel"
+          [(ngModel)]="service.formData.Size"
+          class="form-control"
+          oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+          maxlength="20"
+          placeholder="El tama&ntilde;o de la propiedad en m^2" required>
       </div>
     </div>  
     <div class="form-group">
@@ -53,10 +70,13 @@
       <div class="input-group">
         <div class="input-group-prepend">
           <div class="input-group-text bg-white">
+            <i class="fas fa-bed" [class.green-icon]="Bedrooms.valid" [class.red-icon]="Bedrooms.invalid && Bedrooms.touched"></i>
             </div>
         </div>
         <input type="number" name="Bedrooms" #Bedrooms="ngModel" [(ngModel)]="service.formData.Bedrooms" class="form-control"
-               placeholder="Cantidad de cuartos en la propiedad" required>
+          oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+          maxlength="5"       
+          placeholder="Cantidad de cuartos en la propiedad" required>
       </div>
     </div>
     <div class="form-group">
@@ -64,10 +84,13 @@
       <div class="input-group">
         <div class="input-group-prepend">
           <div class="input-group-text bg-white">
+            <i class="fas fa-toilet" [class.green-icon]="Bathrooms.valid" [class.red-icon]="Bathrooms.invalid && Bathrooms.touched"></i>
             </div>
         </div>
         <input type="number" name="Bathrooms" #Bathrooms="ngModel" [(ngModel)]="service.formData.Bathrooms" class="form-control"
-               placeholder="Cantidad de ba&ntilde;os en la propiedad" required>
+          oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+          maxlength="5"      
+          placeholder="Cantidad de ba&ntilde;os en la propiedad" required>
       </div>
     </div>
     <div class="form-group">
@@ -75,6 +98,7 @@
       <div class="input-group">
         <div class="input-group-prepend">
           <div class="input-group-text bg-white">
+            <i class="fas fa-map-marker-alt" [class.green-icon]="Latitude.valid" [class.red-icon]="Latitude.invalid && Latitude.touched"></i>
             </div>
         </div>
         <input  name="Latitude" #Latitude="ngModel" [(ngModel)]="service.formData.Latitude" class="form-control"
@@ -87,33 +111,43 @@
       <div class="input-group">
         <div class="input-group-prepend">
           <div class="input-group-text bg-white">
+            <i class="fas fa-map-marker-alt" [class.green-icon]="Longitude.valid" [class.red-icon]="Longitude.invalid && Longitude.touched"></i>
             </div>
         </div>
         <input  name="Longitude" #Longitude="ngModel" [(ngModel)]="service.formData.Longitude" class="form-control"
                placeholder="Logitud de la ubicaci&oacute;n" required>
       </div>
     </div>
+    <div class="form-group">
+      <div class="input-group-prepend">
+        <div class="input-group-text bg-white">
+          <i class="far fa-check-circle"></i>
+          <label>&nbsp; &nbsp;</label>
+          <label>
+            <input type="checkbox" name="State" #State="ngModel"  [(ngModel)]="service.formData.State" checked>
+                 ¿La propiedad esta disponible?
+        </label>
+        </div>
+         
+      </div>
+    </div>
     
-  <div>
-      <label>
-          <input type="checkbox" name="State"  [(ngModel)]="service.formData.State" checked>
-          Disponible
-      </label>
-  </div>
   
+  <br>
 <div class="form-group">
   <label>Categorias</label>
 <div class="input-group">
   <div class="input-group-prepend">
     <div class="input-group-text bg-white">
-      <i class="fas fa-dollar-sign" [class.green-icon]="Category.valid" [class.red-icon]="Category.invalid && Category.touched"></i>
+      <i class="fas fa-search-dollar" [class.green-icon]="Category.valid" [class.red-icon]="Category.invalid && Category.touched"></i>
     </div>
   </div>
-  <select ng-required="true" class="form-control input-lg" id="Category" name="Category" #Category="ngModel" [(ngModel)]="service.formData.Category">
+  <select class="form-control input-lg" id="Category" name="Category" #Category="ngModel" [(ngModel)]="service.formData.Category">
     <option  *ngFor="let category of Categories" [value]="category.value" >  
     {{category.display}}
     </option>
 </select>
+
 </div>
 </div>
 
@@ -122,7 +156,7 @@
 <div class="input-group">
   <div class="input-group-prepend">
     <div class="input-group-text bg-white">
-      <i class="fas fa-dollar-sign" [class.green-icon]="Price.valid" [class.red-icon]="Price.invalid && Price.touched"></i>
+      <i class="fas fa-gopuram" [class.green-icon]="TypeProperty.valid" [class.red-icon]="TypeProperty.invalid && Price.touched"></i>
     </div>
   </div>
   <select class="form-control input-lg" name="TypeProperty" #TypeProperty="ngModel" [(ngModel)]="service.formData.TypeProperty" required>
