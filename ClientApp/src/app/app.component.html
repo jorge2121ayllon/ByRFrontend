@@ -19,21 +19,39 @@
             <a class="nav-link js-scroll-trigger"  *ngIf="!_authService.loggedIn()" routerLinkActive="active" routerLink="/registrar">Registrar</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" *ngIf="_authService.loggedIn()" style="cursor: pointer;" (click)="_authService.logoutUser()">Salir</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger"  *ngIf="_authService.loggedAdministrator()" routerLinkActive="active" routerLink="/registrar">Logeado de admin</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger"  *ngIf="_authService.loggedBuyer()" >Logeado de comprador</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger"  *ngIf="_authService.loggedVendor()" routerLinkActive="active" routerLink="/registrar">Logeado de vendedor</a>
-          </li>         
-          <li class="nav-item">
             <a class="nav-link js-scroll-trigger"  *ngIf="_authService.loggedVendor()" routerLinkActive="active" routerLink="/propiedades">Propiedades</a>
           </li>      
       </ul>
+
+      <style>
+        .navbar-nav2{
+          text-align: right;
+        }
+      </style>
+      
+      <ul class="navbar-nav2" style="margin: 10px 0 0 10px;" *ngIf="_authService.loggedIn()">
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" *ngIf="_authService.loggedIn()" style="cursor: pointer;" (click)="_authService.logoutUser()">Cerrar sesion</a>
+        </li>
+      
+        <li class="text-white" *ngIf="_authService.loggedVendor()" >                      
+          &nbsp;  <label >Usuario Vendedor</label><br/>
+            <label *ngFor="let nameLogged of NameLogged" ><i class="fa fa-user"></i> {{nameLogged.display}}</label>      
+       
+        </li>
+        <li class="text-white" *ngIf="_authService.loggedBuyer()" >                      
+          &nbsp;  <label >Usuario Comprador</label><br/>
+            <label *ngFor="let nameLogged of NameLogged" ><i class="fa fa-user"></i> {{nameLogged.display}}</label>           
+     
+        </li>    
+         
+        <li class="text-white"*ngIf="_authService.loggedAdministrator()"  >                      
+         &nbsp;  <label >Usuario Administrador</label><br/>
+           <label *ngFor="let nameLogged of NameLogged" ><i class="fa fa-user"></i> {{nameLogged.display}}</label>           
+          
+       </li>        
+      </ul>
+
       </div>
     </nav>    
   </div>  
@@ -42,9 +60,7 @@
 <div class="container-fluid video-player">
 
   <div class="container">
-
     <router-outlet></router-outlet>
-
   </div>
 </div>
 

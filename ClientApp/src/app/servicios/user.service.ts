@@ -27,6 +27,11 @@ export class UserService {
     return localStorage.getItem('Token');
   }
 
+  getNameUser()
+  {
+    return localStorage.getItem('NameUser');
+  }
+
   loggedIn(){
     return !!localStorage.getItem('UserId');
   }
@@ -63,6 +68,8 @@ export class UserService {
   logoutUser(){
     localStorage.removeItem('UserId');
     localStorage.removeItem('Role');
+    localStorage.removeItem('Token');
+    localStorage.removeItem('NameUser');
     this._router.navigate(['/inicio']);
   }
 

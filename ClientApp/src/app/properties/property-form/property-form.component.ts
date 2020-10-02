@@ -68,7 +68,7 @@ export class PropertyFormComponent implements OnInit {
     this.service.putProperty().subscribe(
       res => {
         this.resetForm(form);
-        this.toastr.info('Datos guardados', 'Detalles de la propiedad');
+        this.toastr.info('Datos guardados', 'Su propiedad editada se guardo correctamente');
         this.refreshData();
       },
       err => {

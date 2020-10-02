@@ -28,6 +28,8 @@ import { PaginationComponent } from './componentes/pagination/pagination.compone
 import { Property } from './modelos/property.model';
 import { PropertyService } from './servicios/property.service';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 @NgModule({
@@ -50,6 +52,8 @@ import { PropertyService } from './servicios/property.service';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
