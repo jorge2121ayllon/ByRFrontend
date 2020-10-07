@@ -29,6 +29,7 @@ public TypeProperties = [
   }
   populateForm(selectedRecord) {
     this.service.formData = Object.assign({}, selectedRecord);
+    
   }
   refreshData() {
     this.service.refreshList().subscribe((result: PropertyList) => {
