@@ -25,6 +25,7 @@ export class PropertyFormComponent implements OnInit {
     { value: 2, display: 'Terreno' }
   ];
   ngOnInit(): void {
+    
     this.resetForm();
   }
   resetForm(form?: NgForm) {
@@ -68,7 +69,7 @@ export class PropertyFormComponent implements OnInit {
     this.service.putProperty().subscribe(
       res => {
         this.resetForm(form);
-        this.toastr.info('Datos guardados', 'Detalles de la propiedad');
+        this.toastr.info('Datos guardados', 'Su propiedad se actualizo correctamente');
         this.refreshData();
       },
       err => {
@@ -84,7 +85,6 @@ export class PropertyFormComponent implements OnInit {
         this.refreshData();
       },
       err => { console.log(err); }
-    ) 
+    )
   }
-  
 }
