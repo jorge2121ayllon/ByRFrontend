@@ -7,6 +7,8 @@ import { UserService } from './servicios/user.service';
 })
 export class AppComponent {
   title = 'ClientApp';
-  
+   public NameLogged = [
+    { value: localStorage.getItem('UserName'), display: localStorage.getItem('UserName') }
+  ];
   constructor(public _authService:UserService) {}
 }

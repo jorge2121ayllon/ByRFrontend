@@ -29,11 +29,10 @@ export class RegistrarComponent implements OnInit {
     this._usuarioSvr.postUser().subscribe(
       res => {
         this.toastr.info('Datos guardados', 'Usuario registrado correctamente');
-       // this._routes.navigate(['/ingresar']);
-
+        this._routes.navigate(['/ingresar']);
       },
       err=>{console.log(err)}
     );
-   // this._routes.navigate(['/ingresar']);
+    this._routes.navigate(['/ingresar']);
   }
 }

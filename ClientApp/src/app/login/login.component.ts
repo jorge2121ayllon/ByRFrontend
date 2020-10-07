@@ -21,13 +21,12 @@ export class LoginComponent implements OnInit {
   }
 
   loginUser(): void {
-    console.log(this.loginUserData);
     this._usuarioSvr.authUser(this.loginUserData.Email, this.loginUserData.Password).subscribe(
       res => {
-      console.log(res);
       localStorage.setItem('UserId', (res as any).Id);
       localStorage.setItem('Token', (res as any).Token);
       localStorage.setItem('Role', (res as any).Role);
+      localStorage.setItem('UserName', this.loginUserData.Email);
       this._routes.navigate(['/inicio']);
     },
     err => {
