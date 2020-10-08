@@ -33,7 +33,7 @@
         <td (click)="populateForm(property)">{{property.Category}}</td>
         <td (click)="populateForm(property)">{{property.TypeProperty}}</td>
         <td>
-
+          <i [routerLink]="['/propiedad/', property.Id]" class="fas fa-edit text-success"></i>
           <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(property.Id)"></i>
         </td>
       </tr>
