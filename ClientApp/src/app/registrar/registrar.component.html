@@ -1,49 +1,110 @@
       
        <h1 class="text-control">Registra tu usuario<i class="fa fa-user"></i></h1>
        <br/>
-       <form #form="ngForm" autocomplete="off">
+       <form [formGroup]="myform" (ngSubmit)="registerUser()" novalidate>
        <div class="row">
          <div class="col-md-6 ">            
               
                   <div class="form-group">
                      <label>Nombre de Usuario</label>
-                     <input class="form-control"  name="Name" type="text"  [(ngModel)]="registerUserData.Name" required>
+                     <input class="form-control" formControlName="name" 
+                       name="Name" type="text"  >
+                     <div
+                        class="text-danger"
+                        *ngIf="myform.get('name').hasError('required') && myform.get('name').touched">
+                        Nombre requerido
+                     </div>
                   </div>
                   <div class="form-group">
                      <label>Apellido de usuario</label>
-                     <input class="form-control"  name="LastName" type="text" [(ngModel)]="registerUserData.LastName" required>
+                     <input class="form-control" formControlName="lastname"  
+                      name="LastName" type="text" >
+                      <div
+                      class="text-danger"
+                      *ngIf="myform.get('lastname').hasError('required') && myform.get('lastname').touched">
+                      Apellido requerido
+                       
+                   </div>
                   </div>
                   <div class="form-group">
                      <label>Email</label>
-                     <input class="form-control" name="Email" type="email" [(ngModel)]="registerUserData.Email" required>
+                     <input class="form-control" formControlName="email" 
+                      name="Email"
+                      type="email" >
+                        <div
+                        class="text-danger"
+                        *ngIf="myform.get('email').hasError('required') && myform.get('email').touched">
+                        Email requerido
+                     </div>
+                   <div
+                      class="text-danger"
+                      *ngIf="myform.get('email').hasError('email') && myform.get('email').touched">
+                      El campo debe ser un E-mail válido
+                   </div>
                   </div>
          </div>
          <div class="col-md-4 ">
-                  <div class="form-group">
-                     <label>Numero de celular</label>
-                     <input class="form-control" name="Phone" type="text"  [(ngModel)]="registerUserData.Phone" required>
+               <div class="form-group">
+                  <label>Numero de celular</label>
+                   <input class="form-control"   formControlName="phone" 
+                     name="Phone" 
+                     type="text"  >
+                  <div
+                     class="text-danger"
+                     *ngIf="myform.get('phone').hasError('required') && myform.get('phone').touched">
+                     Celular requerido
                   </div>
+                  <div
+                     class="text-danger"
+                     *ngIf="myform.get('phone').hasError('minLength')  && myform.get('phone').touched">
+                      Celular debe tener mas de 5 caracteres
+                  </div>
+                </div>
                   <div class="form-group">
                      <label>Cedula de identidad</label>
-                     <input class="form-control"  name="nombre" type="text" [(ngModel)]="registerUserData.Ci" required>
+                     <input class="form-control" formControlName="ci"  
+                      name="Ci" type="text" >
+                      <div
+                      class="text-danger"
+                      *ngIf="myform.get('ci').hasError('required') && myform.get('ci').touched">
+                      Cédula de identidad requerido
+                   </div>
+                   <div
+                     class="text-danger"
+                     *ngIf="myform.get('ci').hasError('minLength') && myform.get('ci').touched">
+                     Cédula de identidad debe tener mas de 5 caractéres
+                  </div>
                   </div>
                   <div class="form-group">
                      <label>Clave</label>
-                     <input class="form-control" name="Password" type="password" [(ngModel)]="registerUserData.Password"  autocomplete="on" required>
+                     <input class="form-control" formControlName="password" 
+                     name="Password" type="password"   > 
+                     <div
+                     class="text-danger"
+                     *ngIf="myform.get('password').hasError('required') && myform.get('ci').touched">
+                     Contraseña requerida
+                  </div>
                   </div>
 
                   <div class="form-group">
                      <label>Rol de usuario</label><br>
-                     <select name="RolUser" [(ngModel)]="registerUserData.Role" >
-                        <option *ngFor="let rol of RolUser" [value]="rol.value">
+                     <select name="RolUser" formControlName="role"   >
+                        <option *ngFor="let rol of RolUser"  [value]="rol.value">
                         {{rol.display}}
                         </option>
                      </select>
+
+                     <div
+                     class="text-danger"
+                     *ngIf="myform.get('role').hasError('required') && myform.get('ci').touched">
+                    Necesita seleccionar un rol
+                  </div>
                   </div>
           </div>   
           <div class="col-md-8 text-center" style="padding: 00px 00px 00px 50px;">
-            <button class="btn btn-success btn-lg btn-block" type="button" [disabled]="form.invalid"
-            (click)="registerUser()"><i class="fas fa-database"></i> Guardar</button>
+            <button class="btn btn-success btn-lg btn-block" type="submit" [disabled]="myform.invalid"
+            ><i class="fas fa-database"></i> Guardar</button>
           </div>       
        </div>
       </form>     
+
