@@ -27,6 +27,11 @@ export class PropertyService {
    // this.formData.UserIdPro = localStorage.getItem('UserId');
   }
 
+
+  getProperty(id: string){
+    return this.http.get(`${environment.apiUrl}Properties/${id}`);
+  }
+
   postProperty() {
     this.formData.UserIdPro = localStorage.getItem('UserId');
 
