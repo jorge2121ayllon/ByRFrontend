@@ -1,3 +1,18 @@
+<style>
+	body { margin: 0; padding: 0; }
+	#mapa-mapbox {  width: 100  %; height:80% ; }
+  #ventanas { margin: 10; padding: 10;}
+</style>
+ 
+
+  
+
+  <div class="modal-body row" id="ventanas" >
+    <div class="col-md-6">
+      <div id="mapa-mapbox"></div>
+    </div>
+    <div class="col-md-6">
+
 <form #form="ngForm" autocomplete="off">
   <input type="hidden" name="id" [value]="service.formData.Id">
   
@@ -95,31 +110,6 @@
       </div>
     </div>
     <div class="form-group">
-      <label>Latitud</label>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <div class="input-group-text bg-white">
-            <i class="fas fa-map-marker-alt" [class.green-icon]="Latitude.valid" [class.red-icon]="Latitude.invalid && Latitude.touched"></i>
-            </div>
-        </div>
-        <input  name="Latitude" #Latitude="ngModel" [(ngModel)]="service.formData.Latitude" class="form-control"
-               placeholder="Latitud de la ubicaci&oacute;n" required>
-      </div>
-    </div>
-    
-    <div class="form-group">
-      <label>Longitud</label>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <div class="input-group-text bg-white">
-            <i class="fas fa-map-marker-alt" [class.green-icon]="Longitude.valid" [class.red-icon]="Longitude.invalid && Longitude.touched"></i>
-            </div>
-        </div>
-        <input  name="Longitude" #Longitude="ngModel" [(ngModel)]="service.formData.Longitude" class="form-control"
-               placeholder="Logitud de la ubicaci&oacute;n" required>
-      </div>
-    </div>
-    <div class="form-group">
       <div class="input-group-prepend">
         <div class="input-group-text bg-white">
           <i class="far fa-check-circle"></i>
@@ -180,3 +170,5 @@
   </div>
   
 </form>
+
+    </div>

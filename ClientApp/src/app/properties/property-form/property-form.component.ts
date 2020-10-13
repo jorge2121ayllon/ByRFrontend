@@ -2,11 +2,10 @@ import { PropertyService } from '../../servicios/property.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder,FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import {PropertyList} from 'src/app/modelos/property-list.model';
-import { map } from 'rxjs/operators';
-import { Property } from 'src/app/modelos/property.model';
+import * as mapboxgl from 'mapbox-gl';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-property-form',
   templateUrl: './property-form.component.html',
@@ -15,29 +14,13 @@ import { Property } from 'src/app/modelos/property.model';
 })
 export class PropertyFormComponent implements OnInit {
 
-<<<<<<< HEAD
+  
+  public latLogn = {};
+  mapa: mapboxgl.Map;
+
   private imagen:any;
 
   constructor(public service: PropertyService, private toastr: ToastrService,private _routes:Router) { }
-=======
-
-  propertyData : Property;
-  public myform: FormGroup;
-  public form: FormGroup;
-  formPrice: string;
-  productoId: string;
-  formDescripcion: string;
-  property: [];
-  constructor(public service: PropertyService, private toastr: ToastrService, private _routes: Router, private avRoute: ActivatedRoute) {
-    const idParam = 'id';
-    this.propertyData = new Property();
-    this.formDescripcion = 'Descripcion';
-    this.formPrice = 'Price';
-    if (this.avRoute.snapshot.params[idParam]){
-      this.productoId = this.avRoute.snapshot.params[idParam];
-    }
-   }
->>>>>>> b61f18465586e6d0b88aaa27e5e28399933c4f44
   public Categories = [
 
       { value: 1, display: 'Venta' },
@@ -49,26 +32,50 @@ export class PropertyFormComponent implements OnInit {
     { value: 1, display: 'Vivienda' },
     { value: 2, display: 'Terreno' }
   ];
+  static latitud: string;
+  static longitud: string;
+
+
   ngOnInit(): void {
-    if( this.productoId != null )
-    {
-      this.service.getProperty(this.productoId).subscribe(res =>{
-        this.service.formData.Price = (res as any).Price;
-        this.service.formData.Description = (res as any).Description;
-        this.service.formData.Direction = (res as any).Direction;
-        this.service.formData.Size = (res as any).Size;
-        this.service.formData.Bedrooms = (res as any).Bedrooms;
-        this.service.formData.Bathrooms = (res as any).Bathrooms;
-        this.service.formData.Latitude = (res as any).Latitude;
-        this.service.formData.Longitude = (res as any).Longitude;
-        this.service.formData.State = (res as any).State;
-        this.service.formData.Category = (res as any).Category;
-        this.service.formData.TypeProperty = (res as any).TypeProperty;
-       
-      });
-    }
+    
     this.resetForm();
+    (mapboxgl.accessToken as any) = environment.mapboxkey;
+
+    this.mapa = new mapboxgl.Map({
+     container: 'mapa-mapbox', // container id
+     style: 'mapbox://styles/mapbox/streets-v11',
+     center: [-64.732951, -21.531428], // starting position
+     zoom: 15 // starting zoom
+    });
+
+    this.mapa.addControl(
+       new mapboxgl.GeolocateControl({
+       positionOptions: {
+       enableHighAccuracy: true
+       },
+       trackUserLocation: true
+     }));
+
+    this.crearMarcador(this.latLogn);
   }
+
+
+  crearMarcador(latitudLongitud) {
+    const marker = new mapboxgl.Marker({
+    draggable: true
+    })
+    .setLngLat([ -64.732951, -21.531428])
+    .addTo(this.mapa);
+
+    this.mapa.on('click', function(e) {
+        marker.setLngLat([e.lngLat['lng'], e.lngLat['lat']]);
+        foo(e);
+    }
+    );
+}
+
+
+
   resetForm(form?: NgForm) {
     if (form != null)
       form.form.reset();
@@ -95,8 +102,10 @@ export class PropertyFormComponent implements OnInit {
     this.service.refreshList().subscribe((result: PropertyList) => {
     });
   }
-  onSubmit(form: NgForm) {
 
+  onSubmit(form: NgForm) {
+    this.service.formData.Latitude = String(PropertyFormComponent.latitud);
+    this.service.formData.Longitude = String(PropertyFormComponent.longitud);
     var category = Number(this.service.formData.Category);
     var type = Number(this.service.formData.TypeProperty);    
     this.service.formData.TypeProperty = type;
@@ -111,44 +120,41 @@ export class PropertyFormComponent implements OnInit {
     else
       this.updateRecord(form);
     }
+
   updateRecord(form: NgForm) {
     this.service.putProperty().subscribe(
       res => {
         this.resetForm(form);
         this.toastr.info('Datos guardados', 'Su propiedad editada se guardo correctamente');
         this.refreshData();
-        this._routes.navigate(['/propiedades']);
       },
       err => {
         console.log(err);
       }
     )
   }
+
+
   insertRecord(form: NgForm) {
     this.service.postProperty().subscribe(
       res => {
         this.resetForm(form); 
         this.toastr.info('Datos guardados', 'Su propiedad se guardo correctamente');
         this.refreshData();
-<<<<<<< HEAD
         localStorage.removeItem('base64');
         localStorage.removeItem('filename');
-=======
-        this._routes.navigate(['/propiedades']);
->>>>>>> b61f18465586e6d0b88aaa27e5e28399933c4f44
       },
       err => { console.log(err); }
     )
   }
-<<<<<<< HEAD
+
+
   uploadImage(event:any):void{
     this.imagen = event.target.files[0];
     console.log('Imagen => ',this.imagen);
   }
 
   //probando
-
-  
   imageSrc;
   sellersPermitFile: any;
   DriversLicenseFile: any;
@@ -200,7 +206,6 @@ export class PropertyFormComponent implements OnInit {
     }
   }
 
-
   handleInputChange(files) {
     var file = files;
     var pattern = /image-*/;
@@ -246,9 +251,15 @@ export class PropertyFormComponent implements OnInit {
   }
 
 
-=======
+}
 
-  get price(){ return this.form.get(this.formPrice); }
-  get descripcion(){ return this.form.get(this.formDescripcion); }
->>>>>>> b61f18465586e6d0b88aaa27e5e28399933c4f44
+function foo(e) { 
+  
+  // tslint:disable-next-line: whitespace
+  PropertyFormComponent.latitud=String(e.lngLat['lat']);
+  PropertyFormComponent.longitud=String(e.lngLat['lng']);
+
+  console.log(e.lngLat['lat'])
+  console.log(e.lngLat['lng'])
+
 }
