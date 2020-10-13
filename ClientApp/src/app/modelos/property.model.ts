@@ -14,4 +14,6 @@ export class Property {
     Category: number;
     TypeProperty: number;
     UserIdPro: string;
+    imageurl: string;
+    nombreimagen: string 
 }

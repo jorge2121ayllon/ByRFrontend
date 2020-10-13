@@ -8,11 +8,12 @@ import { Observable } from "rxjs";
 import { map } from "rxjs/operators"; 
 import { PropertyList}  from '../modelos/property-list.model';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class PropertyService {
-
+  
   formData: Property;
   filterData: PageAndSort;
   list: Property[];
