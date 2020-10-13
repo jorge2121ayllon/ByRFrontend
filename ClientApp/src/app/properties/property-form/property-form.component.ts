@@ -2,8 +2,11 @@ import { PropertyService } from '../../servicios/property.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder,FormControl, FormGroup, Validators } from '@angular/forms';
 import {PropertyList} from 'src/app/modelos/property-list.model';
+import { map } from 'rxjs/operators';
+import { Property } from 'src/app/modelos/property.model';
 @Component({
   selector: 'app-property-form',
   templateUrl: './property-form.component.html',
@@ -12,9 +15,29 @@ import {PropertyList} from 'src/app/modelos/property-list.model';
 })
 export class PropertyFormComponent implements OnInit {
 
+<<<<<<< HEAD
   private imagen:any;
 
   constructor(public service: PropertyService, private toastr: ToastrService,private _routes:Router) { }
+=======
+
+  propertyData : Property;
+  public myform: FormGroup;
+  public form: FormGroup;
+  formPrice: string;
+  productoId: string;
+  formDescripcion: string;
+  property: [];
+  constructor(public service: PropertyService, private toastr: ToastrService, private _routes: Router, private avRoute: ActivatedRoute) {
+    const idParam = 'id';
+    this.propertyData = new Property();
+    this.formDescripcion = 'Descripcion';
+    this.formPrice = 'Price';
+    if (this.avRoute.snapshot.params[idParam]){
+      this.productoId = this.avRoute.snapshot.params[idParam];
+    }
+   }
+>>>>>>> b61f18465586e6d0b88aaa27e5e28399933c4f44
   public Categories = [
 
       { value: 1, display: 'Venta' },
@@ -27,7 +50,23 @@ export class PropertyFormComponent implements OnInit {
     { value: 2, display: 'Terreno' }
   ];
   ngOnInit(): void {
-    
+    if( this.productoId != null )
+    {
+      this.service.getProperty(this.productoId).subscribe(res =>{
+        this.service.formData.Price = (res as any).Price;
+        this.service.formData.Description = (res as any).Description;
+        this.service.formData.Direction = (res as any).Direction;
+        this.service.formData.Size = (res as any).Size;
+        this.service.formData.Bedrooms = (res as any).Bedrooms;
+        this.service.formData.Bathrooms = (res as any).Bathrooms;
+        this.service.formData.Latitude = (res as any).Latitude;
+        this.service.formData.Longitude = (res as any).Longitude;
+        this.service.formData.State = (res as any).State;
+        this.service.formData.Category = (res as any).Category;
+        this.service.formData.TypeProperty = (res as any).TypeProperty;
+       
+      });
+    }
     this.resetForm();
   }
   resetForm(form?: NgForm) {
@@ -78,6 +117,7 @@ export class PropertyFormComponent implements OnInit {
         this.resetForm(form);
         this.toastr.info('Datos guardados', 'Su propiedad editada se guardo correctamente');
         this.refreshData();
+        this._routes.navigate(['/propiedades']);
       },
       err => {
         console.log(err);
@@ -90,12 +130,17 @@ export class PropertyFormComponent implements OnInit {
         this.resetForm(form); 
         this.toastr.info('Datos guardados', 'Su propiedad se guardo correctamente');
         this.refreshData();
+<<<<<<< HEAD
         localStorage.removeItem('base64');
         localStorage.removeItem('filename');
+=======
+        this._routes.navigate(['/propiedades']);
+>>>>>>> b61f18465586e6d0b88aaa27e5e28399933c4f44
       },
       err => { console.log(err); }
     )
   }
+<<<<<<< HEAD
   uploadImage(event:any):void{
     this.imagen = event.target.files[0];
     console.log('Imagen => ',this.imagen);
@@ -201,4 +246,9 @@ export class PropertyFormComponent implements OnInit {
   }
 
 
+=======
+
+  get price(){ return this.form.get(this.formPrice); }
+  get descripcion(){ return this.form.get(this.formDescripcion); }
+>>>>>>> b61f18465586e6d0b88aaa27e5e28399933c4f44
 }
