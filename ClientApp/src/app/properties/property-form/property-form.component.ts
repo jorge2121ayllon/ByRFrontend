@@ -66,7 +66,7 @@ export class PropertyFormComponent implements OnInit {
     })
     .setLngLat([ -64.732951, -21.531428])
     .addTo(this.mapa);
-
+   
     this.mapa.on('click', function(e) {
         marker.setLngLat([e.lngLat['lng'], e.lngLat['lat']]);
         foo(e);
@@ -88,7 +88,7 @@ export class PropertyFormComponent implements OnInit {
       Direction: '',
       State: false,
       Description: '',
-      Latitude: '',
+      Latitude:'',
       Longitude: '',
       Category: 1,
       TypeProperty: 1,
@@ -106,6 +106,12 @@ export class PropertyFormComponent implements OnInit {
   onSubmit(form: NgForm) {
     this.service.formData.Latitude = String(PropertyFormComponent.latitud);
     this.service.formData.Longitude = String(PropertyFormComponent.longitud);
+    if(this.service.formData.Latitude=='undefined' && this.service.formData.Longitude=='undefined')
+    {
+      this.service.formData.Latitude="-21.531428";
+      this.service.formData.Longitude="-64.732951";
+    }
+
     var category = Number(this.service.formData.Category);
     var type = Number(this.service.formData.TypeProperty);    
     this.service.formData.TypeProperty = type;
@@ -140,13 +146,14 @@ export class PropertyFormComponent implements OnInit {
   insertRecord(form: NgForm) {
     this.service.postProperty().subscribe(
       res => {
-        this.resetForm(form); 
+      
+    
         this.toastr.info('Datos guardados', 'Su propiedad se guardo correctamente');
         this.refreshData();
-        this._routes.navigate["/propiedades"];
         localStorage.removeItem('base64');
         localStorage.removeItem('filename');
-        
+        this.resetForm(form); 
+        this._routes.navigate(['/propiedades']);
       },
       err => { console.log(err); }
     )
