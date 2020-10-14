@@ -6,7 +6,8 @@ import { Subscription } from 'rxjs';
 import {  ViewChild, TemplateRef} from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-
+import {GaleriaService} from '../../servicios/galeria.service';
+import { Galeria } from 'src/app/modelos/galeria.model';
 @Component({
   selector: 'app-property-list',
   templateUrl: './property-list.component.html',
@@ -17,10 +18,11 @@ export class PropertyListComponent implements OnInit {
   @ViewChildren(SortColumns) headers: QueryList<SortColumns>;
   @ViewChild("myModalInfo", {static: false}) myModalInfo: TemplateRef<any>;
   @ViewChild("myModalConf", {static: false}) myModalConf: TemplateRef<any>;
-  
+  url="https://kinsta.com/es/wp-content/uploads/sites/8/2018/02/leyenda-de-wordpress-1.png";
   private imagen:any;
-
-  constructor(public service: PropertyService,private toastr: ToastrService,private modalService: NgbModal) { }
+  imagePath:string="";
+  list: Galeria[];
+  constructor(public service: PropertyService,private toastr: ToastrService,private modalService: NgbModal,public galeriaService: GaleriaService) { }
   public Categories = [
 
     { value: 1, display: 'Venta' },
@@ -35,10 +37,12 @@ public TypeProperties = [
 
   mostrarModalInfo(id){
   this.modalService.open(this.myModalInfo);
+      this.GetImages(id);
+      console.log();
   localStorage.setItem('propertyId',id);
   }
 
-  savedImage(){   
+  savedImage(){
     this.service.postSaveImage().subscribe(
       res => {
         this.toastr.info('Imagen Guardada', 'Agregó correctamente la imagen de la propiedad');
@@ -64,8 +68,12 @@ public TypeProperties = [
     this.service.refreshList().subscribe((result: PropertyList) => {
       
     });
+    this.url="https://kinsta.com/es/wp-content/uploads/sites/8/2018/02/leyenda-de-wordpress-1.png";
   }
-
+  GetImages(id){
+    this.service.GetGalleryByPropertyId(id);
+    console.log(this.service.listGaleria);
+  }
   onSort({ column, direction }: SortEvent) {
     // resetting other headers
     this.headers.forEach(header => {
@@ -77,7 +85,7 @@ public TypeProperties = [
     this.service.filterData.Direccion = direction;
     this.refreshData();
   }
-
+    
   onDelete(id) {
     if (confirm('Estas seguro de eliminar ?')) {
       this.service.deleteProperty(id)
@@ -103,6 +111,7 @@ public TypeProperties = [
     this.refreshData();
   }
 
+  
 
   //IMAGEN
   
@@ -131,6 +140,13 @@ public TypeProperties = [
     }
   }
   public picked(event, field) {
+    if (event.target.files){
+      var reader = new FileReader()
+      reader.readAsDataURL(event.target.files[0])
+      reader.onload = (event: any)=> {
+        this.url = event.target.result;
+      }
+    }
     this.currentId = field;
     let fileList: FileList = event.target.files;
     if (fileList.length > 0) {
@@ -194,5 +210,9 @@ public TypeProperties = [
 
     //this.log();
   }
+  //mostrar las fotos guardadas en la bdd
+    public mostrarfotos(){
+        var imagenMostrar="";
 
+    }
 }

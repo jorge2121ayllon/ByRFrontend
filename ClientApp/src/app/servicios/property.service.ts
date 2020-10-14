@@ -7,6 +7,7 @@ import { Property } from '../modelos/property.model';
 import { Observable } from "rxjs"; 
 import { map } from "rxjs/operators"; 
 import { PropertyList}  from '../modelos/property-list.model';
+import { Galeria } from '../modelos/galeria.model';
 
 
 @Injectable({
@@ -17,6 +18,7 @@ export class PropertyService {
   formData: Property;
   filterData: PageAndSort;
   list: Property[];
+  listGaleria: Galeria[];
   totalRows: number;
   PropertyId: string;
   constructor(private http: HttpClient, private _router: Router ) {
@@ -105,4 +107,11 @@ export class PropertyService {
         this.filterData.Pagina = this.filterData.Pagina + 1;
         this.refreshList();
       }
+      
+    GetGalleryByPropertyId(id){
+      return this.http.get(`${environment.apiUrl}Galleries/${id}`)
+      .toPromise()
+      .then(res => this.listGaleria = (res as any) as Galeria[]);
+      
+    }
 }
