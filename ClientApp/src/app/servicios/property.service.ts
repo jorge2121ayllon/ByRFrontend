@@ -8,11 +8,12 @@ import { Observable } from "rxjs";
 import { map } from "rxjs/operators"; 
 import { PropertyList}  from '../modelos/property-list.model';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class PropertyService {
-
+  
   formData: Property;
   filterData: PageAndSort;
   list: Property[];
@@ -34,7 +35,6 @@ export class PropertyService {
 
   postProperty() {
     this.formData.UserIdPro = localStorage.getItem('UserId');
-
     return this.http.post(`${environment.apiUrl}Properties`, this.formData);
   }
 
