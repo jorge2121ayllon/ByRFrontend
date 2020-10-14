@@ -32,7 +32,8 @@
         <td (click)="populateForm(property)">{{property.State}}</td>
         <td (click)="populateForm(property)">{{property.Category}}</td>
         <td (click)="populateForm(property)">{{property.TypeProperty}}</td>
-        <td>
+        <td>        
+          <i class="fas fa-images" title="Agregar imagen" (click)="mostrarModalInfo(property.Id)"></i>  
           <i [routerLink]="['/propiedad/', property.Id]" class="fas fa-edit text-success"></i>
           <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(property.Id)"></i>
         </td>
@@ -50,3 +51,31 @@
       </tr>
     </tfoot>
   </table>
+
+
+  <ng-template #myModalInfo let-modal>
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Agregue una imagen<i class="fas fa-images"></i></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.close()"> 
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <hr />
+      <div class="modal-body">
+        Seleccione una imagen de su dispositivo
+        <hr/>
+        <img src="../../../assets/images/default-image-620x600.jpg" style="width: 100px;">
+        <br />
+        <input (change)="picked($event,1)"  type="file">
+      </div>
+
+      <div class="text-center">
+        <button class="btn btn-success" (click)="savedImage()">Guardar</button>
+      </div>
+    </div>
+  
+  </ng-template><ng-template #myModalInfo let-modal>
+
+  
