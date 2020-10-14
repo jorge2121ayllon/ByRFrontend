@@ -14,12 +14,12 @@ import { environment } from 'src/environments/environment';
 })
 export class PropertyFormComponent implements OnInit {
 
-  
+   
   public latLogn = {};
   mapa: mapboxgl.Map;
-
+    url="https://kinsta.com/es/wp-content/uploads/sites/8/2018/02/leyenda-de-wordpress-1.png";
   private imagen:any;
-
+  
   constructor(public service: PropertyService, private toastr: ToastrService,private _routes:Router) { }
   public Categories = [
 
@@ -125,8 +125,10 @@ export class PropertyFormComponent implements OnInit {
     this.service.putProperty().subscribe(
       res => {
         this.resetForm(form);
+        this._routes.navigate["/propiedades"];
         this.toastr.info('Datos guardados', 'Su propiedad editada se guardo correctamente');
         this.refreshData();
+        
       },
       err => {
         console.log(err);
@@ -141,8 +143,10 @@ export class PropertyFormComponent implements OnInit {
         this.resetForm(form); 
         this.toastr.info('Datos guardados', 'Su propiedad se guardo correctamente');
         this.refreshData();
+        this._routes.navigate["/propiedades"];
         localStorage.removeItem('base64');
         localStorage.removeItem('filename');
+        
       },
       err => { console.log(err); }
     )
@@ -179,6 +183,14 @@ export class PropertyFormComponent implements OnInit {
     }
   }
   public picked(event, field) {
+    if (event.target.files){
+      var reader = new FileReader()
+      reader.readAsDataURL(event.target.files[0])
+      reader.onload = (event: any)=> {
+        this.url = event.target.result;
+        
+      }
+    }
     this.currentId = field;
     let fileList: FileList = event.target.files;
     if (fileList.length > 0) {

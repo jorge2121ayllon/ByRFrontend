@@ -1,3 +1,10 @@
+<style>
+	body { margin: 0; padding: 0; }
+	#myModalInfo {  width: 100%; height:80% ; }
+  #myModalInfo { margin: 10; padding: 10;}
+</style>
+ 
+
 <hr/>
 <app-filter (filterChanged)="filterData($event)"></app-filter>
 <hr/>
@@ -55,18 +62,26 @@
 
   <ng-template #myModalInfo let-modal>
 
-    <div class="modal-content">
+    <div class="modal-content" id="Mymodal">
       <div class="modal-header">
-        <h5 class="modal-title">Agregue una imagen<i class="fas fa-images"></i></h5>
+        <h5 class="modal-title">Agregue una imagen</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.close()"> 
             <span aria-hidden="true">&times;</span>
           </button>
       </div>
       <hr />
       <div class="modal-body">
+        <div class="thumbnails" id="mostrar_videos">
+        </div>
         Seleccione una imagen de su dispositivo
         <hr/>
-        <img src="../../../assets/images/default-image-620x600.jpg" style="width: 100px;">
+        <div *ngFor="let imagen of service.listGaleria">
+          <img [src]="'data:image/jpg;base64,'+imagen.imagen64" width="400" height="300"/>
+
+        </div>
+        <img  [src]="url" width="400" height="300">
+        
+        
         <br />
         <input (change)="picked($event,1)"  type="file">
       </div>
