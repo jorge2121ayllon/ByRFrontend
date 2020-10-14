@@ -18,6 +18,7 @@ export class PropertyService {
   filterData: PageAndSort;
   list: Property[];
   totalRows: number;
+  PropertyId: string;
   constructor(private http: HttpClient, private _router: Router ) {
     this.filterData = new PageAndSort();
     this.filterData.Columna = "Id";
@@ -31,6 +32,32 @@ export class PropertyService {
 
   getProperty(id: string){
     return this.http.get(`${environment.apiUrl}Properties/${id}`);
+  }
+  
+  postSaveImage(){    
+   this.formData = new Property();
+    this.formData = {
+      Id: null,
+      Price: 0,
+      Bedrooms: 0,
+      Bathrooms: 0,
+      Size: 0,
+      Direction: 'sdasd',
+      State: false,
+      Description: 'asdasd',
+      Latitude: '',
+      Longitude: '',
+      Category: 1,
+      TypeProperty: 1,
+      UserIdPro: '',
+      imageurl: '',
+      nombreimagen:''
+    };
+
+    this.formData.Id = localStorage.getItem('propertyId');
+    this.formData.imageurl = localStorage.getItem('base64');
+    console.log(this.formData);
+    return this.http.post(`${environment.apiUrl}Properties/PostSavedImage`, this.formData);
   }
 
   postProperty() {
