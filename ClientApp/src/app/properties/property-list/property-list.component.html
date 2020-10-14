@@ -19,9 +19,7 @@
         <th scope="col" sortable="Bathrooms" (sort)="onSort($event)">Ba&ntilde;os</th>
         <th scope="col" sortable="Latitude" (sort)="onSort($event)">Latitud</th>
         <th scope="col" sortable="Longitude" (sort)="onSort($event)">Longitud</th>
-        <th scope="col" sortable="State" (sort)="onSort($event)">Estado</th>
-        <th scope="col" sortable="Category" (sort)="onSort($event)">Categoria</th>
-        <th scope="col" sortable="TypeProperty" (sort)="onSort($event)">Tipo de propiedad</th>
+        
         <th scope="col">Acciones</th>
       </tr>
     </thead>
@@ -35,9 +33,7 @@
         <td (click)="populateForm(property)">{{property.Bathrooms}}</td>
         <td (click)="populateForm(property)">{{property.Latitude}}</td>
         <td (click)="populateForm(property)">{{property.Longitude}}</td>
-        <td (click)="populateForm(property)">{{property.State}}</td>
-        <td (click)="populateForm(property)">{{property.Category}}</td>
-        <td (click)="populateForm(property)">{{property.TypeProperty}}</td>
+      
         <td>  
           <div class="row">
           <div class="col-md-3">

@@ -1,177 +1,199 @@
 <style>
-	body { margin: 0; padding: 0; }
-	#mapa-mapbox {  width: 100%; height:50% ; }
-  #ventanas { margin: 10; padding: 10;}
+	#mapa-mapbox {  width: 100%; height:80% ; }
+  #contenedorTodo{ margin: 0; padding: 0,0,0,0; }
+  #contenedorTodo{ margin: 0; padding: 0,0,0,0; }
+ 
 </style>
  
+<form #form="ngForm" autocomplete="off">
 
-  
-
-  <div class="modal-body row" id="ventanas" >
+<div class="modal-body row container" id="ventanas" >
+   
     <div class="col-md-6">
       <div id="mapa-mapbox"></div>
     </div>
-    <div class="col-md-6">
-
-<form #form="ngForm" autocomplete="off">
-  <input type="hidden" name="id" [value]="service.formData.Id">
-  
-  <div class="form-group">
-      <label>Precio</label>
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <div class="input-group-text bg-white">
-          <i class="fas fa-dollar-sign" [class.green-icon]="Price.valid" [class.red-icon]="Price.invalid && Price.touched"></i>
-        </div>
-      </div>
-      <input class="form-control"
-        name="Price"
-        #Price="ngModel" 
-        [(ngModel)]="service.formData.Price"
-        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-        type = "number"
-        maxlength = "24" 
-        placeholder="Precio de la propiedad"
-        required
-      /> 
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label>Descripci&oacute;n</label>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <div class="input-group-text bg-white">
-            <i class="fas fa-server" [class.green-icon]="Description.valid" [class.red-icon]="Description.invalid && Description.touched"></i>
-            </div>
-        </div>
-        <textarea rows="4" cols="50" name="Description" #Description="ngModel" [(ngModel)]="service.formData.Description" class="form-control"
-        placeholder="Descripci&oacute;n de la propiedad" maxlength = "250" required>
-        </textarea>
-      </div>
-  </div>
-  <div class="form-group">
-    <label>Direcci&oacute;n</label>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <div class="input-group-text bg-white">
-            <i class="fas fa-map-marked-alt" [class.green-icon]="Direction.valid" [class.red-icon]="Direction.invalid && Direction.touched"></i>
-            </div>
-        </div>
-        <textarea rows="4" cols="50" name="Direction" #Direction="ngModel" [(ngModel)]="service.formData.Direction" class="form-control"
-         placeholder="Direcci&oacute;n de la propiedad" maxlength = "400" required>
-        </textarea>
-      </div>
-  </div>
-    <div class="form-group">
-      <label>Tama&ntilde;o en metros cuadrados</label>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <div class="input-group-text bg-white">
-            <i class="fas fa-home" [class.green-icon]="Size.valid" [class.red-icon]="Size.invalid && Size.touched"></i>
-            </div>
-        </div>
-        <input type="number"
-          name="Size"
-          #Size="ngModel"
-          [(ngModel)]="service.formData.Size"
-          class="form-control"
-          oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-          maxlength="20"
-          placeholder="El tama&ntilde;o de la propiedad en m^2" required>
-      </div>
-    </div>  
-    <div class="form-group">
-      <label>Cantidad de cuartos</label>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <div class="input-group-text bg-white">
-            <i class="fas fa-bed" [class.green-icon]="Bedrooms.valid" [class.red-icon]="Bedrooms.invalid && Bedrooms.touched"></i>
-            </div>
-        </div>
-        <input type="number" name="Bedrooms" #Bedrooms="ngModel" [(ngModel)]="service.formData.Bedrooms" class="form-control"
-          oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-          maxlength="5"       
-          placeholder="Cantidad de cuartos en la propiedad" required>
-      </div>
-    </div>
-    <div class="form-group">
-      <label>Cantidad de ba&ntilde;os</label>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <div class="input-group-text bg-white">
-            <i class="fas fa-toilet" [class.green-icon]="Bathrooms.valid" [class.red-icon]="Bathrooms.invalid && Bathrooms.touched"></i>
-            </div>
-        </div>
-        <input type="number" name="Bathrooms" #Bathrooms="ngModel" [(ngModel)]="service.formData.Bathrooms" class="form-control"
-          oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-          maxlength="5"      
-          placeholder="Cantidad de ba&ntilde;os en la propiedad" required>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="input-group-prepend">
-        <div class="input-group-text bg-white">
-          <i class="far fa-check-circle"></i>
-          <label>&nbsp; &nbsp;</label>
-          <label>
-            <input type="checkbox" name="State" #State="ngModel"  [(ngModel)]="service.formData.State" checked>
-                 ¿La propiedad esta disponible?
-        </label>
-        </div>
-         
-      </div>
-    </div>
     
+      
+   
+
+      
+    <div class="col-md-3">
+          <input type="hidden" name="id" [value]="service.formData.Id">
+          
+          <div class="form-group">
+              <label>Precio</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text bg-white">
+                  <i class="fas fa-dollar-sign" [class.green-icon]="Price.valid" [class.red-icon]="Price.invalid && Price.touched"></i>
+                </div>
+              </div>
+              <input class="form-control"
+                name="Price"
+                #Price="ngModel" 
+                [(ngModel)]="service.formData.Price"
+                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                type = "number"
+                maxlength = "24" 
+                placeholder="Precio de la propiedad"
+                required
+              /> 
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Descripci&oacute;n</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text bg-white">
+                    <i class="fas fa-server" [class.green-icon]="Description.valid" [class.red-icon]="Description.invalid && Description.touched"></i>
+                    </div>
+                </div>
+                <textarea rows="4" cols="50" name="Description" #Description="ngModel" [(ngModel)]="service.formData.Description" class="form-control"
+                placeholder="Descripci&oacute;n de la propiedad" maxlength = "250" required>
+                </textarea>
+              </div>
+          </div>
+
+          <div class="form-group">
+            <label>Direcci&oacute;n</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text bg-white">
+                    <i class="fas fa-map-marked-alt" [class.green-icon]="Direction.valid" [class.red-icon]="Direction.invalid && Direction.touched"></i>
+                    </div>
+                </div>
+                <textarea rows="4" cols="50" name="Direction" #Direction="ngModel" [(ngModel)]="service.formData.Direction" class="form-control"
+                placeholder="Direcci&oacute;n de la propiedad" maxlength = "400" required>
+                </textarea>
+              </div>
+          </div>
+
+          <div class="form-group">
+              <label>Tama&ntilde;o en metros cuadrados</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text bg-white">
+                    <i class="fas fa-home" [class.green-icon]="Size.valid" [class.red-icon]="Size.invalid && Size.touched"></i>
+                    </div>
+                </div>
+                <input type="number"
+                  name="Size"
+                  #Size="ngModel"
+                  [(ngModel)]="service.formData.Size"
+                  class="form-control"
+                  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                  maxlength="20"
+                  placeholder="tama&ntilde;o" required>
+              </div>
+          </div>  
+            
+          <div class="form-group">
+              <label>Cantidad de cuartos</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text bg-white">
+                    <i class="fas fa-bed" [class.green-icon]="Bedrooms.valid" [class.red-icon]="Bedrooms.invalid && Bedrooms.touched"></i>
+                    </div>
+                </div>
+                <input type="number" name="Bedrooms" #Bedrooms="ngModel" [(ngModel)]="service.formData.Bedrooms" class="form-control"
+                  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                  maxlength="5"       
+                  placeholder="Habitaciones" required>
+              </div>
+          </div>
+          
+          <div class="form-group">
+              <label>Cantidad de ba&ntilde;os</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text bg-white">
+                    <i class="fas fa-toilet" [class.green-icon]="Bathrooms.valid" [class.red-icon]="Bathrooms.invalid && Bathrooms.touched"></i>
+                    </div>
+                </div>
+                <input type="number" name="Bathrooms" #Bathrooms="ngModel" [(ngModel)]="service.formData.Bathrooms" class="form-control"
+                  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                  maxlength="5"      
+                  placeholder="Ba&ntilde;os " required>
+              </div>
+          </div>
+          
+         
+            
+        </div>
+          
+     
+          
+
+
+        <div class="col-md-3">
+
+        <div class="form-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text bg-white">
+                <i class="far fa-check-circle"></i>
+                <label>&nbsp; &nbsp;</label>
+                <label>
+                  <input type="checkbox" name="State" #State="ngModel"  [(ngModel)]="service.formData.State" checked>
+                      ¿La propiedad esta disponible?
+              </label>
+              </div>
+              
+            </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Categorias</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text bg-white">
+              <i class="fas fa-search-dollar" [class.green-icon]="Category.valid" [class.red-icon]="Category.invalid && Category.touched"></i>
+            </div>
+          </div>
+          <select class="form-control input-lg" id="Category" name="Category" #Category="ngModel" [(ngModel)]="service.formData.Category">
+            <option  *ngFor="let category of Categories" [value]="category.value" >  
+            {{category.display}}
+            </option>
+        </select>
+
+        </div>
+        </div>
+
+        <div class="form-group">
+          <label>Tipo de propiedad</label><br>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text bg-white">
+              <i class="fas fa-gopuram" [class.green-icon]="TypeProperty.valid" [class.red-icon]="TypeProperty.invalid && Price.touched"></i>
+            </div>
+          </div>
+          <select class="form-control input-lg" name="TypeProperty" #TypeProperty="ngModel" [(ngModel)]="service.formData.TypeProperty" required>
+            <option *ngFor="let typeProperty of TypeProperties" [value]="typeProperty.value">  
+            {{typeProperty.display}}
+            </option>
+        </select>
+                                                                                                                
+        </div>
+        </div>
+
+        <label>Imagen de portada</label><br>
+        <img  [src]="url" width="400" height="250">
+
+        <br><br>
+        <input (change)="picked($event,1)" type="file" class="btn btn-success">
+        <br><br>
+        <br>
+
+          <div class="form-group">
+            <button class="btn btn-success" [disabled]="form.invalid"
+              (click)="onSubmit(form)"><i class="fas fa-database"></i> Guardar</button>
+            <button [routerLink]="['/propiedades']" class="btn btn-danger float-left">Cancelar</button>
+          </div>
   
-  <br>
-<div class="form-group">
-  <label>Categorias</label>
-<div class="input-group">
-  <div class="input-group-prepend">
-    <div class="input-group-text bg-white">
-      <i class="fas fa-search-dollar" [class.green-icon]="Category.valid" [class.red-icon]="Category.invalid && Category.touched"></i>
-    </div>
-  </div>
-  <select class="form-control input-lg" id="Category" name="Category" #Category="ngModel" [(ngModel)]="service.formData.Category">
-    <option  *ngFor="let category of Categories" [value]="category.value" >  
-    {{category.display}}
-    </option>
-</select>
+        </div>
+ 
+
 
 </div>
-</div>
 
-<div class="form-group">
-  <label>Tipo de propiedad</label><br>
-<div class="input-group">
-  <div class="input-group-prepend">
-    <div class="input-group-text bg-white">
-      <i class="fas fa-gopuram" [class.green-icon]="TypeProperty.valid" [class.red-icon]="TypeProperty.invalid && Price.touched"></i>
-    </div>
-  </div>
-  <select class="form-control input-lg" name="TypeProperty" #TypeProperty="ngModel" [(ngModel)]="service.formData.TypeProperty" required>
-    <option *ngFor="let typeProperty of TypeProperties" [value]="typeProperty.value">  
-    {{typeProperty.display}}
-    </option>
-</select>
-                                                                                                        
-</div>
-</div>
-<label>Imagen de portada</label><br>
-<img  [src]="url" width="500" height="300">
-
-<br><br>
-<input (change)="picked($event,1)" type="file" class="btn btn-success">
-<br><br>
-<br>
-
-  <div class="form-group">
-    <button class="btn btn-success" [disabled]="form.invalid"
-      (click)="onSubmit(form)"><i class="fas fa-database"></i> Guardar</button>
-    <button [routerLink]="['/propiedades']" class="btn btn-danger float-left">Cancelar</button>
-  </div>
-  
 </form>
-
-    </div>
