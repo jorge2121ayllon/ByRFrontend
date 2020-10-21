@@ -30,6 +30,7 @@ import { Property } from './modelos/property.model';
 import { PropertyService } from './servicios/property.service';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -59,7 +60,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     FormsModule,
     ToastrModule.forRoot() ,
-    ReactiveFormsModule    
+    ReactiveFormsModule,
+    NgbModule    
   ],
   providers: [
     UserService,

@@ -1,21 +1,25 @@
-<hr/>
+<style>
+	body { margin: 0; padding: 0; }
+	#myModalInfo {  width: 100%; height:80% ; }
+  #myModalInfo { margin: 10; padding: 10;}
+  
+</style>
+<br/>
 <app-filter (filterChanged)="filterData($event)"></app-filter>
-<hr/>
-
-<table class="table table-hover table-striped">
-    <thead>
+<br/>
+<br/>
+<table class="table table-hover " style="text-align:center;" >
+    <thead class="thead-dark" >
       <tr>
         <th scope="col" sortable="Price" (sort)="onSort($event)">Precio</th>
         <th scope="col" sortable="Description" (sort)="onSort($event)">Descripci&oacute;n</th>
         <th scope="col" sortable="Direction" (sort)="onSort($event)">Direcci&oacute;n</th>
         <th scope="col" sortable="Size" (sort)="onSort($event)">Tama&ntilde;o</th>
-        <th scope="col" sortable="Bedrooms" (sort)="onSort($event)">Cantidad de cuartos</th>
-        <th scope="col" sortable="Bathrooms" (sort)="onSort($event)">Cantidad de ba&ntilde;os</th>
+        <th scope="col" sortable="Bedrooms" (sort)="onSort($event)">Cuartos</th>
+        <th scope="col" sortable="Bathrooms" (sort)="onSort($event)">Ba&ntilde;os</th>
         <th scope="col" sortable="Latitude" (sort)="onSort($event)">Latitud</th>
         <th scope="col" sortable="Longitude" (sort)="onSort($event)">Longitud</th>
-        <th scope="col" sortable="State" (sort)="onSort($event)">Estado</th>
-        <th scope="col" sortable="Category" (sort)="onSort($event)">Categoria</th>
-        <th scope="col" sortable="TypeProperty" (sort)="onSort($event)">Tipo de propiedad</th>
+        
         <th scope="col">Acciones</th>
       </tr>
     </thead>
@@ -29,12 +33,19 @@
         <td (click)="populateForm(property)">{{property.Bathrooms}}</td>
         <td (click)="populateForm(property)">{{property.Latitude}}</td>
         <td (click)="populateForm(property)">{{property.Longitude}}</td>
-        <td (click)="populateForm(property)">{{property.State}}</td>
-        <td (click)="populateForm(property)">{{property.Category}}</td>
-        <td (click)="populateForm(property)">{{property.TypeProperty}}</td>
-        <td>
-          <i [routerLink]="['/propiedad/', property.Id]" class="fas fa-edit text-success"></i>
-          <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(property.Id)"></i>
+      
+        <td>  
+          <div class="row">
+          <div class="col-md-3">
+            <i class="fas fa-images" title="Agregar imagen" (click)="mostrarModalInfo(property.Id)"></i> 
+          </div>    
+          <div class="col-md-3">
+            <i [routerLink]="['/propiedad/', property.Id]" class="fas fa-edit text-success"></i>
+          </div>      
+          <div class="col-md-3">
+            <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(property.Id)"></i>
+          </div>      
+        </div>   
         </td>
       </tr>
     </tbody>
@@ -50,3 +61,51 @@
       </tr>
     </tfoot>
   </table>
+
+
+  <ng-template #myModalInfo let-modal>
+
+    <div class="modal-content" id="Mymodal">
+      <div class="modal-header" >
+        <h5 class="modal-title" >Galeria de imagenes</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.close()"> 
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      
+      <div class="modal-body">
+        <div class="thumbnails" id="mostrar_videos">
+        </div>
+     
+        <div style="text-align:center;">
+          Aqui podra agregar una nueva imagen 
+        </div>
+        <hr/>
+        <div class="text-center">
+          <img  [src]="url" width="200" height="120">
+          <br />
+          <br />
+          <input (change)="picked($event,1)"  type="file">
+        </div>
+       
+        <hr />
+        <div style="text-align:center;">
+          Aqui se le mostrara una vista previa de la galeria de la propiedad
+        </div>
+      
+        <hr />
+          <div class="row">
+            <div *ngFor="let imagen of service.listGaleria">
+                <img [src]="'data:image/jpg;base64,'+imagen.imagen64" width="150" height="130"/>
+            </div>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button class="btn btn-success" (click)="savedImage()">Guardar</button>
+      </div>
+    </div>
+  
+  </ng-template><ng-template #myModalInfo let-modal>
+
+  
