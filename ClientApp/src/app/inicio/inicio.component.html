@@ -1,1 +1,56 @@
-<h1>Inicio</h1>
+<div *ngIf="!Role()">
+    <h1 class="text-uppercase text-center">¡BIENVENIDO COMPRADOR!</h1>
+    <style>
+        .stay{
+            border-color:black;
+        }
+    </style>
+    <div id="divbuscador" class="container-fluid jumbotron-fluid stay mt-5 pt-5 pb-5">
+        <h2 class="text-center">Inicia tu búsqueda</h2>
+        <p class="text-center mt-2">Ingresa una palabra clave para buscar propiedades</p>
+        <form [formGroup]="myform" (ngSubmit)="buscarPropiedad()" novalidate>
+            <div class="input-group mt-4 mx-auto" style="max-width: 640px">               
+                <input type="text" class="form-control" 
+                required  formControlName="busqueda"  
+                placeholder="Buscar por dirección,descripción,precio">
+                <div class="">
+                    <button class="btn btn-success ml-2"
+                     [disabled]="myform.invalid" type="submit">Buscar</button>
+                </div>
+                
+            </div>
+        </form>
+    </div>
+</div>
+<div *ngIf="Role()">
+    <h1 class="text-uppercase text-center">¡BIENVENIDO VENDEDOR!</h1>
+    <label class="text-center">Intruduce alguna palabra clave para buscar propiedades en la ciudad!</label>
+</div>
+<div *ngIf="!Role()">
+<div *ngIf="getConfirmSerch()">
+    <h2 class="text-uppercase text-left">Resultado de la Búsqueda</h2>
+    <hr/>
+    <div class="container-fluid " >
+        <div class="container">
+            <div class="row vr-gallery">                
+                <div class="col-md-4 pl-3 mb-4 " *ngFor="let property of listProperty.Data">
+                   
+                    <div class="card">
+                        <img class="card-img-top" [src]="'data:image/jpg;base64,'+property.imagen64portada"  alt=""/>
+                        <div class="card-body bg-gray cus-pd2 cus-arrow-up">
+                            <h4>Dueño:</h4>
+                            <p><small>{{property.User.Name}}</small></p>
+                            <h3>Celular: {{property.User.Phone}}</h3>
+                            <h3>Precio: $ {{property.Price}} </h3>
+                            <strong><p>Descripción</p></strong>
+                            <p>{{property.Description}}</p>                            
+                        </div>
+                        <button class="btn btn-success ml-2"  (click)="getPropertyDetail(property.Id)">Ver Detalles</button>
+                    </div>
+                </div>
+              
+            </div>
+        </div>
+    </div>
+</div>
+</div>

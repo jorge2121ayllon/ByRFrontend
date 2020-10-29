@@ -7,11 +7,9 @@ import { InicioComponent } from './inicio/inicio.component';
 import { AuthGuard } from './auth.guard';
 import { PropertiesComponent } from './properties/properties.component';
 import { PropertyFormComponent } from './properties/property-form/property-form.component';
+import {PropertyDetailComponent} from './properties/property-detail/property-detail.component';
 
-
-const routes: Routes = [
-  
- 
+const routes: Routes = [   
 
   {
     path:"usuarios", 
@@ -45,7 +43,10 @@ const routes: Routes = [
     component: PropertyFormComponent,
     canActivate: [AuthGuard]
   },
-
+ {
+   path:"propiedadDetalle",
+   component: PropertyDetailComponent,
+ },
   { path: '', redirectTo: '/inicio', pathMatch: 'full' },
   { path: '**' , component: LoginComponent}
 ];

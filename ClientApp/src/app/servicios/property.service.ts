@@ -18,6 +18,7 @@ export class PropertyService {
   formData: Property;
   filterData: PageAndSort;
   list: Property[];
+  list2: Property[];
   listGaleria: Galeria[];
   totalRows: number;
   PropertyId: string;
@@ -32,8 +33,15 @@ export class PropertyService {
   }
 
 
-  getProperty(id: string){
-    return this.http.get(`${environment.apiUrl}Properties/${id}`);
+  getProperty(id: string): Observable<PropertyList>{
+    let self = this;
+    
+    return this.http.get(`${environment.apiUrl}Properties/${id}`).pipe(map((data: PropertyList ) => {
+      self.list = data.Data;
+      self.totalRows = data.TotalRows;      
+      return data;
+    }));
+    
   }
   
   postSaveImage(){    
@@ -70,6 +78,16 @@ export class PropertyService {
   putProperty() {
     this.formData.UserIdPro = localStorage.getItem('UserId');
     return this.http.put(`${environment.apiUrl}Properties`, this.formData);
+  }
+  serchProperties(serch: string){
+    let self = this;
+    console.log("desde el servicio -> "+serch);
+    return this.http.get(`${environment.apiUrl}Properties/GetPropertyByUserBuyer`+'?serch='+serch)
+    .pipe(map((data: PropertyList ) => {
+      self.list = data.Data;
+      self.totalRows = data.TotalRows;      
+      return data;
+    }));
   }
 
   deleteProperty(id) {
