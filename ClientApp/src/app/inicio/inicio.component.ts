@@ -14,6 +14,7 @@ export class InicioComponent implements OnInit {
   public myform: FormGroup;
   public imageConfirm: boolean;
   listProperty = new PropertyList();
+  category: number;
   constructor(public formBuilder: FormBuilder,
               public service: PropertyService,
                private toastr: ToastrService,
@@ -24,7 +25,13 @@ export class InicioComponent implements OnInit {
   ngOnInit(): void {  
     this.Role();
     this.myform = new FormGroup({
-      busqueda : new FormControl('', [Validators.required])       
+      busqueda : new FormControl('', [Validators.required]),
+      precioDesde: new FormControl(0),       
+      precioHasta: new FormControl(0), 
+      tamaniodesde: new FormControl(0),       
+      tamaniohasta: new FormControl(0),
+      nbanios: new FormControl(0),
+      ncuartos: new FormControl(0)
     });
   }
 
@@ -40,23 +47,50 @@ export class InicioComponent implements OnInit {
   }  
   
   buscarPropiedad(){
-    var serch = this.myform.value.busqueda.toString();    
-    this.service.serchProperties(serch).subscribe(
+    var serch = this.myform.value.busqueda.toString(); 
+    var preciodesde = this.myform.value.precioDesde;   
+    var preciohasta = this.myform.value.precioHasta;
+    var tamaniodesde2 = this.myform.value.tamaniodesde;
+    var tamaniohasta2 = this.myform.value.tamaniohasta;
+    var ncuartos2 = this.myform.value.ncuartos;
+    var nbanios2 = this.myform.value.nbanios;
+    
+    if(tamaniodesde2==0){
+      tamaniodesde2 = 0.0;
+    }
+    if(tamaniohasta2==0){
+      tamaniohasta2 = 0.0;
+    }
+    if(preciodesde==0){
+      preciodesde = 0.0;
+    }
+    if(preciohasta==0){
+      preciohasta= 0.0;
+    }
+    if(ncuartos2==0){
+      ncuartos2 = 0.0;
+    }
+    if(nbanios2==0){
+      nbanios2 = 0.0;
+    }
+    
+    
+    this.service.serchProperties(serch,preciodesde,preciohasta,tamaniodesde2,tamaniohasta2,ncuartos2,nbanios2).subscribe(
       res => {    
-        this.listProperty.Data = res.Data;    
-        this.listProperty.TotalRows = res.TotalRows;                
+        this.listProperty.Data = res.Data;            
+        this.listProperty.TotalRows = res.TotalRows;           
+        console.log(this.listProperty.Data);
         if(this.listProperty.TotalRows>0)
         {
         this.toastr.info('Busqueda exitosa', '');   
         this.imageConfirm = true;                        
         this.listProperty = res;
+        this.ngOnInit();
         }
         else{
-          this.toastr.error('Ups!', 'No se encontró ningun resultado para su búsqueda');
-          this.myform = new FormGroup({
-            busqueda : new FormControl('', [Validators.required])       
-          }); 
+          this.toastr.error('Ups!', 'No se encontró ningun resultado para su búsqueda');          
           this.imageConfirm = false;
+          this.ngOnInit();
         }
       },
       err=>{
@@ -74,6 +108,7 @@ export class InicioComponent implements OnInit {
         return false;
       }
   }
+
 
   getPropertyDetail(id){
     console.log(id);

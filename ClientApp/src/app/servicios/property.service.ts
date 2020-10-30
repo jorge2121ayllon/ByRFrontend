@@ -79,10 +79,13 @@ export class PropertyService {
     this.formData.UserIdPro = localStorage.getItem('UserId');
     return this.http.put(`${environment.apiUrl}Properties`, this.formData);
   }
-  serchProperties(serch: string){
+  serchProperties(serch: string, preciodesde: number, preciohasta: number, tamaniodesde2:number,
+                  tamaniohasta2: number, ncuartos2: number, nbanios2: number){
     let self = this;
     console.log("desde el servicio -> "+serch);
-    return this.http.get(`${environment.apiUrl}Properties/GetPropertyByUserBuyer`+'?serch='+serch)
+    return this.http.get(`${environment.apiUrl}Properties/GetPropertyByUserBuyer`
+    +'?serch='+serch + '&preciodesde='+preciodesde+'&preciohasta='+preciohasta+'&tamaniodesde='+tamaniodesde2
+    +'&tamaniohasta='+tamaniohasta2+'&ncuartos='+ncuartos2+'&nbanios='+nbanios2)
     .pipe(map((data: PropertyList ) => {
       self.list = data.Data;
       self.totalRows = data.TotalRows;      
