@@ -1,4 +1,75 @@
-<h1>Detalles de propiedad</h1>
+<!-- <h1>Detalles de propiedad</h1>
 <div *ngFor="let property of listProperty.Data">
     {{property.Description}}
+</div> -->
+
+
+
+<div class="article-pg">    
+<div class="container-fluid ar-content">
+    <div class="container">
+        <h1 class="logo text-center text-white">Información de la propiedad</h1>
+        <div class="row" *ngFor="let property of listProperty.Data">
+            <div class="col-lg-9 pr-5" >
+                <div class="card ar-img-over">
+                    <img  [src]="'data:image/jpg;base64,'+property.imagen64portada" class="card-img"  alt="">
+                   
+                </div>
+                <div class="row date-time mt-3">
+
+                    <div class="col text-white">
+                        <a href="#"> <i class="fas fa-retweet"></i> Tarija</a>
+                    </div>
+                    <div class="col text-right">
+                        <h3 href="#">{{typeProperty}} - {{property.Price}} $ </h3>
+                    </div>
+                </div>
+                
+                <h2>{{property.Direction}}</h2>
+                <p>{{property.Description}}</p>  
+                <h2>Características:</h2>   
+                    <div class="row">             
+                        <div class="col-md-4">
+                            <h3> <i class="fas fa-bed"></i>Habitaciones: {{property.Bedrooms}}</h3>               
+                            <h3> <i class="fas fa-bath"></i>Baños: {{property.Bathrooms}}</h3>               
+                        </div>                                   
+                        <div class="col-md-4">
+                            <h3><i class="fas fa-ruler"></i>Tamaño: {{property.Size}} m2</h3>               
+                            <h3 ><i class="fas fa-list"></i>Categoría: {{categoryProperty}} </h3>  
+                        </div>
+                    </div>
+            </div>
+            <div class="col-lg-3 pl-0">
+                <div class="sidebar">                    
+                    <hr class="bg-white" />
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div class="">
+                        <h2 class="text-center">Datos del propiertario</h2>
+                        <br/>
+                        <div>
+                            <h4 class="text-center">                            
+                                Nombre del dueño
+                                <i class="fa fa-user"></i>
+                            </h4>                            
+                            <p class="text-center mt-1 third-clr">{{property.User.Name}} {{property.User.LastName}}<p>
+                            <h4 class="text-center">Teléfono<i class="fa fa-phone"></i></h4>
+                            <p class="text-center mt-1 third-clr">
+                                {{property.User.Phone}}                                
+                            </p>
+                            <h4 class="text-center">Email<i class="fa fa-email"></i></h4>
+                            <p class="text-center mt-1 third-clr">
+                                {{property.User.Email}}                                
+                            </p>
+                        </div>                                     
+                    </div>
+                                                
+                  
+                      
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>

@@ -13,7 +13,8 @@ import { Observable } from "rxjs";
 })
 export class PropertyDetailComponent implements OnInit {
   listProperty = new PropertyList();
-   
+   categoryProperty : string;
+   typeProperty: string;
   constructor(public service: PropertyService) { 
     
   }
@@ -24,6 +25,24 @@ export class PropertyDetailComponent implements OnInit {
     this.service.getProperty(id).subscribe(
       res =>{
         this.listProperty.Data = res.Data; 
+        if(this.listProperty.Data[0].TypeProperty == 1)
+        {
+          this.typeProperty = "Vivienda";
+        }
+        else{
+          this.typeProperty = "Terreno";
+        }
+        if(this.listProperty.Data[0].Category == 1)
+        {
+          this.categoryProperty = "Venta";
+        }
+        else if(this.listProperty.Data[0].Category == 2)
+        {
+          this.categoryProperty = "Alquiler";
+        }
+        else{
+          this.categoryProperty = "Anticrético";
+        }
         console.log(this.listProperty.Data);       
       }
       );
