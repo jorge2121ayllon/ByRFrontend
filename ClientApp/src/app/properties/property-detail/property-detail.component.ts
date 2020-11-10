@@ -8,7 +8,7 @@ import { Observable } from "rxjs";
 @Component({
   selector: 'app-property-detail',
   templateUrl: './property-detail.component.html',
-  styles: [
+  styles: [ './property-detail.component.css'
   ]
 })
 export class PropertyDetailComponent implements OnInit {
@@ -43,9 +43,12 @@ export class PropertyDetailComponent implements OnInit {
         else{
           this.categoryProperty = "Anticrético";
         }
-        console.log(this.listProperty.Data);       
+        console.log(this.listProperty.Data);     
+        this.service.GetGalleryByPropertyId(this.listProperty.Data[0].Id);  
       }
       );
+
+      
   }    
 
   resultDetail(){   
