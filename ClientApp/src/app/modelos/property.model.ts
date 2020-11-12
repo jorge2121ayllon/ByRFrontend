@@ -15,5 +15,5 @@ export class Property {
     TypeProperty: number;
     UserIdPro: string;
     imageurl: string;
-    nombreimagen: string 
+    imagen64portada: string 
 }

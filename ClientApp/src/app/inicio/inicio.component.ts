@@ -79,13 +79,13 @@ export class InicioComponent implements OnInit {
       res => {    
         this.listProperty.Data = res.Data;            
         this.listProperty.TotalRows = res.TotalRows;           
-        console.log(this.listProperty.Data);
         if(this.listProperty.TotalRows>0)
         {
         this.toastr.info('Busqueda exitosa', '');   
         this.imageConfirm = true;                        
         this.listProperty = res;
         this.ngOnInit();
+        //this._routes.navigate(['/propiedadMap']);
         }
         else{
           this.toastr.error('Ups!', 'No se encontró ningun resultado para su búsqueda');          

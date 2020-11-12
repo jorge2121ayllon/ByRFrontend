@@ -94,7 +94,7 @@ export class PropertyFormComponent implements OnInit {
       TypeProperty: 1,
       UserIdPro: null,
       imageurl: '',
-      nombreimagen:''
+      imagen64portada:''
     }
   }
 
@@ -117,7 +117,7 @@ export class PropertyFormComponent implements OnInit {
     this.service.formData.TypeProperty = type;
     this.service.formData.Category = category;
     this.service.formData.imageurl = localStorage.getItem('base64');
-    this.service.formData.nombreimagen = localStorage.getItem('filename'); 
+    this.service.formData.imagen64portada = localStorage.getItem('filename'); 
     console.log(this.service.formData);   
     if (this.service.formData.Id == null){
       this.insertRecord(form);

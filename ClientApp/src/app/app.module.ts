@@ -32,6 +32,7 @@ import { PropertyService } from './servicios/property.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PropertyDetailComponent } from './properties/property-detail/property-detail.component';
+import { PropertyMapdetailComponent } from './properties/property-mapdetail/property-mapdetail.component';
 
 
 
@@ -52,6 +53,7 @@ import { PropertyDetailComponent } from './properties/property-detail/property-d
     FilterComponent,
     PaginationComponent,
     PropertyDetailComponent,
+    PropertyMapdetailComponent,
 
   ],
   imports: [

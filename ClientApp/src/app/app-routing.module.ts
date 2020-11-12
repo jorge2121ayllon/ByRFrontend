@@ -8,12 +8,18 @@ import { AuthGuard } from './auth.guard';
 import { PropertiesComponent } from './properties/properties.component';
 import { PropertyFormComponent } from './properties/property-form/property-form.component';
 import {PropertyDetailComponent} from './properties/property-detail/property-detail.component';
+import { PropertyMapdetailComponent } from './properties/property-mapdetail/property-mapdetail.component';
 
 const routes: Routes = [   
 
   {
     path:"usuarios", 
     component: UsersComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path:"propiedadMap", 
+    component: PropertyMapdetailComponent,
     canActivate: [AuthGuard]
   },
   {
