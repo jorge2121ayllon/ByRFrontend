@@ -19,11 +19,12 @@ export class PropertyMapdetailComponent implements OnInit {
   mapa2: mapboxgl.Map;
   data = this.service.listaPropiedadesMapa;
   list: Property[];
-  constructor(public service: PropertyService,private toastr: ToastrService) { }
+  constructor(public service: PropertyService,private toastr: ToastrService, private _routes:Router) { }
 
 
   ngOnInit(): void {
 
+    console.log(this.data);
     (mapboxgl.accessToken as any) = environment.mapboxkey;
     this.mapa2 = new mapboxgl.Map({
      container: 'mapa-mapbox', // container id
@@ -33,27 +34,19 @@ export class PropertyMapdetailComponent implements OnInit {
     });
 
 
-    this.mapa2.addControl(
-      new mapboxgl.GeolocateControl({
-      positionOptions: {
-      enableHighAccuracy: true
-      },
-      trackUserLocation: true
-    }));
-
-
     this.crearMarcador();
   }
 
   crearMarcador() {
       this.data.Data.forEach(e => {
       const popup4 = new mapboxgl.Popup({offset:[1,1]})
-      .setHTML(`<h3>${e.Description}</h3></br>
+      .setHTML(
+                `<img src="data:image/png;base64, ${e.imagen64portada}"  width="100%" />
                 <h6><small>Baños : ${e.Bedrooms}</small></h6>
-                <h6><small>Precio : ${e.Price}</small></h6>
-                <h6><small>Tamaño : ${e.Size}</small></h6>
-                <h6><small>Descripcion : ${e.Size}</small></h6>` +
-                `<img [src]="'data:image/jpg;base64,'${e.imagen64portada}"/>`
+                <h6><small>Precio : ${e.Price} </small></h6>
+                <h6><small>Tamaño : ${e.Size} m2</small></h6>
+                <h6><small>Descripcion : ${e.Description}</small></h6>
+                <button class="btn btn-success"(click)="getPropertyDetail(${e.Id})">Ver Detalles</button>` 
               )
       const marker = new mapboxgl.Marker({
         draggable: false
@@ -62,5 +55,10 @@ export class PropertyMapdetailComponent implements OnInit {
         .setPopup(popup4)
         .addTo(this.mapa2);
     });
+  }
+
+  getPropertyDetail(id){
+    localStorage.setItem('propertyId',id);    
+    this._routes.navigate(['/propiedadDetalle']);
   }
 }

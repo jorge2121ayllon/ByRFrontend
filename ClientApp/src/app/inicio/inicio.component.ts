@@ -4,6 +4,8 @@ import { Component, OnInit } from '@angular/core';
   import { ToastrService } from 'ngx-toastr';
   import {PropertyList} from 'src/app/modelos/property-list.model';
   import { Router } from '@angular/router';
+  import { AbstractControl} from '@angular/forms';
+
 
 @Component({
   selector: 'app-inicio',
@@ -14,13 +16,22 @@ export class InicioComponent implements OnInit {
   public myform: FormGroup;
   public imageConfirm: boolean;
   listProperty = new PropertyList();
-  category: number;
+  
+  tipoSeleccionado: number = 0;
+  tipos = [
+    { id: 0, texto: "En lista", clase: "fa-user" },
+    { id: 1, texto: "En mapa", clase: "fa-calendar" }
+  ];
+
   constructor(public formBuilder: FormBuilder,
               public service: PropertyService,
                private toastr: ToastrService,
                private _routes:Router) { 
     this.imageConfirm = false;
   }
+
+ 
+
 
   ngOnInit(): void {  
     this.Role();
@@ -82,10 +93,12 @@ export class InicioComponent implements OnInit {
         if(this.listProperty.TotalRows>0)
         {
         this.toastr.info('Busqueda exitosa', '');   
-        this.imageConfirm = true;                        
+        this.imageConfirm = true;
+        if(this.tipoSeleccionado==1) {
+          this._routes.navigate(['/propiedadMap']);
+        }
         this.listProperty = res;
         this.ngOnInit();
-        //this._routes.navigate(['/propiedadMap']);
         }
         else{
           this.toastr.error('Ups!', 'No se encontró ningun resultado para su búsqueda');          

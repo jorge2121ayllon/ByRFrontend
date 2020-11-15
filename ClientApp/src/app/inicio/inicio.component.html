@@ -11,7 +11,9 @@
     </style>
     <div id="divbuscador" class="container-fluid contodo jumbotron-fluid stay mt-5 pt-5 pb-5">
         <h2 class="text-center">Inicia tu búsqueda</h2>  
-        <br/>      
+
+        <br/>  
+        
         <form [formGroup]="myform" (ngSubmit)="buscarPropiedad()" novalidate>
         <div class="row">
             <style>
@@ -23,17 +25,17 @@
                     display: flex;
                 }
             </style>
-             <div class="col-md-12">
-                <strong> <p >Ingresa parametros de búsqueda</p></strong>
-            </div>
+
             <div class="col-md-3" >
-             <strong><p class="text-left">Rango de precios $</p></strong>
+             <strong><p class="text-left text-center">Rango de precios $</p></strong>
                 <div class="row">
+                    
                     <div class="col-md-6 input-group text-center" style="max-width: 140px">
                         <input type="number" value="0" class="form-control inputPrice "
                         formControlName="precioDesde" placeholder="Desde"                  
                         >
-                    </div>            
+                    </div>  
+
                     <div class="col-md-6 input-group text-center" style="max-width: 140px">                
                         <input type="number"  value="0"  class="form-control inputPrice"
                         formControlName="precioHasta" placeholder="Hasta">
@@ -61,23 +63,43 @@
                     formControlName="ncuartos" placeholder="">
                 </div>
             </div>
+            <br>
+            <br>
+            <br>
             
             <div class="col-md-6">
-               <strong> <p class="text-center mt-2">Ingresa una palabra clave para buscar propiedades</p></strong>
-                <div class="input-group mt-4 mx-auto" style="max-width: 640px">               
-                    <input type="text" class="form-control" 
-                    required  formControlName="busqueda"  
-                    placeholder="Buscar por dirección,descripción,precio">
-                    <div class="">
-                        <button class="btn btn-success ml-2"
-                        [disabled]="myform.invalid" type="submit">Buscar</button>
-                    </div>
-                    
-                </div>
-            </div>
+                <strong> <p class="text-center mt-2">Ingresa una palabra clave para buscar propiedades</p></strong>
+                 <div class="input-group mt-4 mx-auto" style="max-width: 640px">               
+                     <input type="text" class="form-control" 
+                     required  formControlName="busqueda"  
+                     placeholder="Buscar por dirección,descripción,precio">
+                     <div class="">
+                         <button class="btn btn-success ml-2"
+                         [disabled]="myform.invalid" type="submit">Buscar</button>
+                     </div>
+                     
+                 </div>
+             </div>
+            
+           
         </div>
         </form>
+
+       
+
+       
     </div>
+
+    <div class="col-md-6 text-center">  
+        <strong><p class="text-left text-center"> Seleccione como se mostrara su busqueda:</p></strong>
+       
+        <select [(ngModel)]="tipoSeleccionado" class="custom-select">
+            <option *ngFor="let tipo of tipos" [value]="tipo.id">
+              {{ tipo.texto }}
+            </option>
+          </select>
+    </div>  
+    <br>
 </div>
 
 <div *ngIf="Role()">
