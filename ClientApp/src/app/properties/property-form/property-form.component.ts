@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import {PropertyList} from 'src/app/modelos/property-list.model';
 import * as mapboxgl from 'mapbox-gl';
 import { environment } from 'src/environments/environment';
+import { userInfo } from 'os';
+import { User } from 'src/app/modelos/user.model';
 @Component({
   selector: 'app-property-form',
   templateUrl: './property-form.component.html',
@@ -94,7 +96,8 @@ export class PropertyFormComponent implements OnInit {
       TypeProperty: 1,
       UserIdPro: null,
       imageurl: '',
-      imagen64portada:''
+      imagen64portada:'',
+     
     }
   }
 

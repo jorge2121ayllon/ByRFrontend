@@ -13,6 +13,7 @@ export class UserService {
   formData: User;
   filterData: PageAndSort;
   list: User[];
+  vendedor: User;
 
   constructor(private http: HttpClient,private _router:Router ) {
     this.filterData = new PageAndSort();
@@ -76,13 +77,18 @@ export class UserService {
 
   
 
-   postUser() {
+  postUser() {
     return this.http.post(`${environment.apiUrl}Users`, this.formData);
   }
 
   putUser() {
     return this.http.put(`${environment.apiUrl}Users/${this.formData.Id}`, this.formData);
   }
+
+  ObtenerVendedor(id) {
+    return this.http.get(`${environment.apiUrl}Users/${id}`);
+  }
+
 
   deleteUser(id) {
     return this.http.delete(`${environment.apiUrl}Users/${id}`);

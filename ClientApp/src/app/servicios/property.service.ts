@@ -7,7 +7,9 @@ import { Property } from '../modelos/property.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PropertyList}  from '../modelos/property-list.model';
+
 import { Galeria } from '../modelos/galeria.model';
+import { PropertyListuser } from '../modelos/property-listuser.model';
 
 
 @Injectable({
@@ -38,6 +40,17 @@ export class PropertyService {
     const self = this;
 
     return this.http.get(`${environment.apiUrl}Properties/${id}`).pipe(map((data: PropertyList ) => {
+      self.list = data.Data;
+      self.totalRows = data.TotalRows;
+      return data;
+    }));
+
+  }
+
+  getPropertyuser(id: string): Observable<PropertyListuser>{
+    const self = this;
+
+    return this.http.get(`${environment.apiUrl}Properties/${id}`).pipe(map((data: PropertyListuser ) => {
       self.list = data.Data;
       self.totalRows = data.TotalRows;
       return data;
