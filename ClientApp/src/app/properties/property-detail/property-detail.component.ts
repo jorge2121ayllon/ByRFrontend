@@ -20,7 +20,7 @@ export class PropertyDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    var id = localStorage.getItem('propertyId');  
+    var id = localStorage.getItem('propertyId');
     console.log("llega");
     this.service.getProperty(id).subscribe(
       res =>{

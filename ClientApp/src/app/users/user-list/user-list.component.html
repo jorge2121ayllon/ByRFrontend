@@ -1,19 +1,40 @@
+<hr/>
+<app-filter (filterChanged)="filterData($event)"></app-filter>
+<hr/>
 <table class="table table-hover table-striped">
     <thead>
       <tr>
-        <th scope="col" sortable="Nombre" (sort)="onSort($event)">Nombre</th>
-        <th scope="col" sortable="Clave" (sort)="onSort($event)">Clave</th>
+        <th scope="col" sortable="Name" (sort)="onSort($event)">Nombre</th>
+        <th scope="col" sortable="LastName" (sort)="onSort($event)">Apellidos</th>
+        <th scope="col" sortable="Email" (sort)="onSort($event)">Email</th>
+        <th scope="col" sortable="Phone" (sort)="onSort($event)">Tel&eacute;fono</th>
+        <th scope="col" sortable="Ci" (sort)="onSort($event)">Carnet de identidad</th>
+        <th scope="col" sortable="Password" (sort)="onSort($event)">Clave</th>
         <th scope="col">Acciones</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let user of service.list">
-        <td (click)="populateForm(user)">{{user.Nombre}}</td>
-        <td (click)="populateForm(user)">{{user.Clave}}</td>
+        <td >{{user.Name}}</td>
+        <td >{{user.LastName}}</td>
+        <td >{{user.Email}}</td>
+        <td >{{user.Phone}}</td>
+        <td >{{user.Ci}}</td>
+        <td >{{user.Password}}</td>
         <td>
           <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(user.Id)"></i>
         </td>
       </tr>
     </tbody>
+    <tfoot class="panel-footer">
+      <tr>
+          <td colspan="11">
+              <app-pager [totalRows]="service.totalRows"
+                         [itemsPerPage]="10"
+                         [allowToChangePageSize]="true" 
+                         (pageChanged)="pageChanged($event)"
+                         (pageSizeChanged)="pageSizeChanged($event)"></app-pager>
+          </td>
+      </tr>
   </table>
   

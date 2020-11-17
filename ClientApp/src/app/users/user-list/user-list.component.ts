@@ -1,5 +1,6 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { SortColumns, SortEvent } from 'src/app/directivas/sortcolumns';
+import { UserList } from 'src/app/modelos/user-list.model';
 import { User } from 'src/app/modelos/user.model';
 import { UserService } from 'src/app/servicios/user.service';
 
@@ -15,25 +16,22 @@ export class UserListComponent implements OnInit {
   constructor(public service: UserService) { }
 
   ngOnInit(): void {
-    this.service.refreshList();
+    this.refreshData();
   }
 
-  
-  populateForm(selectedRecord) {
-    this.service.formData = Object.assign({}, selectedRecord);
-  }
-
-  
   onDelete(id) {
     if (confirm('Esta seguro de borrar el usuario?')) {
       this.service.deleteUser(id)
         .subscribe(res => {
-          this.service.refreshList();
+          this.refreshData();
         },
           err => { console.log(err); })
     }
   }
-
+  refreshData() {
+    this.service.refreshList().subscribe((result: UserList) => {
+    });
+  }
   onSort({ column, direction }: SortEvent) {
     // resetting other headers
     this.headers.forEach(header => {
@@ -45,6 +43,20 @@ export class UserListComponent implements OnInit {
     this.service.filterData.Direccion = direction;
     this.service.refreshList();
   }
+  pageChanged(page: number) {
+    this.service.filterData.Pagina = page;
+    this.refreshData();
+  }
 
+  pageSizeChanged(pageSize: number) {
+    this.service.filterData.TamPagina = pageSize;
+    this.refreshData();
+  }
+
+  filterData(filtro: string) {
+    this.service.filterData.Filtro = filtro;
+    this.service.filterData.Pagina = 1;
+    this.refreshData();
+  }
 
 }

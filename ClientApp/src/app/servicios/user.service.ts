@@ -4,8 +4,9 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { PageAndSort } from '../modelos/pageandsort.model';
 import { User } from '../modelos/user.model';
-
-
+import { UserList } from '../modelos/user-list.model';
+import { map } from "rxjs/operators"; 
+import { Observable } from "rxjs"; 
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +15,7 @@ export class UserService {
   filterData: PageAndSort;
   list: User[];
   vendedor: User;
-
+  totalRows: number;
   constructor(private http: HttpClient,private _router:Router ) {
     this.filterData = new PageAndSort();
     this.filterData.Columna = "Id";
@@ -98,14 +99,35 @@ export class UserService {
     return this.http.get(`${environment.apiUrl}Users/${email}/${clave}`);
   }
 
-  refreshList() {
-    this.http.get( `${environment.apiUrl}Users` + '?columna=' + this.filterData.Columna +
-      '&direccion=' + this.filterData.Direccion +
-      '&pagina=' + this.filterData.Pagina +
-      '&tampagina=' + this.filterData.TamPagina +
-      '&filtro=' + this.filterData.Filtro)
-      .toPromise()
-      .then(res => this.list = (res as any).Datos as User[]);
+  
+  refreshList() : Observable<UserList> {
+    let self = this;
+    return this.http.get(`${environment.apiUrl}Users`+
+      '?column='+this.filterData.Columna+
+      '&direction='+this.filterData.Direccion+
+      '&page='+this.filterData.Pagina+
+      '&pagesize='+this.filterData.TamPagina+
+      '&filter='+this.filterData.Filtro)
+      .pipe(map((data: UserList) => {
+        self.list = data.Data; 
+        self.totalRows = data.TotalRows;
+        return data;
+      })); 
   }
-
+  Search(filtro) {
+    this.filterData.Filtro = filtro;
+    this.refreshList();
+    }
+    Quantity(cantidad) {
+      this.filterData.TamPagina = cantidad;
+      this.refreshList();
+      }
+    Previus() {
+      this.filterData.Pagina = this.filterData.Pagina - 1;
+      this.refreshList();
+      }
+    Next() {
+        this.filterData.Pagina = this.filterData.Pagina + 1;
+        this.refreshList();
+      }
 }

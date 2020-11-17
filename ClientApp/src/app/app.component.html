@@ -21,6 +21,9 @@
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger"  *ngIf="_authService.loggedVendor()" routerLinkActive="active" routerLink="/propiedades">Propiedades</a>
           </li>      
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger"  *ngIf="_authService.loggedAdministrator()" routerLinkActive="active" routerLink="/usuariosLista">Usuarios</a>
+          </li>   
       </ul>
 
       <style>
