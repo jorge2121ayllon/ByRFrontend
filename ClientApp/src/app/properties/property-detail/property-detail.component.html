@@ -8,8 +8,11 @@
 <div class="article-pg">    
 <div class="container-fluid ar-content">
     <div class="container">
+        
         <h1 class="logo text-center text-white">Información de la propiedad</h1>
+        
         <div class="row" *ngFor="let property of listProperty.Data">
+            
             <div class="col-lg-9 pr-5" >
                 <div class="card ar-img-over">
                     <img  [src]="'data:image/jpg;base64,'+property.imagen64portada" class="card-img"  alt="">
@@ -46,9 +49,16 @@
             <div class="col-lg-3 pl-0">
                 <div class="sidebar">                    
                     <hr class="bg-white" />
+                    <button class= "btn btn-success"(click)="volverInicio()" >Volver a la búsqueda</button>
+                    <style>
+                        .btn-success{
+                            width: 500px;
+                        }
+                    </style>
                     <br/>
                     <br/>
                     <br/>
+                    
                     <div class="">
                         <h2 class="text-center">Datos del propiertario</h2>
                         <br/>
@@ -87,7 +97,7 @@
         <div class="owl-carousel owl-carousel5 owl-theme">
             
                 <div class="card"> 
-                    <img class="card-img link-img" [src]="'data:image/jpg;base64,'+imagen.imagen64" style="height: auto; width:105% ;" alt="">
+                    <img class="card-img link-img" [src]="'data:image/jpg;base64,'+imagen.imagen64" style="height: 305px; width:600px ;" alt="">
                     
                     <div class="card-img-overlay">
                         <div class="top-area"><a href="#" class="text-center d-block"><i

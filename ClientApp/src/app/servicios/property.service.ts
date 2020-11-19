@@ -123,11 +123,24 @@ export class PropertyService {
       '&filter=' + this.filterData.Filtro +
       '&id=' + localStorage.getItem('UserId'))
       .pipe(map((data: PropertyList ) => {
+        console.log(data);
         self.list = data.Data;
         self.totalRows = data.TotalRows;
         return data;
       }));
   }
+
+  propertiesInit(): Observable<PropertyList>{
+    const self2 = this;
+
+    return this.http.get(`${environment.apiUrl}Properties/GetPropertiesInit`)
+    .pipe(map((data: PropertyList) =>{
+        self2.list = data.Data;
+        self2.totalRows = data.TotalRows;
+        return data;
+    }));
+  }
+
   Search(filtro) {
     this.filterData.Filtro = filtro;
     this.refreshList();

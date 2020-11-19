@@ -5,7 +5,7 @@
             border-color:black;
         }
         .contodo{
-            max-width: 1000px;
+            max-width: 5000px;
             border-color: black;
         }
     </style>
@@ -15,6 +15,8 @@
         <br/>  
         
         <form [formGroup]="myform" (ngSubmit)="buscarPropiedad()" novalidate>
+        <h3 class="text-center">Parámetros de Búsqueda</h3>
+        <hr/>
         <div class="row">
             <style>
                 .inputPrice{
@@ -24,10 +26,15 @@
                 .row{
                     display: flex;
                 }
+                .col-md-3{
+                    max-width: 20%;
+                }
             </style>
-
+           
             <div class="col-md-3" >
              <strong><p class="text-left text-center">Rango de precios $</p></strong>
+             <p class="text-center">Desde  -  Hasta </p>
+             
                 <div class="row">
                     
                     <div class="col-md-6 input-group text-center" style="max-width: 140px">
@@ -40,7 +47,13 @@
                         <input type="number"  value="0"  class="form-control inputPrice"
                         formControlName="precioHasta" placeholder="Hasta">
                     </div> 
-                <strong><p class="text-left col-md-12">Tamaño en m2</p></strong>
+                                
+                </div>             
+            </div>  
+            <div class="col-md-3">
+                <strong><p class="text-center col-md-6">Tamaño en m2</p></strong>
+                <p class="text-center col-md-6">Desde  -  Hasta </p>
+                <div class="row">
                   <div class="col-md-6 input-group text-center" style="max-width: 140px">                
                       <input type="number"  value="0"  class="form-control inputPrice"
                       formControlName="tamaniodesde" placeholder="Desde">
@@ -48,10 +61,10 @@
                   <div class="col-md-6 input-group text-center" style="max-width: 140px">                
                       <input type="number"  value="0"  class="form-control inputPrice"
                       formControlName="tamaniohasta" placeholder="Hasta">
-                  </div>                    
-                </div>             
-            </div>  
-            <div class="col-md-3" >
+                  </div>    
+                </div>
+            </div>
+            <div class="col-md-2" >
                 <strong><p class="text-left">Numero de baños</p></strong>
                 <div class="col-md-12 input-group text-center" style="max-width: 140px">                
                     <input type="number"  value="0"  class="form-control inputPrice"
@@ -67,48 +80,75 @@
             <br>
             <br>
             
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <strong> <p class="text-center mt-2">Ingresa una palabra clave para buscar propiedades</p></strong>
                  <div class="input-group mt-4 mx-auto" style="max-width: 640px">               
                      <input type="text" class="form-control" 
-                     required  formControlName="busqueda"  
-                     placeholder="Buscar por dirección,descripción,precio">
+                       formControlName="busqueda"  
+                     placeholder="Buscar por dirección,descripción">
                      <div class="">
                          <button class="btn btn-success ml-2"
-                         [disabled]="myform.invalid" type="submit">Buscar</button>
+                          type="submit">Buscar</button>
                      </div>
                      
                  </div>
+                 <br/>
+                
              </div>
             
            
         </div>
         </form>
 
-       
+        <div class="col-md-5 text-center">  
+            <strong><p class=" text-center"> Seleccione como se mostrara su busqueda:</p></strong>
+           
+            <select [(ngModel)]="tipoSeleccionado" class="custom-select">
+                <option *ngFor="let tipo of tipos" [value]="tipo.id">
+                  {{ tipo.texto }}
+                </option>
+              </select>
+        </div>  
 
        
     </div>
 
-    <div class="col-md-6 text-center">  
-        <strong><p class="text-left text-center"> Seleccione como se mostrara su busqueda:</p></strong>
-       
-        <select [(ngModel)]="tipoSeleccionado" class="custom-select">
-            <option *ngFor="let tipo of tipos" [value]="tipo.id">
-              {{ tipo.texto }}
-            </option>
-          </select>
-    </div>  
+    
     <br>
 </div>
-
+<div >
+    <h2 class="text-uppercase text-center">Propiedades Disponibles</h2>
+    <hr/>
+    <div class="container-fluid " >
+        <div class="container">
+            <div class="row vr-gallery">                
+                <div class="col-md-4 pl-3 mb-4 " *ngFor="let property2 of service.list">
+                   
+                    <div class="card">
+                        <img class="card-img-top" [src]="'data:image/jpg;base64,'+property2.imagen64portada"  alt=""/>
+                        <div class="card-body bg-gray cus-pd2 cus-arrow-up">
+                            <h4>Dueño:</h4>
+                            <p><small>{{property2.User.Name}}</small></p>
+                            <h3>Celular: {{property2.User.Phone}}</h3>
+                            <h3>Precio: $ {{property2.Price}} </h3>
+                            <strong><p>Descripción</p></strong>
+                            <p>{{property2.Description}}</p>                            
+                        </div>
+                        <button class="btn btn-success ml-2"  (click)="getPropertyDetail(property2.Id)">Ver Detalles</button>
+                    </div>
+                </div>
+              
+            </div>
+        </div>
+    </div>
+</div>
 <div *ngIf="Role()">
     <h1 class="text-uppercase text-center">¡BIENVENIDO VENDEDOR!</h1>
     <label class="text-center">Intruduce alguna palabra clave para buscar propiedades en la ciudad!</label>
 </div>
 <div *ngIf="!Role()">
 <div *ngIf="getConfirmSerch()">
-    <h2 class="text-uppercase text-left">Resultado de la Búsqueda</h2>
+    <h2 class="text-uppercase text-center">Resultado de la Búsqueda</h2>
     <hr/>
     <div class="container-fluid " >
         <div class="container">

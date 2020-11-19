@@ -38,7 +38,10 @@ export class PropertyMapdetailComponent implements OnInit {
 
     this.crearMarcador();
   }
-
+  
+  volverInicio(){
+    this._routes.navigate(['/inicio']);
+  }
   crearMarcador() {
   
     

@@ -4,6 +4,7 @@ import { Property } from '../../modelos/property.model';
 import { PropertyList}  from '../../modelos/property-list.model';
 import { map } from "rxjs/operators"; 
 import { Observable } from "rxjs"; 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-property-detail',
@@ -15,7 +16,7 @@ export class PropertyDetailComponent implements OnInit {
   listProperty = new PropertyList();
    categoryProperty : string;
    typeProperty: string;
-  constructor(public service: PropertyService) { 
+  constructor(public service: PropertyService,private _routes:Router) { 
     
   }
 
@@ -53,5 +54,9 @@ export class PropertyDetailComponent implements OnInit {
 
   resultDetail(){   
     
+  }
+
+  volverInicio(){
+    this._routes.navigate(['/inicio']);
   }
 }

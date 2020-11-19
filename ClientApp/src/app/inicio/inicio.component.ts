@@ -35,8 +35,11 @@ export class InicioComponent implements OnInit {
 
   ngOnInit(): void {  
     this.Role();
+    this.service.propertiesInit().subscribe((result: PropertyList) => {      
+    });
+
     this.myform = new FormGroup({
-      busqueda : new FormControl('', [Validators.required]),
+      busqueda : new FormControl(''),
       precioDesde: new FormControl(0),       
       precioHasta: new FormControl(0), 
       tamaniodesde: new FormControl(0),       
@@ -127,6 +130,13 @@ export class InicioComponent implements OnInit {
     console.log(id);
     localStorage.setItem('propertyId',id);    
     this._routes.navigate(['/propiedadDetalle']);
+  }
+
+  refreshData() {
+    this.service.refreshList().subscribe((result: PropertyList) => {
+      
+    });
+    
   }
 
 }
