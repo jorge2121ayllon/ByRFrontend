@@ -4,41 +4,63 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { PageAndSort } from '../modelos/pageandsort.model';
 import { Property } from '../modelos/property.model';
-import { Observable } from "rxjs"; 
-import { map } from "rxjs/operators"; 
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { PropertyList}  from '../modelos/property-list.model';
+
 import { Galeria } from '../modelos/galeria.model';
+import { PropertyListuser } from '../modelos/property-listuser.model';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class PropertyService {
-  
+
   formData: Property;
   filterData: PageAndSort;
   list: Property[];
+  list2: Property[];
   listGaleria: Galeria[];
   totalRows: number;
   PropertyId: string;
+  listaPropiedadesMapa= new PropertyList();
   constructor(private http: HttpClient, private _router: Router ) {
     this.filterData = new PageAndSort();
-    this.filterData.Columna = "Id";
-    this.filterData.Direccion = "asc";
+    this.filterData.Columna = 'Id';
+    this.filterData.Direccion = 'asc';
     this.filterData.Pagina = 1;
     this.filterData.TamPagina = 10;
-    this.filterData.Filtro = "";
+    this.filterData.Filtro = '';
    // this.formData.UserIdPro = localStorage.getItem('UserId');
   }
 
 
-  getProperty(id: string){
-    return this.http.get(`${environment.apiUrl}Properties/${id}`);
+  getProperty(id: string): Observable<PropertyList>{
+    const self = this;
+
+    return this.http.get(`${environment.apiUrl}Properties/${id}`).pipe(map((data: PropertyList ) => {
+      self.list = data.Data;
+      self.totalRows = data.TotalRows;
+      return data;
+    }));
+
   }
-  
-  postSaveImage(){    
+
+  getPropertyuser(id: string): Observable<PropertyListuser>{
+    const self = this;
+
+    return this.http.get(`${environment.apiUrl}Properties/${id}`).pipe(map((data: PropertyListuser ) => {
+      self.list = data.Data;
+      self.totalRows = data.TotalRows;
+      return data;
+    }));
+
+  }
+
+  postSaveImage(){
    this.formData = new Property();
-    this.formData = {
+   this.formData = {
       Id: null,
       Price: 0,
       Bedrooms: 0,
@@ -53,13 +75,13 @@ export class PropertyService {
       TypeProperty: 1,
       UserIdPro: '',
       imageurl: '',
-      nombreimagen:''
+      imagen64portada: ''
     };
 
-    this.formData.Id = localStorage.getItem('propertyId');
-    this.formData.imageurl = localStorage.getItem('base64');
-    console.log(this.formData);
-    return this.http.post(`${environment.apiUrl}Properties/PostSavedImage`, this.formData);
+   this.formData.Id = localStorage.getItem('propertyId');
+   this.formData.imageurl = localStorage.getItem('base64');
+   console.log(this.formData);
+   return this.http.post(`${environment.apiUrl}Properties/PostSavedImage`, this.formData);
   }
 
   postProperty() {
@@ -71,13 +93,27 @@ export class PropertyService {
     this.formData.UserIdPro = localStorage.getItem('UserId');
     return this.http.put(`${environment.apiUrl}Properties`, this.formData);
   }
+  serchProperties(serch: string, preciodesde: number, preciohasta: number, tamaniodesde2: number,
+                  tamaniohasta2: number, ncuartos2: number, nbanios2: number){
+    const self = this;
+    return this.http.get(`${environment.apiUrl}Properties/GetPropertyByUserBuyer`
+    + '?serch=' + serch + '&preciodesde=' + preciodesde + '&preciohasta=' + preciohasta + '&tamaniodesde=' + tamaniodesde2
+    + '&tamaniohasta=' + tamaniohasta2 + '&ncuartos=' + ncuartos2 + '&nbanios=' + nbanios2)
+    .pipe(map((data: PropertyList ) => {
+      self.list = data.Data;
+      self.totalRows = data.TotalRows;
+      this.listaPropiedadesMapa.Data = data.Data;
+      this.listaPropiedadesMapa.TotalRows=data.TotalRows;
+      return data;
+    }));
+  }
 
   deleteProperty(id) {
     this.formData.UserIdPro = localStorage.getItem('UserId');
     return this.http.delete(`${environment.apiUrl}Properties/${id}`);
   }
-  refreshList() : Observable<PropertyList> {
-    let self = this;
+  refreshList(): Observable<PropertyList> {
+    const self = this;
     return this.http.get(`${environment.apiUrl}Properties` +
       '?column=' + this.filterData.Columna +
       '&direction=' + this.filterData.Direccion +
@@ -91,6 +127,18 @@ export class PropertyService {
         return data;
       }));
   }
+
+  propertiesInit(): Observable<PropertyList>{
+    const self2 = this;
+
+    return this.http.get(`${environment.apiUrl}Properties/GetPropertiesInit`)
+    .pipe(map((data: PropertyList) =>{
+        self2.list = data.Data;
+        self2.totalRows = data.TotalRows;
+        return data;
+    }));
+  }
+
   Search(filtro) {
     this.filterData.Filtro = filtro;
     this.refreshList();
@@ -107,11 +155,11 @@ export class PropertyService {
         this.filterData.Pagina = this.filterData.Pagina + 1;
         this.refreshList();
       }
-      
+
     GetGalleryByPropertyId(id){
       return this.http.get(`${environment.apiUrl}Galleries/${id}`)
       .toPromise()
       .then(res => this.listGaleria = (res as any) as Galeria[]);
-      
+
     }
 }

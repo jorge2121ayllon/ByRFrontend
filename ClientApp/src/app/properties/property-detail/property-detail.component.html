@@ -1,0 +1,100 @@
+<!-- <h1>Detalles de propiedad</h1>
+<div *ngFor="let property of listProperty.Data">
+    {{property.Description}}
+</div> -->
+
+
+
+<div class="article-pg">    
+<div class="container-fluid ar-content">
+    <div class="container">
+        
+        <br>
+        <br>
+        
+        <h1 class="logo text-center text-white">Información de la propiedad</h1>
+        
+        <div class="row" *ngFor="let property of listProperty.Data">
+            
+            <div class="col-lg-9 pr-5" >
+                <div class="card ar-img-over">
+                    <img  [src]="'data:image/jpg;base64,'+property.imagen64portada" class="card-img"  alt="">
+                   
+                </div>
+                <div class="row date-time mt-3">
+                    <div class="col">
+                        <h3 href="#">{{typeProperty}} - {{property.Price}} $ </h3>
+                    </div>
+                </div>
+                
+                <h2>{{property.Direction}}</h2>
+                <p>{{property.Description}}</p>  
+                <h2>Características:</h2>   
+                    <div class="row">             
+                        <div class="col-md-4">
+                            <h3> <i class="fas fa-bed"></i> &nbsp;Habitaciones : &nbsp; {{property.Bedrooms}}</h3>               
+                            <h3> <i class="fas fa-bath"></i> &nbsp;Baños :  &nbsp;{{property.Bathrooms}}</h3>               
+                        </div>                                   
+                        <div class="col-md-4">
+                            <h3><i class="fas fa-ruler"></i> &nbsp;Tamaño : &nbsp; {{property.Size}} m2</h3>               
+                            <h3 ><i class="fas fa-list"></i> &nbsp;Categoría :  &nbsp;{{categoryProperty}} </h3>  
+                        </div>
+                    </div>
+                
+                <hr/>
+
+               
+            </div>
+            <div class="col-lg-3 pl-0">
+                <div class="sidebar">                    
+                    <hr class="bg-white" />
+                    &nbsp; &nbsp; &nbsp; <button class= "btn btn-info col-md-9"(click)="volverInicio()" >Volver atras</button>
+                    <style>
+                        .btn-success{
+                            width: 500px;
+                        }
+                    </style>
+                    <br/>
+                    
+                    <div class="">
+                        <h2 class="text-center">Datos del propietario</h2>
+                        <br/>
+                        <div>
+                            <h4 class="text-center">                            
+                                Nombre del dueño
+                                <i class="fa fa-user"></i>
+                            </h4>                            
+                            <p class="text-center mt-1 third-clr">{{property.User.Name}} {{property.User.LastName}}<p>
+                            <h4 class="text-center">Teléfono<i class="fa fa-phone"></i></h4>
+                            <p class="text-center mt-1 third-clr">
+                                {{property.User.Phone}}                                
+                            </p>
+                            <h4 class="text-center">Email<i class="fa fa-email"></i></h4>
+                            <p class="text-center mt-1 third-clr">
+                                {{property.User.Email}}                                
+                            </p>
+                        </div>                                     
+                    </div>
+                                                
+                  
+                      
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="container-fluid fh5co-recent-news mt-7 pb-7" >
+    <h2 class="text-uppercase text-center">GALERÍA</h2>
+    <hr class="mx-auto" />
+        <div class="row" >
+                <div class="col-md-3" *ngFor="let imagen of service.listGaleria">
+                            <div > 
+                                <img class=" link-img" [src]="'data:image/jpg;base64,'+imagen.imagen64" width="450" height="350" >
+                            </div>
+                </div>   
+        </div>
+</div>
+ 
+<hr class="mx-auto" />

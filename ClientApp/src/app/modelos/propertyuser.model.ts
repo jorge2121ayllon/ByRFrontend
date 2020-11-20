@@ -1,6 +1,7 @@
 import { DecimalPipe } from '@angular/common';
+import { User } from './user.model';
 
-export class Property {
+export class propertyuser {
     Id: string;
     Price: number;//listo
     Bedrooms: number;//listo
@@ -15,5 +16,6 @@ export class Property {
     TypeProperty: number;
     UserIdPro: string;
     imageurl: string;
-    imagen64portada: string 
+    imagen64portada: string;
+    User: User
 }

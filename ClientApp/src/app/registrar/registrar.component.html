@@ -1,9 +1,10 @@
       
-       <h1 class="text-control">Registra tu usuario<i class="fa fa-user"></i></h1>
+      <hr>
+   <h1 class="text-control text-center">Registra tu usuario<i class="fa fa-user"></i></h1>
        <br/>
        <form [formGroup]="myform" (ngSubmit)="registerUser()" novalidate>
        <div class="row">
-         <div class="col-md-6 ">            
+         <div class="col-md-4 ">            
               
                   <div class="form-group">
                      <label>Nombre de Usuario</label>
@@ -86,25 +87,34 @@
                   </div>
                   </div>
 
-                  <div class="form-group">
-                     <label>Rol de usuario</label><br>
-                     <select name="RolUser" formControlName="role"   >
-                        <option *ngFor="let rol of RolUser"  [value]="rol.value">
-                        {{rol.display}}
-                        </option>
-                     </select>
-
-                     <div
-                     class="text-danger"
-                     *ngIf="myform.get('role').hasError('required') && myform.get('ci').touched">
-                    Necesita seleccionar un rol
-                  </div>
-                  </div>
+                  
           </div>   
-          <div class="col-md-8 text-center" style="padding: 00px 00px 00px 50px;">
-            <button class="btn btn-success btn-lg btn-block" type="submit" [disabled]="myform.invalid"
+          <div class="col-md-4">
+            <div class="form-group">
+               <label>Rol de usuario</label><br>
+               <select name="RolUser" class="form-control col-md-4" formControlName="role"   >
+                  <option *ngFor="let rol of RolUser"  [value]="rol.value">
+                  {{rol.display}}
+                  </option>
+               </select>
+
+               <div
+               class="text-danger"
+               *ngIf="myform.get('role').hasError('required') && myform.get('ci').touched">
+              Necesita seleccionar un rol
+            </div>
+            </div>
+
+          </div>
+          <div class="col-md-4 text-center"></div>
+          <div class="col-md-4 text-center">
+            <button class="btn btn-info col-md-12 btn-block" type="submit" [disabled]="myform.invalid"
             ><i class="fas fa-database"></i> Guardar</button>
-          </div>       
+          </div>  
+          <div class="col-md-4 text-center"></div>
+              
        </div>
-      </form>     
+      </form>    
+      <br>
+      <hr>
 
