@@ -120,8 +120,7 @@ export class PropertyFormComponent implements OnInit {
     this.service.formData.TypeProperty = type;
     this.service.formData.Category = category;
     this.service.formData.imageurl = localStorage.getItem('base64');
-    this.service.formData.imagen64portada = localStorage.getItem('filename'); 
-    console.log(this.service.formData);   
+    this.service.formData.imagen64portada = localStorage.getItem('filename');   
     if (this.service.formData.Id == null){
       this.insertRecord(form);
       }
@@ -165,7 +164,6 @@ export class PropertyFormComponent implements OnInit {
 
   uploadImage(event:any):void{
     this.imagen = event.target.files[0];
-    console.log('Imagen => ',this.imagen);
   }
 
   //probando
@@ -261,16 +259,9 @@ export class PropertyFormComponent implements OnInit {
         break
     }
 
-    //this.log();
+
   }
 
-  log() { 
-    // for debug
-    console.log('1', this.sellersPermitString);
-    console.log('2', this.DriversLicenseString);
-    console.log('3', this.InteriorPicString);
-    console.log('4', this.ExteriorPicString);
-  }
 
 
 }
@@ -280,8 +271,4 @@ function foo(e) {
   // tslint:disable-next-line: whitespace
   PropertyFormComponent.latitud=String(e.lngLat['lat']);
   PropertyFormComponent.longitud=String(e.lngLat['lng']);
-
-  console.log(e.lngLat['lat'])
-  console.log(e.lngLat['lng'])
-
 }

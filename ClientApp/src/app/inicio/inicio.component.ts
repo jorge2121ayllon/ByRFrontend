@@ -127,7 +127,6 @@ export class InicioComponent implements OnInit {
 
 
   getPropertyDetail(id){
-    console.log(id);
     localStorage.setItem('propertyId',id);    
     this._routes.navigate(['/propiedadDetalle']);
   }

@@ -28,13 +28,19 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('Token', (res as any).Token);
       localStorage.setItem('Role', (res as any).Role);
       localStorage.setItem('UserName', this.loginUserData.Email);
+      if(localStorage.getItem('Role')== "vendedor")
+      {
+        this._routes.navigate(['//propiedades']);
+      }
       if(localStorage.getItem('Role')== "administrador"){
 
         this._routes.navigate(['/usuariosLista']);
       }
-      else{
+      if(localStorage.getItem('Role')== "comprador")
+      {
         this._routes.navigate(['/inicio']);
       }
+   
     },
     err => {
       console.log(err);

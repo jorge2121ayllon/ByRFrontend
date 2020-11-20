@@ -22,7 +22,6 @@ export class PropertyDetailComponent implements OnInit {
 
   ngOnInit(): void {
     var id = localStorage.getItem('propertyId');
-    console.log("llega");
     this.service.getProperty(id).subscribe(
       res =>{
         this.listProperty.Data = res.Data; 
@@ -44,7 +43,6 @@ export class PropertyDetailComponent implements OnInit {
         else{
           this.categoryProperty = "Anticrético";
         }
-        console.log(this.listProperty.Data);     
         this.service.GetGalleryByPropertyId(this.listProperty.Data[0].Id);  
       }
       );
@@ -57,6 +55,14 @@ export class PropertyDetailComponent implements OnInit {
   }
 
   volverInicio(){
-    this._routes.navigate(['/inicio']);
+      if(localStorage.getItem('Role')== "vendedor")
+      {
+        this._routes.navigate(['//propiedades']);
+      }
+      else
+      {
+        this._routes.navigate(['/inicio']);
+      }
+      
   }
 }

@@ -8,6 +8,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import {GaleriaService} from '../../servicios/galeria.service';
 import { Galeria } from 'src/app/modelos/galeria.model';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-property-list',
   templateUrl: './property-list.component.html',
@@ -22,7 +23,10 @@ export class PropertyListComponent implements OnInit {
   private imagen:any;
   imagePath:string="";
   list: Galeria[];
-  constructor(public service: PropertyService,private toastr: ToastrService,private modalService: NgbModal,public galeriaService: GaleriaService) { }
+
+  constructor(public service: PropertyService,private toastr: ToastrService,
+                  private modalService: NgbModal,public galeriaService: GaleriaService,
+                  private _routes:Router) { }
   public Categories = [
 
     { value: 1, display: 'Venta' },
@@ -38,7 +42,6 @@ public TypeProperties = [
   mostrarModalInfo(id){
   this.modalService.open(this.myModalInfo);
       this.GetImages(id);
-      console.log();
   localStorage.setItem('propertyId',id);
   }
 
@@ -72,7 +75,7 @@ public TypeProperties = [
   }
   GetImages(id){
     this.service.GetGalleryByPropertyId(id);
-    console.log(this.service.listGaleria);
+
   }
   onSort({ column, direction }: SortEvent) {
     // resetting other headers
@@ -151,7 +154,7 @@ public TypeProperties = [
     let fileList: FileList = event.target.files;
     if (fileList.length > 0) {
       const file: File = fileList[0];
-      console.log(file);
+   
       if (field == 1) {
         this.sellersPermitFile = file;
         this.handleInputChange(file); //turn into base64
@@ -210,9 +213,17 @@ public TypeProperties = [
 
     //this.log();
   }
+
+  getPropertyDetail(id){
+  
+    localStorage.setItem('propertyId',id);    
+    this._routes.navigate(['/propiedadDetalle']);
+  }
   //mostrar las fotos guardadas en la bdd
     public mostrarfotos(){
         var imagenMostrar="";
 
     }
+
+    
 }

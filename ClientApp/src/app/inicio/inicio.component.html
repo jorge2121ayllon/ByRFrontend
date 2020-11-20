@@ -134,7 +134,7 @@
                             <strong><p>Descripción</p></strong>
                             <p>{{property2.Description}}</p>                            
                         </div>
-                        <button class="btn btn-success"  (click)="getPropertyDetail(property2.Id)">Ver Detalles</button>
+                        <button class="btn btn-info"  (click)="getPropertyDetail(property2.Id)">Ver Detalles</button>
                     </div>
                 </div>
               
@@ -145,9 +145,7 @@
 
 
 
-<div *ngIf="!Role()">
-    <h1 class="text-uppercase text-center">¡BIENVENIDO VENDEDOR!</h1>
-    <label class="text-center">Intruduce alguna palabra clave para buscar propiedades en la ciudad!</label>
+<div *ngIf="!Role()">   
 <div *ngIf="getConfirmSerch()">
     <h2 class="text-uppercase text-center">Resultado de la Búsqueda</h2>
     <hr/>
@@ -166,7 +164,7 @@
                             <strong><p>Descripción</p></strong>
                             <p>{{property.Description}}</p>                            
                         </div>
-                        <button class="btn btn-success"  (click)="getPropertyDetail(property.Id)">Ver Detalles</button>
+                        <button class="btn btn-info"  (click)="getPropertyDetail(property.Id)">Ver Detalles</button>
                     </div>
                 </div>
               

@@ -40,6 +40,9 @@
             <i class="fas fa-images" title="Agregar imagen" (click)="mostrarModalInfo(property.Id)"></i> 
           </div>    
           <div class="col-md-3">
+            <i class="fas fa-eye" title="Ver informacion" (click)="getPropertyDetail(property.Id)"></i> 
+          </div> 
+          <div class="col-md-3">
             <i [routerLink]="['/propiedad/', property.Id]" class="fas fa-edit text-success"></i>
           </div>      
           <div class="col-md-3">

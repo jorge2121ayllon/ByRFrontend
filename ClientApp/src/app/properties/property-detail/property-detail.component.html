@@ -9,6 +9,9 @@
 <div class="container-fluid ar-content">
     <div class="container">
         
+        <br>
+        <br>
+        
         <h1 class="logo text-center text-white">Información de la propiedad</h1>
         
         <div class="row" *ngFor="let property of listProperty.Data">
@@ -19,11 +22,7 @@
                    
                 </div>
                 <div class="row date-time mt-3">
-
-                    <div class="col text-white">
-                        <a href="#"> <i class="fas fa-retweet"></i> Tarija</a>
-                    </div>
-                    <div class="col text-right">
+                    <div class="col">
                         <h3 href="#">{{typeProperty}} - {{property.Price}} $ </h3>
                     </div>
                 </div>
@@ -33,12 +32,12 @@
                 <h2>Características:</h2>   
                     <div class="row">             
                         <div class="col-md-4">
-                            <h3> <i class="fas fa-bed"></i>Habitaciones: {{property.Bedrooms}}</h3>               
-                            <h3> <i class="fas fa-bath"></i>Baños: {{property.Bathrooms}}</h3>               
+                            <h3> <i class="fas fa-bed"></i> &nbsp;Habitaciones : &nbsp; {{property.Bedrooms}}</h3>               
+                            <h3> <i class="fas fa-bath"></i> &nbsp;Baños :  &nbsp;{{property.Bathrooms}}</h3>               
                         </div>                                   
                         <div class="col-md-4">
-                            <h3><i class="fas fa-ruler"></i>Tamaño: {{property.Size}} m2</h3>               
-                            <h3 ><i class="fas fa-list"></i>Categoría: {{categoryProperty}} </h3>  
+                            <h3><i class="fas fa-ruler"></i> &nbsp;Tamaño : &nbsp; {{property.Size}} m2</h3>               
+                            <h3 ><i class="fas fa-list"></i> &nbsp;Categoría :  &nbsp;{{categoryProperty}} </h3>  
                         </div>
                     </div>
                 
@@ -49,18 +48,16 @@
             <div class="col-lg-3 pl-0">
                 <div class="sidebar">                    
                     <hr class="bg-white" />
-                    <button class= "btn btn-success"(click)="volverInicio()" >Volver a la búsqueda</button>
+                    &nbsp; &nbsp; &nbsp; <button class= "btn btn-info col-md-9"(click)="volverInicio()" >Volver atras</button>
                     <style>
                         .btn-success{
                             width: 500px;
                         }
                     </style>
                     <br/>
-                    <br/>
-                    <br/>
                     
                     <div class="">
-                        <h2 class="text-center">Datos del propiertario</h2>
+                        <h2 class="text-center">Datos del propietario</h2>
                         <br/>
                         <div>
                             <h4 class="text-center">                            
@@ -91,28 +88,13 @@
 <div class="container-fluid fh5co-recent-news mt-7 pb-7" >
     <h2 class="text-uppercase text-center">GALERÍA</h2>
     <hr class="mx-auto" />
-    <div class="row" >
-    <div class="col-md-4" *ngFor="let imagen of service.listGaleria">
-    
-        <div class="owl-carousel owl-carousel5 owl-theme">
-            
-                <div class="card"> 
-                    <img class="card-img link-img" [src]="'data:image/jpg;base64,'+imagen.imagen64" style="height: 305px; width:600px ;" alt="">
-                    
-                    <div class="card-img-overlay">
-                        <div class="top-area"><a href="#" class="text-center d-block"><i
-                                    class="far fa-heart"></i></a></div>
-                        <div class="bottom-area">
-                            <div class="row">
-                                
+        <div class="row" >
+                <div class="col-md-3" *ngFor="let imagen of service.listGaleria">
+                            <div > 
+                                <img class=" link-img" [src]="'data:image/jpg;base64,'+imagen.imagen64" width="450" height="350" >
                             </div>
-                           
-                        </div>
-                    </div>
-                </div>
-            
-        </div>    
-    </div>   
-    </div>
+                </div>   
+        </div>
 </div>
  
+<hr class="mx-auto" />
