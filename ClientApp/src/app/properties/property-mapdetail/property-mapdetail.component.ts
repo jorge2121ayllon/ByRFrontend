@@ -66,7 +66,6 @@ export class PropertyMapdetailComponent implements OnInit {
                             <div class="col-md-12" >
                                 &nbsp;    <strong><i class="fas fa-bed"></i> Habitaciones ${e.Bedrooms}</strong>
                             </div>
-                            <input type="button" onclick=" location.href='/propiedades' " value="Vamos" name="boton" /> 
                             <div class="col-md-12" >
                                 &nbsp;   <strong><i class="fas fa-bath"></i> Baños ${e.Bathrooms}</strong>
                             </div>

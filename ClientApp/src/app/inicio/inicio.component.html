@@ -1,5 +1,5 @@
 <div *ngIf="!Role()">
-    <h1 class="text-uppercase text-center">¡BIENVENIDO COMPRADOR!</h1>
+    <h1 class="text-uppercase text-center">¡BIENVENIDO!</h1>
     <style>
         .stay{
             border-color:black;
@@ -116,7 +116,7 @@
     
     <br>
 </div>
-<div >
+<div *ngIf="!getConfirmSerch()">
     <h2 class="text-uppercase text-center">Propiedades Disponibles</h2>
     <hr/>
     <div class="container-fluid " >
@@ -134,7 +134,7 @@
                             <strong><p>Descripción</p></strong>
                             <p>{{property2.Description}}</p>                            
                         </div>
-                        <button class="btn btn-success ml-2"  (click)="getPropertyDetail(property2.Id)">Ver Detalles</button>
+                        <button class="btn btn-success"  (click)="getPropertyDetail(property2.Id)">Ver Detalles</button>
                     </div>
                 </div>
               
@@ -142,11 +142,12 @@
         </div>
     </div>
 </div>
-<div *ngIf="Role()">
+
+
+
+<div *ngIf="!Role()">
     <h1 class="text-uppercase text-center">¡BIENVENIDO VENDEDOR!</h1>
     <label class="text-center">Intruduce alguna palabra clave para buscar propiedades en la ciudad!</label>
-</div>
-<div *ngIf="!Role()">
 <div *ngIf="getConfirmSerch()">
     <h2 class="text-uppercase text-center">Resultado de la Búsqueda</h2>
     <hr/>
@@ -165,7 +166,7 @@
                             <strong><p>Descripción</p></strong>
                             <p>{{property.Description}}</p>                            
                         </div>
-                        <button class="btn btn-success ml-2"  (click)="getPropertyDetail(property.Id)">Ver Detalles</button>
+                        <button class="btn btn-success"  (click)="getPropertyDetail(property.Id)">Ver Detalles</button>
                     </div>
                 </div>
               
