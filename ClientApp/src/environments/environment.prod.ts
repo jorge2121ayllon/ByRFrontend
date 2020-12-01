@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
   apiUrl: 'https://AyllonPedidos.somee.com/api/',
-  mapboxkey: 'pk.eyJ1Ijoiam9yZ2UyMTIxIiwiYSI6ImNrZzFhYXEwdjAwcnUyem1za2thN3VpYTcifQ._KAj6-TVj2ZXFWe5a1HLkA'
+  mapboxkey: 'pk.eyJ1IjoiZmF2aW8xMjMiLCJhIjoiY2swZnM4ZzY1MDA1YjNua2lwbnlpaHE5MiJ9.omobm_BWxHCf37uL0HQkYQ'
 }

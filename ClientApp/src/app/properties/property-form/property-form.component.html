@@ -187,7 +187,7 @@
           <div class="form-group">
             <button class="btn btn-success" [disabled]="form.invalid"
               (click)="onSubmit(form)"><i class="fas fa-database"></i> Guardar</button>
-            <button [routerLink]="['/propiedades']" class="btn btn-danger float-left">Cancelar</button>
+            <button (click)="cancelar()"  class="btn btn-danger float-left">Cancelar</button>
           </div>
   
         </div>

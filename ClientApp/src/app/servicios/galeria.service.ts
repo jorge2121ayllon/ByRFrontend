@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 export class GaleriaService {
 
   constructor(private http: HttpClient, private _router: Router) { }
-
-    
-
+  deleteGallery(id) {
+    return this.http.delete(`${environment.apiUrl}Galleries/${id}`);
+  }
 }

@@ -44,9 +44,7 @@ export class PropertyService {
       self.totalRows = data.TotalRows;
       return data;
     }));
-
   }
-
   getPropertyuser(id: string): Observable<PropertyListuser>{
     const self = this;
 

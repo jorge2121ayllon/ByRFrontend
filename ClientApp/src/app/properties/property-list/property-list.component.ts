@@ -55,11 +55,8 @@ public TypeProperties = [
         localStorage.removeItem('filename');
         this.modalService.dismissAll();
       }
-    )
+    );
   }
-  
-
-
   ngOnInit(): void {
     this.refreshData();
   }
@@ -218,6 +215,20 @@ public TypeProperties = [
   
     localStorage.setItem('propertyId',id);    
     this._routes.navigate(['/propiedadDetalle']);
+  }
+  getPropertyEdit(id){
+    localStorage.setItem('propertyIdEdit', id);
+    console.log(localStorage.getItem('propertyIdEdit'));
+    this._routes.navigate(['/propiedad']);
+  }
+  deleteImage(id){
+    if (confirm('Estas seguro de eliminar ?')) {
+      this.galeriaService.deleteGallery(id)
+        .subscribe(res => {
+          this.GetImages(localStorage.getItem('propertyId'));
+        },
+          err => { console.log(err); })
+    }
   }
   //mostrar las fotos guardadas en la bdd
     public mostrarfotos(){

@@ -16,13 +16,12 @@ import { User } from 'src/app/modelos/user.model';
 })
 export class PropertyFormComponent implements OnInit {
 
-   
   public latLogn = {};
   mapa: mapboxgl.Map;
     url="https://kinsta.com/es/wp-content/uploads/sites/8/2018/02/leyenda-de-wordpress-1.png";
   private imagen:any;
-  
-  constructor(public service: PropertyService, private toastr: ToastrService,private _routes:Router) { }
+
+  constructor(public service: PropertyService, private toastr: ToastrService,private _routes: Router) { }
   public Categories = [
 
       { value: 1, display: 'Venta' },
@@ -34,31 +33,48 @@ export class PropertyFormComponent implements OnInit {
     { value: 1, display: 'Vivienda' },
     { value: 2, display: 'Terreno' }
   ];
-  static latitud: string;
-  static longitud: string;
-
-
+    static latitud: string;
+    static longitud: string;
+  public latInitial = -64.732951;
+  public longInitial = -21.531428;
   ngOnInit(): void {
-    
-    this.resetForm();
     (mapboxgl.accessToken as any) = environment.mapboxkey;
-
+    var id = localStorage.getItem('propertyIdEdit');
+    if( id != null )
+    {
+      this.service.getProperty(id).subscribe(res => {
+        console.log(res);
+        this.service.formData.Id = id;
+        this.service.formData.Price = (res as any).Data[0].Price;
+        this.service.formData.Description = (res as any).Data[0].Description;
+        this.service.formData.Direction = (res as any).Data[0].Direction;
+        this.service.formData.Size = (res as any).Data[0].Size;
+        this.service.formData.Bedrooms = (res as any).Data[0].Bedrooms;
+        this.service.formData.Bathrooms = (res as any).Data[0].Bathrooms;
+        this.latInitial = Number((res as any).Data[0].Latitude);
+        this.longInitial = Number((res as any).Data[0].Longitude);
+        this.service.formData.State = (res as any).Data[0].State;
+        this.service.formData.Category = (res as any).Data[0].Category;
+        this.service.formData.TypeProperty = (res as any).Data[0].TypeProperty;
+        this.service.formData.UserIdPro = (res as any).Data[0].User.Id;
+        console.log(this.service.formData);
+      });
+    }
     this.mapa = new mapboxgl.Map({
-     container: 'mapa-mapbox', // container id
-     style: 'mapbox://styles/mapbox/streets-v11',
-     center: [-64.732951, -21.531428], // starting position
-     zoom: 15 // starting zoom
-    });
-
+        container: 'mapa-mapbox', // container id
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [-64.732951, -21.531428], // starting position
+        zoom: 15 // starting zoom
+       });
     this.mapa.addControl(
-       new mapboxgl.GeolocateControl({
-       positionOptions: {
-       enableHighAccuracy: true
-       },
-       trackUserLocation: true
-     }));
-
+          new mapboxgl.GeolocateControl({
+          positionOptions: {
+          enableHighAccuracy: true
+          },
+          trackUserLocation: true
+        }));
     this.crearMarcador(this.latLogn);
+    this.resetForm();
   }
 
 
@@ -66,18 +82,14 @@ export class PropertyFormComponent implements OnInit {
     const marker = new mapboxgl.Marker({
     draggable: true
     })
-    .setLngLat([ -64.732951, -21.531428])
+    .setLngLat([this.latInitial, this.longInitial])
     .addTo(this.mapa);
-   
     this.mapa.on('click', function(e) {
         marker.setLngLat([e.lngLat['lng'], e.lngLat['lat']]);
         foo(e);
     }
     );
 }
-
-
-
   resetForm(form?: NgForm) {
     if (form != null)
       form.form.reset();
@@ -97,7 +109,6 @@ export class PropertyFormComponent implements OnInit {
       UserIdPro: null,
       imageurl: '',
       imagen64portada:'',
-     
     }
   }
 
@@ -116,11 +127,11 @@ export class PropertyFormComponent implements OnInit {
     }
 
     var category = Number(this.service.formData.Category);
-    var type = Number(this.service.formData.TypeProperty);    
+    var type = Number(this.service.formData.TypeProperty);
     this.service.formData.TypeProperty = type;
     this.service.formData.Category = category;
     this.service.formData.imageurl = localStorage.getItem('base64');
-    this.service.formData.imagen64portada = localStorage.getItem('filename');   
+    this.service.formData.imagen64portada = localStorage.getItem('filename');
     if (this.service.formData.Id == null){
       this.insertRecord(form);
       }
@@ -132,24 +143,22 @@ export class PropertyFormComponent implements OnInit {
   updateRecord(form: NgForm) {
     this.service.putProperty().subscribe(
       res => {
-        this.resetForm(form);
-        this._routes.navigate["/propiedades"];
         this.toastr.info('Datos guardados', 'Su propiedad editada se guardo correctamente');
         this.refreshData();
-        
+        localStorage.removeItem('base64');
+        localStorage.removeItem('filename');
+        this.resetForm(form);
+        this._routes.navigate(['/propiedades']);
+        localStorage.removeItem('propertyIdEdit');
       },
       err => {
         console.log(err);
       }
     )
   }
-
-
   insertRecord(form: NgForm) {
     this.service.postProperty().subscribe(
       res => {
-      
-    
         this.toastr.info('Datos guardados', 'Su propiedad se guardo correctamente');
         this.refreshData();
         localStorage.removeItem('base64');
@@ -158,10 +167,13 @@ export class PropertyFormComponent implements OnInit {
         this._routes.navigate(['/propiedades']);
       },
       err => { console.log(err); }
-    )
+    );
   }
 
-
+cancelar(){
+  this._routes.navigate(['/propiedades']);
+  localStorage.removeItem('propertyIdEdit');
+}
   uploadImage(event:any):void{
     this.imagen = event.target.files[0];
   }
@@ -196,7 +208,6 @@ export class PropertyFormComponent implements OnInit {
       reader.readAsDataURL(event.target.files[0])
       reader.onload = (event: any)=> {
         this.url = event.target.result;
-        
       }
     }
     this.currentId = field;
@@ -205,19 +216,19 @@ export class PropertyFormComponent implements OnInit {
       const file: File = fileList[0];
       if (field == 1) {
         this.sellersPermitFile = file;
-        this.handleInputChange(file); //turn into base64
+        this.handleInputChange(file); // turn into base64
       }
       else if (field == 2) {
         this.DriversLicenseFile = file;
-        this.handleInputChange(file); //turn into base64
+        this.handleInputChange(file); // turn into base64
       }
       else if (field == 3) {
         this.InteriorPicFile = file;
-        this.handleInputChange(file); //turn into base64
+        this.handleInputChange(file); // turn into base64
       }
       else if (field == 4) {
         this.ExteriorPicFile = file;
-        this.handleInputChange(file); //turn into base64
+        this.handleInputChange(file); // turn into base64
 
       }
     }
@@ -246,7 +257,7 @@ export class PropertyFormComponent implements OnInit {
     let id = this.currentId;
     switch (id) {
       case 1:
-        this.sellersPermitString = base64result;        
+        this.sellersPermitString = base64result;
         break;
       case 2:
         this.DriversLicenseString = base64result;
@@ -256,7 +267,7 @@ export class PropertyFormComponent implements OnInit {
         break;
       case 4:
         this.ExteriorPicString = base64result;
-        break
+        break;
     }
 
 
@@ -266,8 +277,7 @@ export class PropertyFormComponent implements OnInit {
 
 }
 
-function foo(e) { 
-  
+function foo(e) {
   // tslint:disable-next-line: whitespace
   PropertyFormComponent.latitud=String(e.lngLat['lat']);
   PropertyFormComponent.longitud=String(e.lngLat['lng']);

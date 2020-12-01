@@ -49,11 +49,6 @@ const routes: Routes = [
     component: PropertyFormComponent,
     canActivate: [AuthGuard]
   },
-  {
-    path:"propiedad/:id",
-    component: PropertyFormComponent,
-    canActivate: [AuthGuard]
-  },
  {
    path:"propiedadDetalle",
    component: PropertyDetailComponent,
