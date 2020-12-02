@@ -85,7 +85,6 @@ public TypeProperties = [
     this.service.filterData.Direccion = direction;
     this.refreshData();
   }
-    
   onDelete(id) {
     if (confirm('Estas seguro de eliminar ?')) {
       this.service.deleteProperty(id)

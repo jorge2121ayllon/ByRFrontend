@@ -18,8 +18,8 @@ export class PropertyFormComponent implements OnInit {
 
   public latLogn = {};
   mapa: mapboxgl.Map;
-    url="https://kinsta.com/es/wp-content/uploads/sites/8/2018/02/leyenda-de-wordpress-1.png";
-  private imagen:any;
+  url="https://kinsta.com/es/wp-content/uploads/sites/8/2018/02/leyenda-de-wordpress-1.png";
+  private imagen: any;
 
   constructor(public service: PropertyService, private toastr: ToastrService,private _routes: Router) { }
   public Categories = [
@@ -39,11 +39,23 @@ export class PropertyFormComponent implements OnInit {
   public longInitial = -21.531428;
   ngOnInit(): void {
     (mapboxgl.accessToken as any) = environment.mapboxkey;
+    this.mapa = new mapboxgl.Map({
+      container: 'mapa-mapbox', // container id
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [-64.732951, -21.531428], // starting position
+      zoom: 15 // starting zoom
+     });
+    this.mapa.addControl(
+        new mapboxgl.GeolocateControl({
+        positionOptions: {
+        enableHighAccuracy: true
+        },
+        trackUserLocation: true
+      }));
     var id = localStorage.getItem('propertyIdEdit');
     if( id != null )
     {
       this.service.getProperty(id).subscribe(res => {
-        console.log(res);
         this.service.formData.Id = id;
         this.service.formData.Price = (res as any).Data[0].Price;
         this.service.formData.Description = (res as any).Data[0].Description;
@@ -51,41 +63,33 @@ export class PropertyFormComponent implements OnInit {
         this.service.formData.Size = (res as any).Data[0].Size;
         this.service.formData.Bedrooms = (res as any).Data[0].Bedrooms;
         this.service.formData.Bathrooms = (res as any).Data[0].Bathrooms;
-        this.latInitial = Number((res as any).Data[0].Latitude);
-        this.longInitial = Number((res as any).Data[0].Longitude);
+        this.longInitial = Number((res as any).Data[0].Latitude);
+        this.latInitial = Number((res as any).Data[0].Longitude);
         this.service.formData.State = (res as any).Data[0].State;
         this.service.formData.Category = (res as any).Data[0].Category;
         this.service.formData.TypeProperty = (res as any).Data[0].TypeProperty;
         this.service.formData.UserIdPro = (res as any).Data[0].User.Id;
-        console.log(this.service.formData);
+        this.service.formData.imagen64portada = (res as any).Data[0].imagen64portada;
+        this.mapa.setCenter([this.latInitial,this.longInitial]);
+        this.crearMarcador(this.longInitial, this.latInitial);
+        if (this.service.formData.imagen64portada != null){
+          this.url = 'data:image/jpeg;base64,' + this.service.formData.imagen64portada;
+        }
       });
     }
-    this.mapa = new mapboxgl.Map({
-        container: 'mapa-mapbox', // container id
-        style: 'mapbox://styles/mapbox/streets-v11',
-        center: [-64.732951, -21.531428], // starting position
-        zoom: 15 // starting zoom
-       });
-    this.mapa.addControl(
-          new mapboxgl.GeolocateControl({
-          positionOptions: {
-          enableHighAccuracy: true
-          },
-          trackUserLocation: true
-        }));
-    this.crearMarcador(this.latLogn);
+    else{
+      this.crearMarcador(this.longInitial, this.latInitial);
+    }
     this.resetForm();
   }
-
-
-  crearMarcador(latitudLongitud) {
+  crearMarcador(long,lat) {
     const marker = new mapboxgl.Marker({
     draggable: true
     })
     .setLngLat([this.latInitial, this.longInitial])
     .addTo(this.mapa);
     this.mapa.on('click', function(e) {
-        marker.setLngLat([e.lngLat['lng'], e.lngLat['lat']]);
+      marker.setLngLat([e.lngLat['lng'], e.lngLat['lat']]);
         foo(e);
     }
     );
@@ -122,10 +126,9 @@ export class PropertyFormComponent implements OnInit {
     this.service.formData.Longitude = String(PropertyFormComponent.longitud);
     if(this.service.formData.Latitude=='undefined' && this.service.formData.Longitude=='undefined')
     {
-      this.service.formData.Latitude="-21.531428";
-      this.service.formData.Longitude="-64.732951";
+      this.service.formData.Latitude=String(this.latInitial);
+      this.service.formData.Longitude=String(this.latInitial);
     }
-
     var category = Number(this.service.formData.Category);
     var type = Number(this.service.formData.TypeProperty);
     this.service.formData.TypeProperty = type;
