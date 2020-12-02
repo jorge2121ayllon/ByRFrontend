@@ -14,6 +14,5 @@ export class PropertiesComponent implements OnInit {
   }
   Eliminar(){
     this._routes.navigate(['/propiedad']);
-    localStorage.removeItem('propertyIdEdit');
   }
 }

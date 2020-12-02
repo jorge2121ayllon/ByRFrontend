@@ -211,13 +211,11 @@ public TypeProperties = [
   }
 
   getPropertyDetail(id){
-  
     localStorage.setItem('propertyId',id);    
     this._routes.navigate(['/propiedadDetalle']);
   }
   getPropertyEdit(id){
     localStorage.setItem('propertyIdEdit', id);
-    console.log(localStorage.getItem('propertyIdEdit'));
     this._routes.navigate(['/propiedad']);
   }
   deleteImage(id){

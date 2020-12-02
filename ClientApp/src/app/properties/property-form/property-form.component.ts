@@ -70,10 +70,10 @@ export class PropertyFormComponent implements OnInit {
         this.service.formData.TypeProperty = (res as any).Data[0].TypeProperty;
         this.service.formData.UserIdPro = (res as any).Data[0].User.Id;
         this.service.formData.imagen64portada = (res as any).Data[0].imagen64portada;
-        this.mapa.setCenter([this.latInitial,this.longInitial]);
+        this.mapa.setCenter([this.latInitial, this.longInitial]);
         this.crearMarcador(this.longInitial, this.latInitial);
         if (this.service.formData.imagen64portada != null){
-          this.url = 'data:image/jpeg;base64,' + this.service.formData.imagen64portada;
+          localStorage.setItem('MiImagen', this.service.formData.imagen64portada); 
         }
       });
     }
@@ -133,14 +133,16 @@ export class PropertyFormComponent implements OnInit {
     var type = Number(this.service.formData.TypeProperty);
     this.service.formData.TypeProperty = type;
     this.service.formData.Category = category;
-    this.service.formData.imageurl = localStorage.getItem('base64');
-    this.service.formData.imagen64portada = localStorage.getItem('filename');
+    if (localStorage.getItem('MiImagen') == null){
+      this.service.formData.imagen64portada = localStorage.getItem('filename');
+      this.service.formData.imageurl = localStorage.getItem('base64');
+    }else{
+      this.service.formData.imageurl = localStorage.getItem('MiImagen');
+    }
     if (this.service.formData.Id == null){
       this.insertRecord(form);
-      }
-
-    else
-      this.updateRecord(form);
+    }
+    else{this.updateRecord(form); }
     }
 
   updateRecord(form: NgForm) {
@@ -150,6 +152,8 @@ export class PropertyFormComponent implements OnInit {
         this.refreshData();
         localStorage.removeItem('base64');
         localStorage.removeItem('filename');
+        localStorage.removeItem('MiImagenPro');
+        localStorage.removeItem('MiImagen');
         this.resetForm(form);
         this._routes.navigate(['/propiedades']);
         localStorage.removeItem('propertyIdEdit');
@@ -166,7 +170,9 @@ export class PropertyFormComponent implements OnInit {
         this.refreshData();
         localStorage.removeItem('base64');
         localStorage.removeItem('filename');
-        this.resetForm(form); 
+        localStorage.removeItem('MiImagenPro');
+        localStorage.removeItem('MiImagen');
+        this.resetForm(form);
         this._routes.navigate(['/propiedades']);
       },
       err => { console.log(err); }
@@ -176,6 +182,8 @@ export class PropertyFormComponent implements OnInit {
 cancelar(){
   this._routes.navigate(['/propiedades']);
   localStorage.removeItem('propertyIdEdit');
+  localStorage.removeItem('MiImagenPro');
+  localStorage.removeItem('MiImagen');
 }
   uploadImage(event:any):void{
     this.imagen = event.target.files[0];
@@ -256,7 +264,8 @@ cancelar(){
     let reader = e.target;
     var base64result = reader.result.substr(reader.result.indexOf(',') + 1);
     //this.imageSrc = base64result;
-    localStorage.setItem('base64',base64result);
+    localStorage.setItem('base64', base64result);
+    localStorage.setItem('MiImagen', base64result);
     let id = this.currentId;
     switch (id) {
       case 1:
