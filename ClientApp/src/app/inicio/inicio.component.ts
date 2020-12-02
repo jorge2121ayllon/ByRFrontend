@@ -101,7 +101,6 @@ export class InicioComponent implements OnInit {
           this._routes.navigate(['/propiedadMap']);
         }
         this.listProperty = res;
-        this.ngOnInit();
         }
         else{
           this.toastr.error('Ups!', 'No se encontró ningun resultado para su búsqueda');          
