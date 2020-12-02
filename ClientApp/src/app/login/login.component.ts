@@ -4,6 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { UserService } from '../servicios/user.service';
 import { User } from '../modelos/user.model';
 import { Console } from 'console';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ import { Console } from 'console';
 export class LoginComponent implements OnInit {
   loginUserData : User;
 
-  constructor(private _usuarioSvr: UserService,private _routes:Router) { 
+  constructor(private _usuarioSvr: UserService,private _routes:Router,private toastr: ToastrService) { 
     this.loginUserData = new User();
   }
 
@@ -43,12 +44,7 @@ export class LoginComponent implements OnInit {
    
     },
     err => {
-      console.log(err);
-          if(err instanceof HttpErrorResponse){
-              if(err.status === 404){
-                  this._routes.navigate(['/login']);
-              }
-          }
+          this.toastr.info('Usuario o clave incorrectos');
         }
     );
   }
